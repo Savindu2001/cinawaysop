@@ -949,7 +949,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search SOPs or roles...">
+                <input type="text" id="sidebarSearchInput" class="search-input" placeholder="Filter sidebar modules...">
             </div>
         </div>
 
@@ -1036,6 +1036,17 @@
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 Last Updated: July 2026
+            </div>
+            <!-- Main Content Area Search Box -->
+            <div class="main-search-container" style="flex: 1; max-width: 400px; margin: 0 20px;">
+                <div class="search-input-wrapper">
+                    <!-- Search Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" id="mainSearchInput" class="search-input" placeholder="Search page content...">
+                </div>
             </div>
             <div class="quick-actions">
                 <!-- PDF Print duplicate button (Top bar) -->
@@ -4442,15 +4453,15 @@
         const themeIconMoon = document.getElementById('themeIconMoon');
         const themeIconSun = document.getElementById('themeIconSun');
 
-        // Theme Toggle Handler
+        // Theme Toggle Handler - Toggles data-theme on html element
         document.getElementById('themeToggleBtn').addEventListener('click', () => {
             isDarkMode = !isDarkMode;
             if (isDarkMode) {
-                body.setAttribute('data-theme', 'dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
                 themeIconMoon.style.display = 'block';
                 themeIconSun.style.display = 'none';
             } else {
-                body.setAttribute('data-theme', 'light');
+                document.documentElement.setAttribute('data-theme', 'light');
                 themeIconMoon.style.display = 'none';
                 themeIconSun.style.display = 'block';
             }
@@ -4537,8 +4548,23 @@
             }
         });
 
-        // Search and Filtering System
-        const searchInput = document.getElementById('searchInput');
+        // Sidebar Search: Filters the module lists in the TOC
+        const sidebarSearchInput = document.getElementById('sidebarSearchInput');
+        function applySidebarSearch() {
+            const query = sidebarSearchInput.value.toLowerCase().trim();
+            document.querySelectorAll('.toc-item').forEach((item) => {
+                const textContent = item.textContent.toLowerCase();
+                if (textContent.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        sidebarSearchInput.addEventListener('input', applySidebarSearch);
+
+        // Main content Search and Filtering System
+        const mainSearchInput = document.getElementById('mainSearchInput');
         const noResults = document.getElementById('noResults');
         let currentRoleFilter = '';
 
@@ -4546,8 +4572,8 @@
         const filterRoleName = document.getElementById('filterRoleName');
         const clearFilterBtn = document.getElementById('clearFilterBtn');
 
-        function applySearchAndFilter() {
-            const query = searchInput.value.toLowerCase().trim();
+        function applyMainSearch() {
+            const query = mainSearchInput.value.toLowerCase().trim();
             let visibleCount = 0;
 
             modules.forEach((mod) => {
@@ -4560,13 +4586,8 @@
                 if (matchesSearch && matchesRole) {
                     mod.style.display = 'block';
                     visibleCount++;
-
-                    const tocItem = document.getElementById(`toc-${mod.id}`);
-                    if (tocItem) tocItem.style.display = 'block';
                 } else {
                     mod.style.display = 'none';
-                    const tocItem = document.getElementById(`toc-${mod.id}`);
-                    if (tocItem) tocItem.style.display = 'none';
                 }
             });
 
@@ -4582,17 +4603,17 @@
             currentRoleFilter = role;
             filterRoleName.innerText = role;
             filterIndicator.classList.add('active');
-            applySearchAndFilter();
+            applyMainSearch();
         }
 
         // Clear role badge filter
         clearFilterBtn.addEventListener('click', () => {
             currentRoleFilter = '';
             filterIndicator.classList.remove('active');
-            applySearchAndFilter();
+            applyMainSearch();
         });
 
-        searchInput.addEventListener('input', applySearchAndFilter);
+        mainSearchInput.addEventListener('input', applyMainSearch);
     </script>
 </body>
 
