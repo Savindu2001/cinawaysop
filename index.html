@@ -1055,6 +1055,49 @@
         <div id="sop-modules-container">
 
             <!-- ==========================================================================
+     SYSTEM OVERVIEW & PROJECT LIFECYCLE PREFACE (SHORT & SWEET)
+     ========================================================================== -->
+            <section class="sop-module" id="system-preface-overview" data-title="System Overview"
+                data-responsible="Lead Software Engineer, Client Executive, External Auditors">
+                <div class="module-header">
+                    <span class="module-badge" style="background: #28a745; color: #fff;">Project Overview</span>
+                    <h2 class="module-title">System Overview & Project Lifecycle</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Project Timeline</span>
+                            <span class="meta-value">May 2025 - November 2025</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Development Structure</span>
+                            <span class="meta-value">Custom-Engineered Solo Project</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-body" style="line-height: 1.6;">
+                    <p style="color: #ffffff; mix-blend-mode: difference; margin-bottom: 15px;">
+                        Welcome to the <strong>CINAWAY LOGISTICS ERP</strong> system. This platform was
+                        custom-engineered from the ground up between May and November 2025. Every feature, business
+                        logic rule, and automated workflow implemented within these modules—including the real-time
+                        customer SMS alerts, advanced route management, and specialized Unilever data aggregation
+                        sorting—has been built precisely according to the explicit instructions and requirements
+                        provided by the client team. The system accurately reflects the physical operational workflows
+                        requested for this business.
+                    </p>
+
+                    <p style="color: #ffffff; mix-blend-mode: difference;">
+                        As a specialized logistics solution, the platform automates highly complex data processes.
+                        Please note that the current core system architecture and module structures are fully completed
+                        based on the final agreed-upon scope. If any structural changes, report expansions, or
+                        operational modifications are requested in the future, they will be treated as new feature
+                        requests. Since adjusting these advanced workflows manually requires significant time,
+                        engineering resources, and third-party API/AI data parsing services, any such future
+                        modifications will incur separate, additional maintenance or development costs.
+                    </p>
+                </div>
+            </section>
+
+            <!-- ==========================================================================
            MODULE 1: USER ROLES & PERMISSIONS
            ========================================================================== */ -->
             <section class="sop-module" id="roles-permissions" data-title="User Roles & Permissions"
@@ -3865,7 +3908,510 @@
 
                 </div>
             </section>
+            <!-- ==========================================================================
+     MODULE: CHART OF ACCOUNTS (COA)
+     ========================================================================== -->
+            <section class="sop-module" id="chart-of-accounts" data-title="Chart of Accounts"
+                data-responsible="Accountant, System Administrator">
+                <div class="module-header">
+                    <span class="module-badge">SOP Module</span>
+                    <h2 class="module-title">Chart of Accounts</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Objective</span>
+                            <span class="meta-value">To manage the complete financial account structure of the
+                                organization using double-entry bookkeeping principles — including creating and
+                                organizing accounts, setting opening balances, configuring account mappings for all
+                                modules, performing bank reconciliation, managing petty cash, and generating financial
+                                reports.</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Responsible Person</span>
+                            <span class="meta-value">
+                                <span class="role-badge role-fin" onclick="filterByRole('Accountant')">Accountant</span>
+                                <span class="role-badge role-admin"
+                                    onclick="filterByRole('System Administrator')">System Administrator</span>
+                                <span class="role-badge role-ops" onclick="filterByRole('Auditor')">Auditor (View
+                                    Only)</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="module-body">
+                    <!-- Step 1 -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">1</span>
+                            Overview Dashboard
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Chart of Accounts ➡️ Overview</span> from the main
+                                sidebar menu.</p>
+                            <p>The <strong>Overview Dashboard</strong> provides a complete financial snapshot of all
+                                accounts:</p>
+                            <ul>
+                                <li><strong>Summary Cards:</strong> Displays total accounts, total balance, and a
+                                    breakdown per account type (Asset, Liability, Equity, Income, Expense).</li>
+                                <li><strong>System Accounts Summary:</strong> Shows all protected system accounts (Cash
+                                    in Hand, Bank Account, Petty Cash, Accounts Receivable, etc.) and their current
+                                    balances.</li>
+                                <li><strong>Trial Balance Widget:</strong> Quick-view balance check showing total Debits
+                                    vs total Credits and the difference.</li>
+                                <li><strong>Account Tree View:</strong> Visual hierarchical display of all accounts
+                                    grouped by type with expand/collapse support.</li>
+                                <li><strong>Quick Actions:</strong> Shortcuts to common tasks — Add New Account, View
+                                    Account Mappings, Generate Reports.</li>
+                            </ul>
+                            <div class="sop-alert warning" style="margin-top: 10px;">
+                                <div class="alert-icon">⚠️</div>
+                                <div class="alert-content">
+                                    <strong>Note:</strong> The Overview is a read-only summary dashboard. No direct
+                                    edits are made here.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">2</span>
+                            Managing the Chart of Accounts (Account List)
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Chart of Accounts ➡️ Accounts List</span>.</p>
+
+                            <p><strong>2.1 View All Accounts</strong></p>
+                            <p>The main accounts table displays configuration properties across the financial grid:</p>
+                            <table class="table sop-report-table"
+                                style="width:100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 10px;">
+                                <thead>
+                                    <tr style="border-bottom: 2px solid #ddd; text-align: left;">
+                                        <th style="padding: 8px; width: 30%;">Column</th>
+                                        <th style="padding: 8px;">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Account Code</strong></td>
+                                        <td style="padding: 8px;">Unique identifier (e.g., <code>1001</code>,
+                                            <code>2101</code>)
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Account Name</strong></td>
+                                        <td style="padding: 8px;">Descriptive name</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Type</strong></td>
+                                        <td style="padding: 8px;">Asset / Liability / Equity / Income / Expense / Contra
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Category</strong></td>
+                                        <td style="padding: 8px;"><strong>Group</strong> (no direct transactions) or
+                                            **Ledger** (accepts transactions)</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Opening Balance</strong></td>
+                                        <td style="padding: 8px;">Balance as of the start date</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Current Balance</strong></td>
+                                        <td style="padding: 8px;">Live balance including all posted transactions</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Status</strong></td>
+                                        <td style="padding: 8px;">Active / Inactive / Archived</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>System Account</strong></td>
+                                        <td style="padding: 8px;">Marked if it is a protected system account</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p><strong>Filtering & Search:</strong> Filter accounts by Account Type, Category, and
+                                Status. Switch between <strong>All Accounts</strong>, <strong>Tree View</strong>, and
+                                <strong>System Accounts</strong> using the upper data tabs.
+                            </p>
+                            <ul>
+                                <li><strong>Tree View Tab:</strong> Displays accounts in a hierarchical parent-child
+                                    structure where each parent group shows the sum of all child ledger balances.</li>
+                                <li><strong>System Accounts Tab:</strong> Lists protected accounts (e.g., Cash in Hand
+                                    <code>1001</code>, Bank Account <code>1002</code>, Petty Cash <code>1003</code>)
+                                    that are locked against deletion and used for automated journal postings.
+                                </li>
+                            </ul>
+
+                            <p style="margin-top: 15px;"><strong>2.2 Create a New Account</strong></p>
+                            <p>Click the <span class="sop-btn-indicator">Add New Account</span> button located at the
+                                top-right of the page to access the following form layout fields:</p>
+                            <table class="table sop-report-table"
+                                style="width:100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 10px;">
+                                <thead>
+                                    <tr style="border-bottom: 2px solid #ddd; text-align: left;">
+                                        <th style="padding: 8px;">Field</th>
+                                        <th style="padding: 8px;">Required</th>
+                                        <th style="padding: 8px;">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Account Code</strong></td>
+                                        <td style="padding: 8px;">Yes</td>
+                                        <td style="padding: 8px;">Unique alphanumeric code (auto-generated or manual)
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Account Name</strong></td>
+                                        <td style="padding: 8px;">Yes</td>
+                                        <td style="padding: 8px;">Full descriptive name</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Account Type</strong></td>
+                                        <td style="padding: 8px;">Yes</td>
+                                        <td style="padding: 8px;">Asset / Liability / Equity / Income / Expense / Contra
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Account Sub-Type</strong></td>
+                                        <td style="padding: 8px;">No</td>
+                                        <td style="padding: 8px;">Current / Non-Current</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Account Category</strong></td>
+                                        <td style="padding: 8px;">Yes</td>
+                                        <td style="padding: 8px;"><strong>Group</strong> (for grouping only) or
+                                            **Ledger** (for transactions)</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Parent Account</strong></td>
+                                        <td style="padding: 8px;">No</td>
+                                        <td style="padding: 8px;">Select a parent Group account to nest this account
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Description</strong></td>
+                                        <td style="padding: 8px;">No</td>
+                                        <td style="padding: 8px;">Optional notes about this account</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Opening Balance</strong></td>
+                                        <td style="padding: 8px;">No</td>
+                                        <td style="padding: 8px;">Starting balance value (LKR)</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Opening Balance Type</strong></td>
+                                        <td style="padding: 8px;">If opening balance &gt; 0</td>
+                                        <td style="padding: 8px;"><strong>Debit</strong> (Assets, Expenses) or
+                                            **Credit** (Liabilities, Equity, Income)</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Tax Applicable</strong></td>
+                                        <td style="padding: 8px;">No</td>
+                                        <td style="padding: 8px;">Toggle on if this account is subject to tax</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Tax Rate (%)</strong></td>
+                                        <td style="padding: 8px;">If tax applicable</td>
+                                        <td style="padding: 8px;">Tax percentage</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p><strong>Account Code Series (Convention):</strong></p>
+                            <ul>
+                                <li><code>Asset:</code> 1xxx Series (e.g., 1001, 1101, 1201)</li>
+                                <li><code>Liability:</code> 2xxx Series (e.g., 2101, 2201)</li>
+                                <li><code>Equity:</code> 3xxx Series (e.g., 3001)</li>
+                                <li><code>Income:</code> 4xxx Series (e.g., 4001)</li>
+                                <li><code>Expense:</code> 5xxx Series (e.g., 5001, 5002, 5003)</li>
+                                <li><code>Contra:</code> 6xxx Series (e.g., 6001)</li>
+                            </ul>
+                            <p>Click <span class="sop-btn-indicator">Save</span> to create the account.</p>
+
+                            <div class="sop-alert warning" style="margin-top: 10px; margin-bottom: 15px;">
+                                <div class="alert-icon">⚠️</div>
+                                <div class="alert-content">
+                                    <strong>Opening Balance Journal Entry:</strong> When an account is created with an
+                                    opening balance, the system <strong>automatically creates a journal entry</strong>
+                                    (entry number format: <code>OB-{account_code}-{timestamp}</code>) and posts it to
+                                    the Opening Balance Equity account to maintain double-entry compliance. This cannot
+                                    be undone manually.
+                                </div>
+                            </div>
+
+                            <p><strong>2.3 Edit an Existing Account</strong></p>
+                            <p>Click the <strong>Edit</strong> button on any account row. Most fields are editable.
+                                However, system accounts have locked attributes (only name can be changed), and ledger
+                                accounts with posted logs cannot be switched to group categories.</p>
+
+                            <p style="margin-top: 15px;"><strong>2.4 Update Opening Balance</strong></p>
+                            <p>Modify the opening balance amount and type inside the Edit form. The system will
+                                <strong>reverse the old opening balance journal entry</strong> and create a <strong>new
+                                    one</strong> automatically to keep records balanced.
+                            </p>
+
+                            <p style="margin-top: 15px;"><strong>2.5 Delete / Archive an Account</strong></p>
+                            <p>Click the Delete icon. System accounts, accounts with linked entries, and group accounts
+                                containing children cannot be removed. Use the <strong>"Archived"</strong> status to
+                                hide accounts while saving history attributes.</p>
+
+                            <p style="margin-top: 15px;"><strong>2.6 Transfer Between Accounts</strong></p>
+                            <p>Use the <strong>"Transfer"</strong> action to move funds between two accounts (e.g., Cash
+                                in Hand to Bank). Select the source, destination, and amount; the system records an
+                                automated transaction entry.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">3</span>
+                            Account Mapping Configuration
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Chart of Accounts ➡️ Account Mappings</span>. This
+                                screen maps external system modules directly to specific ledger lines to process
+                                automated transactions.</p>
+
+                            <p><strong>3.1 View All Mappings</strong></p>
+                            <table class="table sop-report-table"
+                                style="width:100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 10px;">
+                                <thead>
+                                    <tr style="border-bottom: 2px solid #ddd; text-align: left;">
+                                        <th style="padding: 8px; width: 30%;">Column</th>
+                                        <th style="padding: 8px;">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Module</strong></td>
+                                        <td style="padding: 8px;">Sales / Collections / Expenses / Petty Cash / Payroll
+                                            / Purchases / Bank / Inventory</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Transaction Type</strong></td>
+                                        <td style="padding: 8px;">Type configuration keys (e.g.,
+                                            <code>sale_revenue</code>, <code>collection_cash</code>,
+                                            <code>expense_payment</code>)
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Mapping Type</strong></td>
+                                        <td style="padding: 8px;">Debit / Credit</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Account</strong></td>
+                                        <td style="padding: 8px;">The linked account name and identifier code</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><strong>Status</strong></td>
+                                        <td style="padding: 8px;">Active / Inactive</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p style="margin-top: 15px;"><strong>3.2 Create a New Mapping</strong></p>
+                            <p>Click <span class="sop-btn-indicator">Add Mapping</span> and fill in the required fields
+                                (Module Name, Transaction Type, Mapping Type, Account, and Description). Duplicate
+                                combinations are explicitly blocked by the database validation layer.</p>
+
+                            <p style="margin-top: 15px;"><strong>3.3 Auto-Generate Default Mappings</strong></p>
+                            <p>Click any of the designated generation links:
+                                <code>Generate Default Sales Mappings</code>,
+                                <code>Generate Default Expense Mappings</code>,
+                                <code>Generate Default Collection Mappings</code>,
+                                <code>Generate Default Purchase Mappings</code>,
+                                <code>Generate Default Payroll Mappings</code>, or
+                                <code>Setup Inventory Mappings</code>. Use the <strong>"Validate Mappings"</strong>
+                                routine tool to check configuration states.
+                            </p>
+                            <div class="sop-alert warning" style="margin-top: 10px;">
+                                <div class="alert-icon">⚠️</div>
+                                <div class="alert-content">
+                                    <strong>Dependency Requirement:</strong> System core accounts must exist in the
+                                    environment beforehand. Run the <strong>"Create System Accounts"</strong> script
+                                    tool if default nodes are missing.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">4</span>
+                            Account Ledger View
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Accounts List</span> ➡️ click <span
+                                    class="sop-btn-indicator">View</span> on any active row line to expand the
+                                historical running statement transaction logs.</p>
+                            <ul>
+                                <li><strong>Grid Headers:</strong> Displays account profile attributes, metadata
+                                    tracking, and child/parent nested references.</li>
+                                <li><strong>Journal Lines Structure:</strong> Renders fields: <em>Date</em>, <em>Entry
+                                        Number</em>, <em>Description</em>, <em>Reference Type</em>, <em>Debit
+                                        Amount</em>, <em>Credit Amount</em>, <em>Running Balance</em>, and <em>Created
+                                        By</em>.</li>
+                                <li><strong>Filter & Sorting Controls:</strong> Run target queries using date ranges,
+                                    entry pagination selectors, or row-level character lookups.</li>
+                            </ul>
+
+                            <p><strong>Balance Calculation Rules:</strong></p>
+                            <ul>
+                                <li><code>Asset / Expense (Debit Normal):</code> Running Balance = Opening Balance +
+                                    Total Debits − Total Credits</li>
+                                <li><code>Liability / Equity / Income (Credit Normal):</code> Running Balance = Opening
+                                    Balance + Total Credits − Total Debits</li>
+                            </ul>
+                            <p>If the selected profile is an Asset Ledger and matches standard bank keywords, a
+                                quick-action <span class="sop-btn-indicator">Bank Reconciliation</span> shortcut button
+                                expands dynamically on the header ribbon.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">5</span>
+                            Bank Reconciliation Workflow
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Chart of Accounts ➡️ Bank Reconciliation</span> to
+                                audit system books against clearing bank logs.</p>
+                            <ul>
+                                <li><strong>Reconciliation Table Data:</strong> Tracks fields: <em>Bank Account</em>,
+                                    <em>Period</em>, <em>Statement Date</em>, <em>Statement Balance</em>, <em>Ledger
+                                        Balance</em>, <em>Difference</em>, and <em>Status</em>.
+                                </li>
+                                <li><strong>Initialization Routine:</strong> Click <span class="sop-btn-indicator">Start
+                                        New Reconciliation</span>. Populate the Bank Account, Statement Date, Closing
+                                    Statement Balance, and target Period, then click Start.</li>
+                                <li><strong>Discrepancy Identification:</strong> Click the automated execution tool
+                                    marked <span class="sop-btn-indicator">Detect Discrepancies</span> to run background
+                                    validation checking for unlinked transactions, value variances, or calendar mismatch
+                                    codes.</li>
+                                <li><strong>Data Extraction:</strong> Click <span class="sop-btn-indicator">Export
+                                        Report</span> to download structured summary spreadsheets (CSV/Excel) for
+                                    external audits. Erroneous logs can be removed via the row Delete trigger.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">6</span>
+                            Petty Cash Integration Management
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Chart of Accounts ➡️ Petty Cash</span>. Manages
+                                sub-safe operational limits and automates postings back to cash counters.</p>
+                            <ul>
+                                <li><strong>Fund Settings Tracking:</strong> Tracks parameters: <em>Fund Name</em>,
+                                    <em>Code</em>, <em>Initial Balance</em>, <em>Current Balance</em>, <em>Max/Min
+                                        Caps</em>, <em>Custodian</em>, and <em>Location</em>.
+                                </li>
+                                <li><strong>Replenishment Posting:</strong> When sub-balances cross below thresholds,
+                                    custodians trigger requests. Executive approval automatically writes a transaction
+                                    line: <strong>Debit Petty Cash Account / Credit Cash in Hand or Bank</strong>.</li>
+                                <li><strong>Fund Transfers:</strong> Execute <code>Send Fund to Petty Cash</code> or
+                                    <code>Get Fund from Petty Cash</code> commands to reallocate liquidity values
+                                    automatically based on account mappings.
+                                </li>
+                                <li><strong>Audit Balance Checks:</strong> Click <span
+                                        class="sop-btn-indicator">Reconcile</span> to input exact physical cash counts,
+                                    check systemic variances, and audit real-time statistics panels.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 7 -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">7</span>
+                            Financial Reports & Business Statements
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Reports</span> to execute analytical evaluation sheets
+                                across company ledgers.</p>
+                            <ul>
+                                <li><strong>Trial Balance:</strong> Displays complete tracking debits vs credits. The
+                                    variance difference calculation must total exactly <code>0</code>. Set the As-of
+                                    Date criteria and click export to process external review logs.</li>
+                                <li><strong>Balance Sheet:</strong> Renders hierarchical tracking metrics for
+                                    <code>Assets</code>, <code>Liabilities</code>, and <code>Equity</code> calculations
+                                    at a designated point in time. Group subtotals can be exported as Excel/PDF
+                                    profiles.
+                                </li>
+                                <li><strong>Profit & Loss Statement:</strong> Evaluates income streams vs COGS and
+                                    operational bills across calendar boundaries to calculate net profitability values.
+                                </li>
+                                <li><strong>Ageing Summaries (Receivable & Payable):</strong> Organizes customer or
+                                    vendor outstanding balances into chronological overdue buckets: <em>Current (0-30
+                                        days)</em>, <em>31-60 days</em>, <em>61-90 days</em>, <em>91-120 days</em>, and
+                                    <em>120+ long overdue days</em>. Summary lists map totals while detail screens open
+                                    invoice lines.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 8 -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">8</span>
+                            System Account Management & Stock Valuation
+                        </h3>
+                        <div class="step-content">
+                            <p>Go to the specialized **System Accounts Tab** inside the Accounts List workspace to
+                                monitor core accounting nodes.</p>
+                            <ul>
+                                <li><strong>Default Protected Registry:</strong> Controls keys:
+                                    <code>1001 Cash in Hand</code>, <code>1002 Bank Account</code>,
+                                    <code>1003 Petty Cash</code>, <code>1101 Accounts Receivable</code>,
+                                    <code>1201 Inventory Adjustment</code>, <code>2101 Accounts Payable</code>,
+                                    <code>2201 Tax Payable</code>, <code>3001 Retained Earnings</code>,
+                                    <code>4001 Sales Revenue</code>, <code>5001 COGS</code>,
+                                    <code>5002 Payroll Expense</code>, and <code>5003 General Expenses</code>.
+                                </li>
+                                <li><strong>Restoration Utility:</strong> If a default core node is dropped or missing
+                                    during environment changes, click the action switch marked <span
+                                        class="sop-btn-indicator">Create System Accounts</span> to rebuild missing
+                                    entries using standard serial coding series.</li>
+                                <li><strong>Stock Accounting Ledger:</strong> Access <span class="sop-flow">Stock
+                                        Valuation</span> to view a live side-view mapping tracking inventory updates,
+                                    material purchases, and stock removals against the active Inventory Adjustment
+                                    configuration node.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Access Control & Safety Notifications -->
+                    <div class="sop-alert warning">
+                        <div class="alert-icon">🛑</div>
+                        <div class="alert-content">
+                            <strong>Critical Core Architecture & Hierarchy Constraints:</strong>
+                            <p>• <strong>System Account Lockdown:</strong> Core system accounts cannot be deleted under
+                                any circumstances. Modifying them is restricted to preserve mapping structures.</p>
+                            <p>• <strong>Mapping Failures:</strong> Deleting or corrupting active mapping strings causes
+                                immediate backend processing failures for Sales, Collections, Expenses, Payroll, and
+                                Petty Cash entry cycles.</p>
+                            <p>• <strong>Hierarchy Mapping Rules:</strong> A ledger account is a terminal point and
+                                cannot possess nested children. A group account cannot directly accept or store manual
+                                transaction entries.</p>
+                            <p>• <strong>Balance Rule Consistency:</strong> Asset/Expense opening variables must always
+                                use a **Debit** type structure. Liability/Equity/Income openings must always use a
+                                **Credit** type parameter. Discrepancies immediately break the system Trial Balance
+                                verification integrity checks.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
 
             <!-- ==========================================================================
