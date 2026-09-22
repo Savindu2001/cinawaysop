@@ -1109,6 +1109,152 @@
             </section>
 
             <!-- ==========================================================================
+     MODULE 01: SYSTEM ACCESS, AUTHENTICATION & USER ONBOARDING
+     ========================================================================== -->
+            <section class="sop-module" id="system-access-auth" data-title="User Access & Provisioning"
+                data-responsible="Super Admin, System Administrator">
+                <div class="module-header">
+                    <span class="module-badge">Module 01</span>
+                    <h2 class="module-title">System Access, User Roles & Employee Provisioning</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Objective</span>
+                            <span class="meta-value">Root setup, RBAC role configuration, HR hierarchy creation, staff
+                                user provisioning, and mandatory email verification.</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Responsible Person</span>
+                            <span class="meta-value" style="display: flex; gap: 8px;">
+                                <span class="role-badge role-admin" onclick="filterByRole('Super Admin')">Super Admin
+                                    (Owner)</span>
+                                <span class="role-badge role-admin"
+                                    onclick="filterByRole('System Administrator')">System Administrator</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-body">
+                    <!-- Step 1: Sequential Architecture Notice -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">1</span>
+                            Prerequisite Sequence (Order of Execution)
+                        </h3>
+                        <div class="step-content">
+                            <p>Employee registration enforces strict relational foreign keys in the database. The setup
+                                sequence must strictly follow this order:</p>
+                            <ul>
+                                <li><strong>Step A — Super Admin Initial Login:</strong> Root access credentials
+                                    deployed to the business owner to configure master operations and background tasks.
+                                </li>
+                                <li><strong>Step B — Configure User Roles:</strong> Navigate to <span
+                                        class="sop-flow">User Management ➔ User Roles</span> and set up required
+                                    operational roles (Admin, Accountant, Cashier, Salesperson).</li>
+                                <li><strong>Step C — HR Hierarchy (Mandatory):</strong> Navigate to <span
+                                        class="sop-flow">HR ➔ Department & Designation</span> to define departments and
+                                    job titles before registering staff.</li>
+                                <li><strong>Step D — Register Staff & Verification:</strong> Create the employee profile
+                                    and trigger the automated email activation link.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Scribe Interactive Workflow Guide -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">2</span>
+                            Interactive Visual Workflow (Scribe Step-by-Step Guide)
+                        </h3>
+                        <div class="step-content">
+                            <p>Follow the interactive visual recording below to execute the complete setup workflow:</p>
+
+                            <!-- Scribe Responsive Embed Wrapper -->
+                            <div
+                                style="position: relative; width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); background: var(--bg-base); margin: 16px 0; box-shadow: var(--shadow-sm);">
+                                <iframe
+                                    src="https://scribehow.com/embed/How_To_Search_For_Hello_Sri_Lanka_On_YouTube__UQgjSPh6SjGYvbwToCjamA"
+                                    width="100%" height="680" allow="fullscreen"
+                                    style="aspect-ratio: 1 / 1; border: 0; min-height: 500px; display: block;">
+                                </iframe>
+                            </div>
+                            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">
+                                💡 <em>Click through the interactive steps inside the frame above to view exact screen
+                                    actions, input highlights, and system clicks.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Error Handling & Troubleshooting Table -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">3</span>
+                            Error Handling & Troubleshooting Guidelines
+                        </h3>
+                        <div class="step-content">
+                            <table class="table sop-report-table"
+                                style="width: 100%; border-collapse: collapse; margin-top: 8px; margin-bottom: 12px;">
+                                <thead>
+                                    <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+                                        <th style="padding: 10px; width: 30%;">Scenario / System Error</th>
+                                        <th style="padding: 10px; width: 30%;">Root Cause</th>
+                                        <th style="padding: 10px; width: 40%;">Resolution Procedure</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 10px;"><strong>"Please verify your email to
+                                                continue"</strong></td>
+                                        <td style="padding: 10px; color: var(--text-muted);">Account exists, but
+                                            employee did not click the confirmation link in the dispatch email.</td>
+                                        <td style="padding: 10px; color: var(--text-main);">Open registered Gmail inbox,
+                                            find the email from <code>cinaway.system@gmail.com</code>, and click the
+                                            blue <strong>"Verify My Email Address"</strong> button.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 10px;"><strong>"Verification link expired"</strong></td>
+                                        <td style="padding: 10px; color: var(--text-muted);">More than 1 hour has
+                                            elapsed since user registration.</td>
+                                        <td style="padding: 10px; color: var(--text-main);">System Admin must navigate
+                                            to <span class="sop-flow">User Management ➔ Employees</span> and resend the
+                                            activation link.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 10px;"><strong>"Department / Designation is
+                                                required"</strong></td>
+                                        <td style="padding: 10px; color: var(--text-muted);">Attempting to save an
+                                            employee before creating organizational units.</td>
+                                        <td style="padding: 10px; color: var(--text-main);">Complete Step C under <span
+                                                class="sop-flow">HR Module ➔ Core Setup</span> first to establish parent
+                                            entities.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 10px;"><strong>"Email already exists"</strong></td>
+                                        <td style="padding: 10px; color: var(--text-muted);">Email address serves as
+                                            unique primary key in the database and is already assigned.</td>
+                                        <td style="padding: 10px; color: var(--text-main);">Verify if the employee
+                                            already has an account or check the inactive/resigned employee list.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Alert Notification -->
+                    <div class="sop-alert warning">
+                        <div class="alert-icon">⚠️</div>
+                        <div class="alert-content">
+                            <strong>Auditor Verification Guard:</strong>
+                            <p>The root Super Admin account performs automated background cron jobs (database backups,
+                                snapshots) and remains decoupled from daily HR employee directories and payrolls. Field
+                                Salespersons are redirected automatically upon login to the mobile terminal
+                                (<code>/mobile-collector</code>), blocking access to general management views.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================================================
            MODULE 1: USER ROLES & PERMISSIONS
            ========================================================================== */ -->
             <section class="sop-module" id="roles-permissions" data-title="User Roles & Permissions"
