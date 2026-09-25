@@ -54,6 +54,10 @@
             --role-admin-text: #0369a1;
             --role-hr-bg: #f0fdf4;
             --role-hr-text: #15803d;
+            --role-logistics-bg: #fef3c7;
+            --role-logistics-text: #b45309;
+            --role-finance-bg: #f3e8ff;
+            --role-finance-text: #7e22ce;
 
             --transition-speed: 0.2s;
             --sidebar-width: 300px;
@@ -95,6 +99,10 @@
             --role-admin-text: #38bdf8;
             --role-hr-bg: rgba(16, 185, 129, 0.15);
             --role-hr-text: #34d399;
+            --role-logistics-bg: rgba(245, 158, 11, 0.15);
+            --role-logistics-text: #fbbf24;
+            --role-finance-bg: rgba(168, 85, 247, 0.15);
+            --role-finance-text: #c084fc;
         }
 
         /* ==========================================================================
@@ -497,6 +505,16 @@
             color: var(--role-hr-text);
         }
 
+        .role-logistics {
+            background-color: var(--role-logistics-bg);
+            color: var(--role-logistics-text);
+        }
+
+        .role-finance {
+            background-color: var(--role-finance-bg);
+            color: var(--role-finance-text);
+        }
+
         /* SOP Steps */
         .module-body {
             display: flex;
@@ -715,6 +733,16 @@
         body.preview-a4 .sop-module .role-hr {
             background-color: #f0fdf4;
             color: #15803d;
+        }
+
+        body.preview-a4 .sop-module .role-logistics {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        body.preview-a4 .sop-module .role-finance {
+            background-color: #f3e8ff;
+            color: #7e22ce;
         }
 
         body.preview-a4 .sop-module .sop-alert.warning {
@@ -2859,6 +2887,267 @@
                             <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
                                 &#128161; <em>Scroll through the interactive steps inside the frame above to view exact screen actions, input highlights, and click annotations. Use fullscreen mode for the best experience.</em>
                             </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+     MODULE 07 / CHAPTER 07: OUTLETS DIRECTORY, BULK INGESTION & AUTOMATED CUSTOMER LEDGER MANAGEMENT
+     ========================================================================== -->
+            <section class="sop-module" id="outlets-directory-ledger-management"
+                data-title="Outlets &amp; Customer Ledger Management"
+                data-responsible="Logistics Operations / System Administrator / Accounts &amp; Finance">
+                <div class="module-header">
+                    <span class="module-badge">Module 07 &middot; Chapter 07 &mdash; Master Data &amp; Core Logistics</span>
+                    <h2 class="module-title">Outlets Directory, Bulk Ingestion &amp; Automated Customer Ledger Management in Cinaway ERP</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Target Audience</span>
+                            <span class="meta-value">Logistics Managers, Sales Operations, Trade Debtors / Accounts Receivable Accountants, System Administrators</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Responsible Person</span>
+                            <span class="meta-value" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="role-badge role-logistics" onclick="filterByRole('Logistics Operations')">Logistics Operations</span>
+                                <span class="role-badge role-admin" onclick="filterByRole('System Administrator')">System Administrator</span>
+                                <span class="role-badge role-finance" onclick="filterByRole('Accounts &amp; Finance')">Accounts &amp; Finance</span>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Objective</span>
+                            <span class="meta-value">Standard operating procedure detailing individual outlet registrations, bulk Excel ingestion with duplicate protection, automated customer debtor ledger setup (Account 1200), and SMS notification toggles.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-body">
+
+                    <!-- Automated Ledger & Chart of Accounts Integration Banner -->
+                    <div class="sop-alert info" style="margin-bottom: 24px;">
+                        <div class="alert-icon">&#128179;</div>
+                        <div class="alert-content">
+                            <strong>Automated Customer Debtor Ledger Integration (Account 1200):</strong>
+                            <p>Under Cinaway ERP&apos;s canonical 59-account structure, all customer trade balances fall under <strong>Account 1200 (Accounts Receivable / Trade Debtors)</strong>. Whenever a retail shop or wholesale outlet is registered&mdash;either manually or through the bulk ingestion engine&mdash;the system automatically provisions a dedicated debtor sub-ledger linked directly to Account 1200. This eliminates manual journal entries, guarantees 100% synchronization between warehouse dispatch invoices and financial balance sheets, and automates credit limit monitoring.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Navigating the Outlets Directory -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">1</span>
+                            Accessing &amp; Navigating the Outlets Retail Directory
+                        </h3>
+                        <div class="step-content">
+                            <p>To access the centralized customer and retail directory, navigate to <a href="https://cinawaylogistics.com/outlets" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 600;">cinawaylogistics.com/outlets</a> or select <span class="sop-flow">Master Data &amp; Core Logistics &#10148; Outlets</span> from the main sidebar navigation.</p>
+                            <p>The Outlets Directory serves as the master database for all retail distribution points across all operational sales routes. The primary dashboard provides:</p>
+                            <ul>
+                                <li><strong>Key Performance Metrics:</strong> Live KPI cards displaying <em>Total Registered Outlets</em>, <em>Active Outlets</em>, <em>SMS-Enabled Count</em>, and <em>Debtor Ledger Mapped Outlets</em>.</li>
+                                <li><strong>Multi-Criteria Search &amp; Filtering:</strong> Filter shops by <strong>Assigned Route</strong> (e.g., Colombo North, Kandy Central, Galle Coastal), <strong>District / Territory</strong>, <strong>Credit Status</strong>, or search dynamically by Outlet Name, Customer Code, Contact Person, or Mobile Number.</li>
+                                <li><strong>Action Controls:</strong> Quick buttons for <span class="sop-btn-indicator">+ Add Outlet</span> (individual manual creation), <span class="sop-btn-indicator">&#128229; Import Outlets</span> (bulk Excel data ingestion), and <span class="sop-btn-indicator">&#128242; Bulk SMS Actions</span> (mass alert configuration).</li>
+                                <li><strong>Table View &amp; Actions:</strong> Interactive data table listing Outlet Code, Trade Name, Assigned Route, Contact Phone, SMS Status badge, Credit Limit, and direct row action buttons (<span class="sop-btn-indicator">About Outlet</span>, <span class="sop-btn-indicator">Edit</span>, <span class="sop-btn-indicator">Deactivate</span>).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Individual Outlet Registration -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">2</span>
+                            Individual Outlet Registration &amp; Customer Profiling
+                        </h3>
+                        <div class="step-content">
+                            <p>When onboarding a single new retail shop, click the <span class="sop-btn-indicator">Add Outlet</span> button in the top-right header of the directory. Complete the required and optional profile fields:</p>
+                            <ul>
+                                <li><strong>Outlet Name <code>*</code>:</strong> Enter the official registered business name or commercial storefront sign (e.g., <em>Perera Super Stores</em>, <em>Nimal Grocery &amp; Bakery</em>).</li>
+                                <li><strong>Owner / Contact Person:</strong> Enter the primary contact person, store manager, or proprietor responsible for purchasing and accounts settlements.</li>
+                                <li><strong>Contact Phone Number <code>*</code>:</strong> Enter a valid 10-digit Sri Lankan mobile number (e.g., <code>0771234567</code>). This number is utilized by the automated SMS dispatch gateway for real-time order confirmation, delivery dispatch alerts, and collection payment receipts.</li>
+                                <li><strong>Delivery Address &amp; Landmarks <code>*</code>:</strong> Input the accurate street address, building number, and prominent landmark. This information prints directly on delivery manifests and invoice delivery slips for lorry drivers.</li>
+                                <li><strong>Assigned Route / Territory <code>*</code>:</strong> Select the delivery route from the pre-configured Route Master dropdown. The outlet will be mapped to the sales representative and lorry assigned to this territory.</li>
+                                <li><strong>Credit Limit &amp; Credit Period (Days):</strong> Define the authorized debt ceiling (LKR) and credit payment window (e.g., <em>0 Days for COD</em>, <em>14 Days</em>, <em>30 Days</em>). Once the outstanding ledger balance hits the credit limit, the invoicing engine flags credit hold warnings.</li>
+                                <li><strong>SMS Notifications Toggle:</strong> Enable or disable transactional SMS alerts. If enabled, the store owner will receive automated SMS notifications whenever goods are dispatched, invoices are generated, or payments are collected.</li>
+                            </ul>
+                            <p>Click <span class="sop-btn-indicator">Save Outlet</span>. Upon saving, the system creates the outlet record, creates the Account 1200 debtor sub-ledger, and redirects back to the directory.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Automated Customer Debtor Ledger Setup -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">3</span>
+                            Automated Customer Debtor Ledger Setup (Account 1200 Integration)
+                        </h3>
+                        <div class="step-content">
+                            <p>Cinaway ERP eliminates double entry and manual bookkeeper interventions by automating the debtor ledger provisioning process:</p>
+                            <ul>
+                                <li><strong>Direct Sub-Ledger Provisioning:</strong> Each time an outlet is saved or imported, the accounting engine provisions a dedicated customer account beneath parent account <strong>1200 &mdash; Accounts Receivable (Trade Debtors)</strong>.</li>
+                                <li><strong>System Code Binding:</strong> The unique outlet code (e.g., <code>OUT-0412</code>) is mapped 1:1 to the customer ledger account code (e.g., <code>1200-OUT-0412</code>), ensuring zero ambiguity across invoices and collection receipts.</li>
+                                <li><strong>Real-Time Debtor Aging:</strong> Invoices issued during lorry dispatch immediately debit this sub-ledger, while cash collections, cheques, or bank transfers recorded by sales reps credit the sub-ledger. Debtor aging reports (Current, 1&ndash;30 Days, 31&ndash;60 Days, 61+ Days) populate automatically.</li>
+                                <li><strong>Audit Trail Preservation:</strong> Deactivating an outlet in the logistics directory retains all historical financial postings in Account 1200, protecting general ledger audit compliance.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Bulk Excel Ingestion & Duplicate Protection -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">4</span>
+                            Bulk Excel Ingestion &amp; Duplicate Protection Pipeline
+                        </h3>
+                        <div class="step-content">
+                            <p>For mass onboarding during new territory launches or distributor data migrations, use the automated Excel ingestion pipeline:</p>
+
+                            <!-- Sub-step 4.1 -->
+                            <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; margin: 14px 0;">
+                                <h4 style="margin: 0 0 10px 0; color: var(--text-heading); font-size: 15px; display: flex; align-items: center; gap: 8px;">
+                                    <span style="background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">A</span>
+                                    Download Standard Template
+                                </h4>
+                                <p style="margin-bottom: 0;">Click <span class="sop-btn-indicator">Import Outlets</span> on the Outlets page, then click <span class="sop-btn-indicator">Download Sample Template</span>. Always use this official template to guarantee column alignment with the backend parser.</p>
+                            </div>
+
+                            <!-- Sub-step 4.2 -->
+                            <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; margin: 14px 0;">
+                                <h4 style="margin: 0 0 10px 0; color: var(--text-heading); font-size: 15px; display: flex; align-items: center; gap: 8px;">
+                                    <span style="background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">B</span>
+                                    Prepare Spreadsheet Data &amp; Schema Integrity Rules
+                                </h4>
+                                <p>Strictly follow these rules before uploading your file to prevent validation failures:</p>
+                                <ul style="margin-bottom: 0;">
+                                    <li><strong>Retain All Columns:</strong> Do not rename, delete, or change the order of columns in the sample spreadsheet.</li>
+                                    <li><strong>Mandatory Columns:</strong> Ensure <code>outlet_name</code>, <code>phone_number</code>, <code>route_name</code>, and <code>address</code> are populated for every row.</li>
+                                    <li><strong>Phone Formatting:</strong> Use standard 10-digit Sri Lankan phone numbers (e.g., <code>0712345678</code> or <code>+94712345678</code>) without hyphens or spaces.</li>
+                                    <li><strong>Route Verification:</strong> Ensure route names match exactly with existing routes configured in the Route Master.</li>
+                                    <li><strong>Credit Limits &amp; SMS:</strong> Set numeric credit limits (default <code>0</code> for Cash On Delivery) and enter <code>true</code> or <code>false</code> for the <code>sms_enabled</code> column.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Sub-step 4.3 -->
+                            <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; margin: 14px 0;">
+                                <h4 style="margin: 0 0 10px 0; color: var(--text-heading); font-size: 15px; display: flex; align-items: center; gap: 8px;">
+                                    <span style="background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">C</span>
+                                    File Upload &amp; Automated Duplicate Protection Engine
+                                </h4>
+                                <p>Click <span class="sop-btn-indicator">&#11014; Browse Files</span> and select the completed <code>.xlsx</code> or <code>.csv</code> spreadsheet. Once selected, click <span class="sop-btn-indicator">Import Outlets</span> to trigger the backend ingestion pipeline:</p>
+                                <ul style="margin-bottom: 0;">
+                                    <li><strong>Automated Duplicate Suppression:</strong> The pipeline compares phone numbers, outlet codes, and normalized store names within the target route against existing database records.</li>
+                                    <li><strong>Conflict Resolution:</strong> Duplicate entries are safely quarantined and flagged in the import audit log rather than overwriting existing ledger balances or creating fractured debtor accounts.</li>
+                                    <li><strong>Atomic Ledger Generation:</strong> Valid rows are ingested in a batch transaction with corresponding Account 1200 customer debtor sub-ledgers provisioned in real time.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Sub-step 4.4 -->
+                            <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; margin: 14px 0;">
+                                <h4 style="margin: 0 0 10px 0; color: var(--text-heading); font-size: 15px; display: flex; align-items: center; gap: 8px;">
+                                    <span style="background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">D</span>
+                                    Completion &amp; Verification
+                                </h4>
+                                <p style="margin-bottom: 0;">Once the progress bar hits 100%, review the import summary report detailing successful imports and any skipped rows. Click <span class="sop-btn-indicator">Done</span> to refresh the directory, and select <span class="sop-btn-indicator">All Outlets</span> to review your newly ingested customer records.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Granular & Bulk SMS Notification Controls -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">5</span>
+                            Granular Per-Outlet &amp; Bulk SMS Notification Controls
+                        </h3>
+                        <div class="step-content">
+                            <p>Cinaway ERP integrates an automated SMS gateway that notifies store owners of critical logistics and financial transactions:</p>
+                            <ul>
+                                <li><strong>Transactional SMS Triggers:</strong> Real-time SMS alerts are dispatched upon (1) Invoice creation and lorry loading, (2) Driver dispatch departure, (3) Payment collection receipt issue (Cash/Cheque), and (4) Credit note or goods return processing.</li>
+                                <li><strong>Individual Outlet SMS Toggle:</strong> Click on an outlet row or click <span class="sop-btn-indicator">About Outlet</span> to open the profile overview. Click the <span class="sop-btn-indicator">Switch On/Off SMS</span> toggle to immediately enable or disable alerts for that specific customer without editing other fields.</li>
+                                <li><strong>Bulk SMS Actions Modal:</strong> To manage SMS preferences across an entire route or customer segment:
+                                    <ol style="margin-top: 6px;">
+                                        <li>Click the <span class="sop-btn-indicator">Bulk SMS Actions</span> button at the top of the Outlets Directory.</li>
+                                        <li>In the Bulk SMS dialog, choose your target selection (All Outlets, specific Route, or selected checkboxes).</li>
+                                        <li>Select the desired action: <span class="sop-btn-indicator">Enable SMS Alerts</span> or <span class="sop-btn-indicator">Disable SMS Alerts</span>.</li>
+                                        <li>Click <span class="sop-btn-indicator">Confirm &amp; Apply</span> to update all target outlet configurations in a single atomic operation.</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Scribe Interactive Walkthrough Embed -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">6</span>
+                            Interactive Step-by-Step Guide (Scribe Walkthrough)
+                        </h3>
+                        <div class="step-content">
+                            <p>Follow the annotated interactive guide below for the complete Outlets Management workflow &mdash; covering individual shop registration, bulk template downloading, spreadsheet uploading with duplicate suppression, and SMS preference configuration &mdash; with live screen captures and click annotations.</p>
+
+                            <!-- Scribe Responsive Embed -->
+                            <div class="scribe-container my-6 w-full overflow-hidden rounded-xl border border-border shadow-sm"
+                                style="margin-top: 16px; margin-bottom: 8px; width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <iframe
+                                    src="https://scribehow.com/embed/Outlets_Directory_Bulk_Ingestion_and_Automated_Customer_Ledger_Management_in_Cinaway_ERP__XgNv55s_R7mN9lllXnrlvA?as=scrollable"
+                                    width="100%"
+                                    height="800"
+                                    allow="fullscreen"
+                                    style="border: 0; min-height: 640px; display: block;"
+                                    title="Outlets Directory, Bulk Ingestion &amp; Automated Customer Ledger Management in Cinaway ERP">
+                                </iframe>
+                                <div class="print-url-fallback">
+                                    <span class="fallback-icon">&#127760;</span>
+                                    <span class="fallback-text">View Live Interactive Walkthrough:</span>
+                                    <a href="https://scribehow.com/shared/Outlets_Directory_Bulk_Ingestion_and_Automated_Customer_Ledger_Management_in_Cinaway_ERP__XgNv55s_R7mN9lllXnrlvA" class="fallback-url" target="_blank" rel="noopener">Open Scribe Guide &rarr;</a>
+                                </div>
+                            </div>
+                            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+                                &#128161; <em>Scroll through the interactive steps inside the frame above to view exact screen actions, input highlights, and click annotations. Use fullscreen mode for the best experience.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Troubleshooting & Operational Best Practices -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">7</span>
+                            Operational Guidelines &amp; Troubleshooting Matrix
+                        </h3>
+                        <div class="step-content">
+                            <div class="sop-table-container" style="overflow-x: auto; margin-top: 10px;">
+                                <table class="sop-table" style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+                                    <thead>
+                                        <tr style="background-color: var(--bg-card); border-bottom: 2px solid var(--border-color); text-align: left;">
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Issue / Scenario</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Root Cause</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Corrective Resolution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Bulk Import Skips Rows as "Duplicate Detected"</td>
+                                            <td style="padding: 10px 14px;">The phone number or outlet code in the Excel spreadsheet matches a retail shop already registered in the system.</td>
+                                            <td style="padding: 10px 14px;">Review the import summary log. If the shop is already registered, update its details via the directory. If it is a different branch, verify and assign a unique contact phone and unique outlet code.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">"Invalid Route Name" Error During Ingestion</td>
+                                            <td style="padding: 10px 14px;">The <code>route_name</code> column contains spelling differences or refers to a territory not yet created in the Route Master.</td>
+                                            <td style="padding: 10px 14px;">Check the exact route names in <strong>Core Logistics &#10148; Route Master</strong>. Update the Excel column to match the registered route name exactly before re-uploading.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Store Owner Reports Not Receiving Dispatch SMS</td>
+                                            <td style="padding: 10px 14px;">SMS toggle is switched OFF in the outlet profile, or the recorded phone number has invalid formatting (missing leading zero or non-numeric characters).</td>
+                                            <td style="padding: 10px 14px;">Open <strong>About Outlet</strong>, verify the phone number is a standard 10-digit mobile number, and ensure the <strong>Switch On/Off SMS</strong> toggle is in the green <em>Active</em> position.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Outlet Debtor Ledger Balance Does Not Match ERP Invoice Total</td>
+                                            <td style="padding: 10px 14px;">Cash or cheque collection was recorded against a generic cashier account without linking the outlet debtor sub-ledger.</td>
+                                            <td style="padding: 10px 14px;">Ensure all rep collection receipts select the specific outlet so the payment credits sub-account <code>1200-OUT-XXXX</code> directly. Run the Debtor Ledger Reconciliation report to re-align.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px 14px; font-weight: 600;">Retail Shop Permanently Closes or Ceases Trading</td>
+                                            <td style="padding: 10px 14px;">Shop is inactive but historical sales and accounting records must be permanently retained for tax and audit compliance.</td>
+                                            <td style="padding: 10px 14px;">Do <strong>not</strong> attempt hard database deletion. Change the outlet status to <span class="sop-btn-indicator">Deactivated</span>. The shop will be hidden from daily delivery manifests while preserving all past Account 1200 ledger transactions.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
