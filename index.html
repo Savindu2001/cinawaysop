@@ -2752,7 +2752,7 @@
                         <div class="alert-icon">&#128203;</div>
                         <div class="alert-content">
                             <strong>Payroll Integration Notice:</strong>
-                            <p>Leave records directly impact payroll calculations. <strong>Paid leave</strong> types (where <em>Is Paid Leave</em> is toggled ON) are counted toward the employee&apos;s full salary entitlement for that period. <strong>Unpaid leave</strong> reduces the monthly basic salary proportionally. Ensure all leave requests are approved or rejected before the monthly payroll run is executed.</p>
+                            <p>Leave records directly impact payroll calculations. <strong>Paid leave</strong> types (where <em>Is Paid Leave</em> is toggled ON) are counted toward the employee&apos;s full salary entitlement for that period. <strong>Unpaid leave</strong> reduces the monthly basic salary proportionally. Ensure all leave requests are approved or rejected before the monthly payroll run is executed (see Module 07 for the complete Payroll Lifecycle).</p>
                         </div>
                     </div>
 
@@ -2894,13 +2894,304 @@
             </section>
 
             <!-- ==========================================================================
-     MODULE 07 / CHAPTER 07: OUTLETS DIRECTORY, BULK INGESTION & AUTOMATED CUSTOMER LEDGER MANAGEMENT
+     MODULE 07 / CHAPTER 07: END-TO-END PAYROLL LIFECYCLE, STAFF ADVANCES, LOANS & STATUTORY PROCESSING
+     ========================================================================== -->
+            <section class="sop-module" id="payroll-lifecycle-statutory-processing"
+                data-title="Payroll Lifecycle &amp; Statutory Processing"
+                data-responsible="HR Manager / Payroll Officer / Accounts &amp; Finance / System Administrator">
+                <div class="module-header">
+                    <span class="module-badge">Module 07 &middot; Chapter 07 &mdash; HR &amp; Payroll Operations</span>
+                    <h2 class="module-title">Module 07: End-to-End Payroll Lifecycle, Staff Advances, Loans &amp; Statutory Processing in Cinaway ERP</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Target Audience</span>
+                            <span class="meta-value">HR Managers, Payroll Officers, Finance &amp; Accounts Officers, System Administrators</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Responsible Person</span>
+                            <span class="meta-value" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="role-badge role-hr" onclick="filterByRole('HR Manager')">HR Manager</span>
+                                <span class="role-badge role-finance" onclick="filterByRole('Accounts &amp; Finance')">Accounts &amp; Finance</span>
+                                <span class="role-badge role-admin" onclick="filterByRole('System Administrator')">System Administrator</span>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Objective</span>
+                            <span class="meta-value">Complete operational workflow covering recurring pay component setup, employee loans and salary advance disbursement, monthly batch payroll generation, automatic statutory deductions (EPF 8%/12%, ETF 3%, Gratuity provision), and payslip verification.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-body">
+
+                    <!-- Statutory Compliance Alert Banner -->
+                    <div class="sop-alert info" style="margin-bottom: 24px;">
+                        <div class="alert-icon">&#128176;</div>
+                        <div class="alert-content">
+                            <strong>Sri Lankan Statutory Payroll Compliance &amp; Automated ERP Computation:</strong>
+                            <p>Under Sri Lankan Labor Law and Cinaway ERP&apos;s automated payroll architecture, statutory contributions are computed automatically on qualifying gross earnings. In addition to basic salary calculations, the engine executes real-time statutory deductions and provisions: <strong>Employee EPF (8%)</strong>, <strong>Employer EPF (12%)</strong>, <strong>Employer ETF (3%)</strong>, and <strong>Gratuity provisions</strong> (Payment of Gratuity Act No. 12 of 1983). The payroll pipeline automatically reconciles with Biometric Attendance records (Module 05), Approved Leave days (Module 06), Active Staff Loans, and Approved Salary Advance disbursements before generating official monthly payslips.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Pay Components Configuration -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">1</span>
+                            Configuring Recurring &amp; Custom Pay Components (Allowances &amp; Deductions)
+                        </h3>
+                        <div class="step-content">
+                            <p>To configure recurring salary additions, variable allowances, or fixed payroll deductions, navigate to <span class="sop-flow">HR Module &#10148; Pay Components</span>.</p>
+                            <p>From the Pay Components dashboard, click <span class="sop-btn-indicator">+ Add Pay Component</span> to open the configuration modal:</p>
+                            <ul>
+                                <li><strong>Component Name <code>*</code>:</strong> Enter a recognizable, standardized title (e.g., <em>Transport Allowance</em>, <em>Attendance Incentive</em>, <em>Travelling Allowance</em>, <em>Sales Incentive</em>, or <em>Mobile Allowance</em>).</li>
+                                <li><strong>Component Type <code>*</code>:</strong> Select the component classification from the dropdown:
+                                    <ul>
+                                        <li><strong>Allowance / Addition:</strong> Adds directly to the employee&apos;s gross earnings before or after statutory baselines depending on taxability.</li>
+                                        <li><strong>Deduction:</strong> Deducted from the employee&apos;s net pay (e.g., staff welfare, insurance, or uniform contributions).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Amount (LKR) <code>*</code>:</strong> Enter the recurring monthly numeric value in Sri Lankan Rupees.</li>
+                                <li><strong>Effective Date Range:</strong> Define the <code>Effective From Date</code> and <code>Effective To Date</code>. Use the year/month picker to set multi-year validity or contract-bound expiration.</li>
+                                <li><strong>Applicable Months:</strong> Select whether this component recurs every calendar month or applies only to specific seasonal cycles (e.g., New Year bonus components).</li>
+                                <li><strong>Default vs. Manual Assignment:</strong> Toggle whether the component automatically applies to all employees by default or is manually assigned to selected individual staff profiles.</li>
+                            </ul>
+                            <p>Click <span class="sop-btn-indicator">Create Pay Component</span> to register the rule. Click <span class="sop-btn-indicator">View</span> on any component row to inspect assigned employees, effective date windows, and complete audit history via the <span class="sop-btn-indicator">&#128737; Audit History</span> log.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Employee Loans Management & Installment Amortization -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">2</span>
+                            Employee Loans Provisioning, Repayment Tenures &amp; Installment Amortization
+                        </h3>
+                        <div class="step-content">
+                            <p>Cinaway ERP manages long-term staff loan facilities with automated monthly installment amortization. Navigate to <span class="sop-flow">HR Module &#10148; Employee Loans</span>.</p>
+                            <p>To issue an employee loan facility, click <span class="sop-btn-indicator">+ Create New Loan</span> and complete all required fields:</p>
+                            <ul>
+                                <li><strong>Target Employee <code>*</code>:</strong> Search and select the eligible permanent employee from the staff directory.</li>
+                                <li><strong>Loan Amount (LKR) <code>*</code>:</strong> Input the approved principal loan sum (e.g., <code>50,000.00</code>).</li>
+                                <li><strong>Start Date / Effective Month <code>*</code>:</strong> Select the payroll month in which the first installment deduction will trigger.</li>
+                                <li><strong>Repayment Tenure &amp; Installments:</strong> Specify the total number of monthly installments or monthly deduction amount. The system calculates the monthly amortization deduction and tracks running principal balances.</li>
+                                <li><strong>Purpose &amp; Remarks:</strong> Record the formal justification (e.g., <em>Staff Emergency Medical Support</em>, <em>Motorcycle Purchase Facility</em>, <em>Education Assistance</em>) and administrative remarks for executive audit trails.</li>
+                            </ul>
+                            <p>Click <span class="sop-btn-indicator">Create Loan</span>. The loan record is registered in <code>Pending Approval</code> status.</p>
+                            <div class="sop-alert warning" style="margin-top: 12px; margin-bottom: 12px;">
+                                <div class="alert-icon">&#9888;</div>
+                                <div class="alert-content">
+                                    <strong>Loan Approval &amp; Cancellation Authority:</strong>
+                                    <p>An authorized administrator or HR Manager reviews pending loan requests directly on the Employee Loans dashboard. Click <span class="sop-btn-indicator">Approve</span> to activate the loan into the active deduction cycle, or <span class="sop-btn-indicator">Cancel</span> to reject the loan with mandatory audit remarks. Once approved, the monthly deduction is automatically locked into future payroll cycles until fully amortized.</p>
+                                </div>
+                            </div>
+                            <p>Select <span class="sop-btn-indicator">Audit History</span> on any loan row to review immutable timestamps, approver user IDs, and running installment ledger balances.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Staff Salary Advances Disbursement -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">3</span>
+                            Staff Salary Advances: Application, Approval &amp; Bank Account Settlement
+                        </h3>
+                        <div class="step-content">
+                            <p>For mid-month emergency salary draws, navigate to <span class="sop-flow">HR Module &#10148; Salary Advances</span>. The system automates advance requests, approver bank allocations, and automated month-end recoveries.</p>
+                            <ul>
+                                <li><strong>Create Advance Request:</strong> Click <span class="sop-btn-indicator">+ Create Advance Request</span>.</li>
+                                <li><strong>Employee Search <code>*</code>:</strong> Search by name, employee EPF number, or national ID.</li>
+                                <li><strong>Advance Amount (LKR) <code>*</code>:</strong> Enter the requested disbursement figure.</li>
+                                <li><strong>Advance Payroll Month <code>*</code>:</strong> Select the specific payroll month against which this advance must be recovered (e.g., <em>September 2026</em>).</li>
+                                <li><strong>Reason <code>*</code>:</strong> Document the official reason for the advance draw.</li>
+                            </ul>
+                            <p>Click <span class="sop-btn-indicator">Submit Advance</span>. Authorized managers can then review the application:</p>
+                            <ul>
+                                <li><strong>Bank Account Selection &amp; Financial Settlement:</strong> Upon clicking the <span class="sop-btn-indicator">Approve</span> action icon, an approval modal prompts the manager to enter <strong>Approval Remarks</strong> and select the <strong>Disbursing Bank Account</strong> (e.g., <em>Commercial Bank Operating Account</em> or <em>BOC Main Disbursement Account</em>). This links the cash outflow directly to financial general ledger accounts.</li>
+                                <li><strong>Automated Recovery:</strong> When the monthly bulk payroll is generated for that specified advance month, the advance sum is automatically deducted under the <em>Salary Advance</em> column, ensuring zero manual bookkeeper intervention.</li>
+                                <li><strong>Audit Trail:</strong> Access <span class="sop-btn-indicator">&#128737; Audit History</span> to verify application time, approver credentials, and bank account mapping.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Automated Monthly Bulk Payroll Generation -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">4</span>
+                            Executing Automated Monthly Bulk Payroll Generation &amp; Cross-Module Reconciliation
+                        </h3>
+                        <div class="step-content">
+                            <p>To run the monthly payroll cycle for all active staff, navigate to <span class="sop-flow">HR Module &#10148; Payroll</span>.</p>
+                            <p>The Payroll interface offers individual employee search as well as full automated bulk execution:</p>
+                            <ul>
+                                <li><strong>Initiate Bulk Run:</strong> Click the <span class="sop-btn-indicator">&#9881; Auto Generate (Bulk) Payroll</span> button in the top action header.</li>
+                                <li><strong>Select Payroll Month <code>*</code>:</strong> Choose the target settlement cycle (e.g., <em>September 2026</em>) from the dropdown.</li>
+                                <li><strong>Click Generate:</strong> Click <span class="sop-btn-indicator">Generate</span> to trigger the backend calculation pipeline.</li>
+                            </ul>
+                            <p>The payroll calculation engine automatically executes a four-way cross-module reconciliation in real time:</p>
+                            <ol>
+                                <li><strong>Biometric Attendance Data (Module 05):</strong> Calculates exact duty days, overtime (OT) hours, verified late check-in penalties, and holiday work premiums.</li>
+                                <li><strong>Leave Balances (Module 06):</strong> Verifies approved paid leaves versus unpaid (no-pay) leaves. Unpaid leaves trigger automatic basic pay deductions based on the monthly working day divisor.</li>
+                                <li><strong>Active Pay Components:</strong> Pulls all active allowances and fixed deductions configured in Step 1.</li>
+                                <li><strong>Advances &amp; Loan Amortizations:</strong> Automatically recovers approved salary advances for the month (Step 3) and applies active employee loan installment deductions (Step 2).</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Statutory EPF, ETF & Gratuity Calculation Engine -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">5</span>
+                            Automated Statutory Calculation Engine: EPF, ETF &amp; Gratuity Liability Accruals
+                        </h3>
+                        <div class="step-content">
+                            <p>Cinaway ERP natively calculates all statutory deductions and company contributions strictly compliant with Sri Lankan Department of Labour mandates:</p>
+
+                            <table class="table sop-report-table" style="width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 16px; font-size: 13.5px;">
+                                <thead>
+                                    <tr style="background-color: var(--bg-card); border-bottom: 2px solid var(--border-color); text-align: left;">
+                                        <th style="padding: 10px 14px; width: 22%;">Statutory Component</th>
+                                        <th style="padding: 10px 14px; width: 14%;">Rate (%)</th>
+                                        <th style="padding: 10px 14px; width: 20%;">Contribution Source</th>
+                                        <th style="padding: 10px 14px; width: 44%;">Computation Formula &amp; Statutory Rule</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 10px 14px; font-weight: 600;">EPF &mdash; Employee</td>
+                                        <td style="padding: 10px 14px; color: var(--primary); font-weight: 700;">8%</td>
+                                        <td style="padding: 10px 14px;">Employee Salary Deduction</td>
+                                        <td style="padding: 10px 14px;"><code>8% &times; (Basic Salary + Qualifying Allowances)</code>.<br>Deducted directly from employee gross salary.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 10px 14px; font-weight: 600;">EPF &mdash; Employer</td>
+                                        <td style="padding: 10px 14px; color: #10b981; font-weight: 700;">12%</td>
+                                        <td style="padding: 10px 14px;">Direct Employer Cost</td>
+                                        <td style="padding: 10px 14px;"><code>12% &times; (Basic Salary + Qualifying Allowances)</code>.<br>Paid 100% by Cinaway Logistics; zero deduction from staff pay.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 10px 14px; font-weight: 600;">ETF &mdash; Employer</td>
+                                        <td style="padding: 10px 14px; color: #3b82f6; font-weight: 700;">3%</td>
+                                        <td style="padding: 10px 14px;">Direct Employer Cost</td>
+                                        <td style="padding: 10px 14px;"><code>3% &times; (Basic Salary + Qualifying Allowances)</code>.<br>Remitted to Employees&apos; Trust Fund Board monthly.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 10px 14px; font-weight: 600;">Gratuity Provision</td>
+                                        <td style="padding: 10px 14px; color: #8b5cf6; font-weight: 700;">Monthly Accrual</td>
+                                        <td style="padding: 10px 14px;">Company Balance Sheet Liability</td>
+                                        <td style="padding: 10px 14px;">Computed under Payment of Gratuity Act No. 12 of 1983: <code>(Basic Salary / 2) &divide; 12</code> accrued monthly per eligible employee with &ge; 5 years statutory entitlement horizon.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>Select <span class="sop-btn-indicator">Gratuity</span> in the payroll navigation to inspect cumulative gratuity reserves and individual employee entitlement projections.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Review, Batch Approval, Disbursement & Payslips -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">6</span>
+                            Monthly Payroll Review, Batch Approval, Salary Disbursement &amp; Payslip Issuance
+                        </h3>
+                        <div class="step-content">
+                            <p>Once bulk generation finishes, follow the four-stage verification and payment workflow:</p>
+                            <ol>
+                                <li><strong>Pre-Approval Review:</strong> Filter by the target month. Review line items for each employee: Basic Salary, Overtime, Allowances, Gross Pay, EPF 8%, Advance Recoveries, Loan Deductions, and Net Salary.</li>
+                                <li><strong>Batch Approval:</strong> Verify company totals on the summary KPI header. Click <span class="sop-btn-indicator">Approve</span>. The payroll status transitions from <code>Draft</code> to <code>Approved</code>.</li>
+                                <li><strong>Disburse Salary:</strong> Click <span class="sop-btn-indicator">Disburse Salary</span> in the top action bar. Select the approved payroll month (e.g., <em>September 2026</em>) and click <span class="sop-btn-indicator">Disburse</span>. This updates the payroll status to <code>Disbursed</code>, locks records against accidental tampering, and generates Bank of Ceylon (BOC) PRN / electronic bank transfer files.</li>
+                                <li><strong>Payslip Verification:</strong> Click on any employee row or click <span class="sop-btn-indicator">View Payslip</span> to inspect the formatted payslip. Staff payslips clearly distinguish between Gross Earnings, Statutory Deductions (EPF 8%), Voluntary Deductions (Advances, Loans), Employer Contributions (EPF 12%, ETF 3%), and Final Net Payable.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Scribe Interactive Walkthrough Embed -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">7</span>
+                            Interactive Step-by-Step Guide (Scribe Walkthrough)
+                        </h3>
+                        <div class="step-content">
+                            <p>Follow the interactive visual guide below for the complete End-to-End Payroll Lifecycle &mdash; covering pay components setup, staff loan provisioning, salary advances, automated bulk payroll execution, statutory EPF/ETF verification, and salary disbursement &mdash; with live screen captures and click annotations.</p>
+
+                            <!-- Scribe Responsive Embed -->
+                            <div class="scribe-container my-6 w-full overflow-hidden rounded-xl border border-border shadow-sm"
+                                style="margin-top: 16px; margin-bottom: 8px; width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <iframe
+                                    src="https://scribehow.com/embed/End-to-End_Payroll_Lifecycle_Staff_Advances_Loans_and_Statutory_Processing_in_Cinaway_ERP__0Kd6niXQSXWj2m9lDBWJgA?as=scrollable"
+                                    width="100%"
+                                    height="800"
+                                    allow="fullscreen"
+                                    style="border: 0; min-height: 640px; display: block;"
+                                    title="End-to-End Payroll Lifecycle, Staff Advances, Loans &amp; Statutory Processing in Cinaway ERP">
+                                </iframe>
+                                <div class="print-url-fallback">
+                                    <span class="fallback-icon">&#127760;</span>
+                                    <span class="fallback-text">View Live Interactive Walkthrough:</span>
+                                    <a href="https://scribehow.com/shared/End-to-End_Payroll_Lifecycle_Staff_Advances_Loans_and_Statutory_Processing_in_Cinaway_ERP__0Kd6niXQSXWj2m9lDBWJgA" class="fallback-url" target="_blank" rel="noopener">Open Scribe Guide &rarr;</a>
+                                </div>
+                            </div>
+                            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+                                &#128161; <em>Scroll through the interactive steps inside the frame above to view exact screen actions, input highlights, and click annotations. Use fullscreen mode for the best experience.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Operational Guidelines & Troubleshooting Matrix -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">8</span>
+                            Operational Guidelines &amp; Troubleshooting Matrix
+                        </h3>
+                        <div class="step-content">
+                            <div class="sop-table-container" style="overflow-x: auto; margin-top: 10px;">
+                                <table class="sop-table" style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+                                    <thead>
+                                        <tr style="background-color: var(--bg-card); border-bottom: 2px solid var(--border-color); text-align: left;">
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Issue / Scenario</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Root Cause</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Corrective Resolution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Salary Advance not deducted in Monthly Payroll run</td>
+                                            <td style="padding: 10px 14px;">The advance request is either still in <code>Pending</code> status or the <em>Advance Month</em> specified on the application does not match the active payroll cycle.</td>
+                                            <td style="padding: 10px 14px;">Navigate to <strong>Salary Advances</strong>. Verify that the advance is <code>Approved</code> and that the assigned <em>Advance Month</em> matches the payroll month. Re-run bulk payroll if the month was edited.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Loan Installment deduction did not reflect on payslip</td>
+                                            <td style="padding: 10px 14px;">The loan is in <code>Pending Approval</code> status, the start date is set to a future month, or the loan principal has already been 100% amortized.</td>
+                                            <td style="padding: 10px 14px;">Open <strong>Employee Loans</strong>, confirm status is <code>Approved</code>, and verify that the current calendar month falls between the start date and tenure completion date.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Incorrect basic salary reduction for staff absent days</td>
+                                            <td style="padding: 10px 14px;">Pending leave requests have not been approved/rejected in Module 06, or leave was incorrectly classified as paid instead of unpaid (no-pay).</td>
+                                            <td style="padding: 10px 14px;">Ensure all leave requests are resolved in <strong>Leave Management</strong> before running payroll. Verify that leave categories requiring salary deductions have <em>Is Paid Leave</em> turned OFF.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Attendance/Biometric adjustments made after payroll generation</td>
+                                            <td style="padding: 10px 14px;">Biometric logs were re-imported or manually adjusted after the bulk payroll run was executed.</td>
+                                            <td style="padding: 10px 14px;">If the batch is still in <code>Draft</code> status, click <strong>Auto Generate (Bulk) Payroll</strong> again for that month to re-calculate attendance and OT baselines. If already approved, cancel approval before re-generating.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px 14px; font-weight: 600;">BOC PRN / Bank Transfer file contains wrong account numbers</td>
+                                            <td style="padding: 10px 14px;">Staff bank details were missing or updated with invalid branch codes in Employee Profiles (Module 04).</td>
+                                            <td style="padding: 10px 14px;">Navigate to <strong>Employee Directory</strong>, update the employee&apos;s bank name, branch code, and account number, and re-export the disbursement file.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+     MODULE 08 / CHAPTER 08: OUTLETS DIRECTORY, BULK INGESTION & AUTOMATED CUSTOMER LEDGER MANAGEMENT
      ========================================================================== -->
             <section class="sop-module" id="outlets-directory-ledger-management"
                 data-title="Outlets &amp; Customer Ledger Management"
                 data-responsible="Logistics Operations / System Administrator / Accounts &amp; Finance">
                 <div class="module-header">
-                    <span class="module-badge">Module 07 &middot; Chapter 07 &mdash; Master Data &amp; Core Logistics</span>
+                    <span class="module-badge">Module 08 &middot; Chapter 08 &mdash; Master Data &amp; Core Logistics</span>
                     <h2 class="module-title">Outlets Directory, Bulk Ingestion &amp; Automated Customer Ledger Management in Cinaway ERP</h2>
                     <div class="module-meta">
                         <div class="meta-item">
@@ -3144,6 +3435,1490 @@
                                             <td style="padding: 10px 14px; font-weight: 600;">Retail Shop Permanently Closes or Ceases Trading</td>
                                             <td style="padding: 10px 14px;">Shop is inactive but historical sales and accounting records must be permanently retained for tax and audit compliance.</td>
                                             <td style="padding: 10px 14px;">Do <strong>not</strong> attempt hard database deletion. Change the outlet status to <span class="sop-btn-indicator">Deactivated</span>. The shop will be hidden from daily delivery manifests while preserving all past Account 1200 ledger transactions.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+     MODULE 09 / CHAPTER 09: MULTI-CHANNEL NOTIFICATION CENTER: SINGLE & BULK SMS/EMAIL DISPATCH
+     ========================================================================== -->
+            <section class="sop-module" id="multi-channel-notification-center"
+                data-title="Multi-Channel Notification Center"
+                data-responsible="System Administrator / Operations Manager / Marketing &amp; Communications / Logistics Operations">
+                <div class="module-header">
+                    <span class="module-badge">Module 09 &middot; Chapter 09 &mdash; System Administration &amp; Communications</span>
+                    <h2 class="module-title">Multi-Channel Notification Center: Single &amp; Bulk SMS/Email Dispatch in Cinaway ERP</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Target Audience</span>
+                            <span class="meta-value">System Administrators, Operations Managers, Marketing &amp; Communications Officers, Logistics Coordinators</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Responsible Person</span>
+                            <span class="meta-value" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="role-badge role-admin" onclick="filterByRole('System Administrator')">System Administrator</span>
+                                <span class="role-badge role-logistics" onclick="filterByRole('Logistics Operations')">Logistics Operations</span>
+                                <span class="role-badge role-hr" onclick="filterByRole('HR Manager')">HR Manager</span>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Objective</span>
+                            <span class="meta-value">Administrative procedures for single and bulk SMS/Email broadcasts, dynamic recipient filtering (Outlets, Suppliers, Staff), Dialog SMS gateway usage, and transmission audit logs.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-body">
+
+                    <!-- Enterprise Gateway & Compliance Banner -->
+                    <div class="sop-alert info" style="margin-bottom: 24px;">
+                        <div class="alert-icon">&#128242;</div>
+                        <div class="alert-content">
+                            <strong>Enterprise Communication Gateway &amp; Automated Audit Protocol:</strong>
+                            <p>Cinaway ERP integrates an enterprise multi-channel dispatch architecture powered by the <strong>Dialog Business Messaging Gateway</strong> (for authenticated SMS with the registered <code>CINAWAY</code> sender mask) and secure SMTP relays (for rich HTML email circulars). All outgoing communications are tracked in immutable transmission logs, automatically validated against mobile number standards (E.164 / Sri Lankan 10-digit formats), and reconciled against customer SMS preferences configured in the Outlets Directory (Module 08).</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Navigating the Notification Center -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">1</span>
+                            Accessing the Notification Center &amp; Channel Overview
+                        </h3>
+                        <div class="step-content">
+                            <p>To access the centralized messaging console, navigate to <span class="sop-flow">System Administration &#10148; Notification Center</span> or select <span class="sop-flow">Communications &#10148; SMS / Email Notifications</span> from the main ERP navigation bar.</p>
+                            <p>The Notification Center dashboard provides a unified control hub across both communication channels:</p>
+                            <ul>
+                                <li><strong>Channel Navigation Tabs:</strong> Toggle seamlessly between the <span class="sop-btn-indicator">SMS Notifications</span> tab (carrier text messaging) and the <span class="sop-btn-indicator">Email Notifications</span> tab (rich broadcast emails).</li>
+                                <li><strong>Gateway Status &amp; Quota Counters:</strong> Live telemetry cards displaying <em>Remaining SMS Credit Balance</em>, <em>Total Monthly Messages Dispatched</em>, <em>Carrier Gateway Latency</em>, and <em>Overall Delivery Success Rate</em>.</li>
+                                <li><strong>Quick Dispatch Actions:</strong> Direct modal launch buttons for <span class="sop-btn-indicator">+ New Single Message</span>, <span class="sop-btn-indicator">&#128227; Bulk Broadcast</span>, and <span class="sop-btn-indicator">&#128203; Export Transmission Logs</span>.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Single SMS Dispatch -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">2</span>
+                            Single Ad-Hoc SMS Messaging &amp; Real-Time GSM Character Counting
+                        </h3>
+                        <div class="step-content">
+                            <p>When sending operational alerts to a specific lorry driver, warehouse storekeeper, outlet proprietor, or corporate supplier:</p>
+                            <ol>
+                                <li>Click <span class="sop-btn-indicator">New Single SMS</span> or select the <strong>Single Dispatch</strong> radio option.</li>
+                                <li><strong>Recipient Phone Number <code>*</code>:</strong> Enter the 10-digit Sri Lankan mobile number (e.g., <code>0771234567</code>) or international format (<code>+94771234567</code>). The system automatically validates carrier network prefixes (Dialog, Mobitel, Airtel, Hutch).</li>
+                                <li><strong>Sender Mask Selection:</strong> Verify that the verified <code>CINAWAY</code> masking ID is selected. This ensures recipient trust and prevents carrier spam quarantine.</li>
+                                <li><strong>Message Composer &amp; GSM Character Tracker:</strong> Type the message content. The dynamic character counter monitors payload length in real time:
+                                    <ul>
+                                        <li><strong>Standard SMS (GSM 7-bit):</strong> Up to <strong>160 characters</strong> counts as 1 SMS credit.</li>
+                                        <li><strong>Multi-Part Concatenation:</strong> Messages exceeding 160 characters automatically segment into linked multi-part SMS (153 characters per segment) with a clear credit count preview.</li>
+                                    </ul>
+                                </li>
+                                <li>Click <span class="sop-btn-indicator">Send SMS</span>. The system submits the payload to the Dialog API gateway and displays an instantaneous confirmation receipt with the gateway transaction ID.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Dynamic Multi-Stakeholder Recipient Filtering (Bulk SMS) -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">3</span>
+                            Dynamic Multi-Stakeholder Recipient Filtering &amp; Bulk SMS Broadcasts
+                        </h3>
+                        <div class="step-content">
+                            <p>For territory-wide logistics announcements, price updates, holiday delivery changes, or critical payment reminders, use the automated multi-stakeholder bulk broadcast engine:</p>
+                            <ul>
+                                <li><strong>Select Recipient Category:</strong> Choose the target stakeholder demographic from the filter selector:
+                                    <ul>
+                                        <li><strong>Retail Outlets:</strong> Target registered shops with multi-level filtering:
+                                            <ul style="margin-top: 4px;">
+                                                <li><strong>By Delivery Route:</strong> Broadcast exclusively to shops assigned to a specific sales route (e.g., <em>Colombo North</em>, <em>Kandy Central</em>, <em>Galle Coastal</em>).</li>
+                                                <li><strong>By Territory / District:</strong> Target entire geographic provinces or sales territories.</li>
+                                                <li><strong>By Credit / Ledger Status:</strong> Filter shops exceeding credit ceilings or overdue payment periods.</li>
+                                                <li><strong>Automated Opt-In Respect:</strong> The system automatically evaluates the <code>sms_enabled</code> status configured in Module 08 and skips any merchant who has opted out of SMS alerts.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Suppliers &amp; Principals:</strong> Dispatch intake schedules, purchase order dispatch notices, or warehouse receiving window updates directly to trade vendors.</li>
+                                        <li><strong>Internal Staff &amp; Field Crews:</strong> Broadcast emergency operational circulars or shift schedules filtered by department (e.g., <em>All Sales Reps</em>, <em>Lorry Drivers &amp; Assistants</em>, <em>Accounts Staff</em>).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Custom Spreadsheet Ingestion:</strong> For one-off broadcast campaigns, click <span class="sop-btn-indicator">Upload CSV / Excel</span> to import an external phone list with automatic duplicate number suppression and syntax validation.</li>
+                                <li><strong>Review &amp; Schedule:</strong> Review the calculated total recipient count, estimated credit consumption, and click <span class="sop-btn-indicator">&#128640; Launch Broadcast</span>. The dispatch queue distributes messages in throttled bursts to ensure 100% gateway compliance.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Multi-Channel Email Broadcasting -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">4</span>
+                            Multi-Channel Email Broadcasting, Rich Templates &amp; Dynamic Merge Tags
+                        </h3>
+                        <div class="step-content">
+                            <p>Switch to the <span class="sop-btn-indicator">Email Notifications</span> tab to draft and transmit formal digital correspondence:</p>
+                            <ul>
+                                <li><strong>Recipient Selection:</strong> Select recipient groups (Corporate Outlets, Supplier Key Accounts, Management Teams) or input individual email addresses.</li>
+                                <li><strong>Subject Line &amp; Priority:</strong> Enter a professional subject line and optionally flag high-importance circulars.</li>
+                                <li><strong>Rich Text Composer &amp; Dynamic Merge Tags:</strong> The built-in WYSIWYG editor allows structured formatting, embedded tables, official corporate signatures, and personalized merge tokens:
+                                    <ul>
+                                        <li><code>{{recipient_name}}</code> &mdash; Automatically resolves to the contact person or store manager.</li>
+                                        <li><code>{{outlet_name}}</code> &mdash; Dynamically inserts the registered retail trading name.</li>
+                                        <li><code>{{route_name}}</code> &mdash; Displays the outlet&apos;s assigned delivery route.</li>
+                                        <li><code>{{date}}</code> &mdash; Injects the current operational dispatch date.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>File Attachments:</strong> Attach PDF invoice summaries, updated Unilever distributor price matrices, or formal company notices up to 15MB per transmission.</li>
+                                <li><strong>Dispatch &amp; Delivery Tracking:</strong> Click <span class="sop-btn-indicator">Send Email Broadcast</span> to initiate transmission through Cinaway&apos;s authenticated enterprise SMTP server.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Dialog Gateway Settings & Sender Masking -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">5</span>
+                            Dialog Enterprise SMS Gateway Configuration &amp; Balance Monitoring
+                        </h3>
+                        <div class="step-content">
+                            <p>System Administrators can review and manage telecom carrier parameters under <span class="sop-flow">Notification Center &#10148; Gateway Settings</span>:</p>
+                            <ul>
+                                <li><strong>Carrier Endpoint &amp; Authentication:</strong> Direct secure integration with Dialog Enterprise Business Messaging API using encrypted bearer tokens.</li>
+                                <li><strong>Approved Sender Masking ID:</strong> Outbound SMS headers are locked to the approved regulatory mask <code>CINAWAY</code>. This eliminates carrier filtering and ensures legal compliance under TRCSL (Telecommunications Regulatory Commission of Sri Lanka) regulations.</li>
+                                <li><strong>Low-Balance Alert Threshold:</strong> Configure an automated notification alert (sent to the System Administrator and Finance Team) whenever the pre-paid SMS credit pool drops below <strong>1,000 credits</strong>, ensuring zero disruption to automated daily invoice SMS dispatches.</li>
+                                <li><strong>Automated Retry Policy:</strong> Failed dispatches caused by temporary network congestion or handsets being out of coverage are placed into a resilient retry queue with 3 retry attempts over a 2-hour window.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Transmission Audit Logs -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">6</span>
+                            Transmission Audit Logs, Delivery Receipts &amp; Compliance Reporting
+                        </h3>
+                        <div class="step-content">
+                            <p>Every single and bulk communication dispatched through Cinaway ERP is immutably archived in the <strong>Notification Transmission Logs</strong> table:</p>
+                            <ul>
+                                <li><strong>Detailed Log Attributes:</strong> Each log record captures the exact transmission timestamp, channel (<code>SMS</code> or <code>Email</code>), recipient phone/email, recipient category (<code>Outlet</code>, <code>Staff</code>, <code>Supplier</code>), message text snippet, sender user ID, carrier gateway transaction ID, and final delivery status (<span class="sop-btn-indicator">Delivered</span>, <span class="sop-btn-indicator">Sent</span>, <span class="sop-btn-indicator">Failed</span>, <span class="sop-btn-indicator">Pending</span>).</li>
+                                <li><strong>Search &amp; Filter Logs:</strong> Filter records dynamically by date range, specific delivery route, recipient mobile number, or delivery outcome to investigate any reported communication lapses.</li>
+                                <li><strong>Export for Telecom Reconciliation:</strong> Click <span class="sop-btn-indicator">&#128196; Export Logs to CSV</span> to download itemized monthly statements for cross-checking against Dialog monthly telecommunication billing invoices.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Scribe Interactive Walkthrough Embed -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">7</span>
+                            Interactive Step-by-Step Guide (Scribe Walkthrough)
+                        </h3>
+                        <div class="step-content">
+                            <p>Follow the interactive visual guide below for the complete Multi-Channel Notification Center workflow &mdash; covering single SMS dispatch, bulk recipient filtering across routes and stakeholders, email circular creation, and transmission log audits &mdash; with live screen captures and click annotations.</p>
+
+                            <!-- Scribe Responsive Embed -->
+                            <div class="scribe-container my-6 w-full overflow-hidden rounded-xl border border-border shadow-sm"
+                                style="margin-top: 16px; margin-bottom: 8px; width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <iframe
+                                    src="https://scribehow.com/embed/Multi-Channel_Notification_Center_Single_and_Bulk_SMSEmail_Dispatch_in_Cinaway_ERP__BctoD1YeT7WDLkMQFRaRxw?as=scrollable"
+                                    width="100%"
+                                    height="800"
+                                    allow="fullscreen"
+                                    style="border: 0; min-height: 640px; display: block;"
+                                    title="Multi-Channel Notification Center: Single &amp; Bulk SMS/Email Dispatch in Cinaway ERP">
+                                </iframe>
+                                <div class="print-url-fallback">
+                                    <span class="fallback-icon">&#127760;</span>
+                                    <span class="fallback-text">View Live Interactive Walkthrough:</span>
+                                    <a href="https://scribehow.com/shared/Multi-Channel_Notification_Center_Single_and_Bulk_SMSEmail_Dispatch_in_Cinaway_ERP__BctoD1YeT7WDLkMQFRaRxw" class="fallback-url" target="_blank" rel="noopener">Open Scribe Guide &rarr;</a>
+                                </div>
+                            </div>
+                            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+                                &#128161; <em>Scroll through the interactive steps inside the frame above to view exact screen actions, input highlights, and click annotations. Use fullscreen mode for the best experience.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Operational Guidelines & Communication Troubleshooting Matrix -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">8</span>
+                            Operational Guidelines &amp; Communication Troubleshooting Matrix
+                        </h3>
+                        <div class="step-content">
+                            <div class="sop-table-container" style="overflow-x: auto; margin-top: 10px;">
+                                <table class="sop-table" style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+                                    <thead>
+                                        <tr style="background-color: var(--bg-card); border-bottom: 2px solid var(--border-color); text-align: left;">
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Issue / Scenario</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Root Cause</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Corrective Resolution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">SMS Status displays "Failed" or "Undelivered"</td>
+                                            <td style="padding: 10px 14px;">Invalid mobile number syntax (missing leading 0 or non-numeric characters), phone out of coverage, or subscriber has active DND (Do-Not-Disturb) carrier bar.</td>
+                                            <td style="padding: 10px 14px;">Check the <strong>Transmission Logs</strong> error description. Verify the recipient&apos;s phone number in the Outlets or Employee directory. Ensure number adheres strictly to 10-digit Sri Lankan standards.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Bulk route broadcast skipped specific retail shops</td>
+                                            <td style="padding: 10px 14px;">The skipped outlets have the <em>SMS Notifications</em> toggle switched OFF in their profile (Module 08).</td>
+                                            <td style="padding: 10px 14px;">If the merchant requested to receive broadcasts, navigate to <strong>Outlets Directory</strong>, open the shop profile, and toggle <strong>Switch On/Off SMS</strong> to the active position or use <em>Bulk SMS Actions</em>.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Dialog Gateway Error 401 / "Unauthorized API Token"</td>
+                                            <td style="padding: 10px 14px;">Dialog Business API token has expired or server outgoing IP address is not whitelisted on Dialog developer portal.</td>
+                                            <td style="padding: 10px 14px;">System Administrator must generate a fresh API Bearer Token from the Dialog Corporate Portal and update credentials in <strong>Gateway Settings</strong>.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Single message billed as multiple SMS credits</td>
+                                            <td style="padding: 10px 14px;">Text contained non-GSM Unicode characters (e.g., smart curly quotes, emoticons, or Sinhala/Tamil characters) which reduce credit limits to 70 chars per SMS.</td>
+                                            <td style="padding: 10px 14px;">Compose messages using standard ASCII/GSM-7 characters. Remove graphical emojis and formatted curly quotes before launching mass broadcasts.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px 14px; font-weight: 600;">Broadcast emails landing in recipient Spam folders</td>
+                                            <td style="padding: 10px 14px;">Domain SPF, DKIM, or DMARC DNS records missing or failing authentication on recipient corporate mail servers.</td>
+                                            <td style="padding: 10px 14px;">Verify domain DNS configuration for <code>cinawaylogistics.com</code> to ensure outgoing SMTP relay IP is fully authorized in the SPF TXT record.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+     MODULE 10 / CHAPTER 10: BOC PRN GENERATION & ELECTRONIC SALARY TRANSFER
+     ========================================================================== -->
+            <section class="sop-module" id="boc-prn-salary-transfer"
+                data-title="BOC PRN &amp; Electronic Salary Transfer"
+                data-responsible="Accounts &amp; Finance / Payroll Officer / System Administrator">
+                <div class="module-header">
+                    <span class="module-badge">Module 10 &middot; Chapter 10 &mdash; Banking &amp; Electronic Fund Transfers</span>
+                    <h2 class="module-title">BOC PRN Generation &amp; Electronic Salary Transfer in Cinaway ERP</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Target Audience</span>
+                            <span class="meta-value">Finance &amp; Accounts Officers, Payroll Officers, Chief Financial Officer, System Administrators</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Responsible Person</span>
+                            <span class="meta-value" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="role-badge role-finance" onclick="filterByRole('Accounts &amp; Finance')">Accounts &amp; Finance</span>
+                                <span class="role-badge role-hr" onclick="filterByRole('HR Manager')">Payroll Officer / HR Manager</span>
+                                <span class="role-badge role-admin" onclick="filterByRole('System Administrator')">System Administrator</span>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Objective</span>
+                            <span class="meta-value">Administrative procedures for verifying payroll disbursement eligibility, generating draft Excel preview sheets, exporting native bank PRN text files, and locking records against duplicate payments.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-body">
+
+                    <!-- Banking Standards & Integrity Notice Banner -->
+                    <div class="sop-alert info" style="margin-bottom: 24px;">
+                        <div class="alert-icon">&#127974;</div>
+                        <div class="alert-content">
+                            <strong>Bank of Ceylon (BOC) Corporate Banking &amp; Cryptographic Checksum Integrity:</strong>
+                            <p>Cinaway ERP integrates a native <strong>Bank of Ceylon (BOC) Bulk PRN File Generation Engine</strong> engineered strictly to BOC Corporate Internet Banking (PayMaster) file specifications. The engine calculates precise fixed-width record lines, header control parameters, running transactional checksums, and trailer record hashes. Once a file is produced, the system applies an atomic disbursement lock to prevent duplicate employee payments and ensure 100% compliance with Central Bank of Sri Lanka electronic fund transfer guidelines.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Prerequisites & Verification -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">1</span>
+                            Prerequisites &amp; Payroll Disbursement Eligibility Verification
+                        </h3>
+                        <div class="step-content">
+                            <p>Before launching the BOC PRN generation pipeline, verify that all preceding operational milestones are finalized:</p>
+                            <ul>
+                                <li><strong>Approved Monthly Payroll Run (Module 07):</strong> The monthly bulk payroll batch for the target period must be in <code>Approved</code> status. Under no circumstances should unapproved or draft payroll batches be processed for bank file creation.</li>
+                                <li><strong>Employee Banking Profiles Validation (Module 04):</strong> Every beneficiary staff member must have complete, verified commercial banking coordinates:
+                                    <ul>
+                                        <li><strong>Bank Code:</strong> <code>7010</code> for Bank of Ceylon (or valid 4-digit commercial bank code for CEFT/SLIPS clearing).</li>
+                                        <li><strong>Branch Code:</strong> Official 3-digit Central Bank registered branch code.</li>
+                                        <li><strong>Account Number:</strong> Validated numeric account string (without dashes, spaces, or alphabetic characters).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Missing Bank Details Scan:</strong> The system automatically flags any active employee with missing bank details during batch initialization. Unbanked staff must be settled via separate manual cash or cheque vouchers rather than contaminating the electronic bank payload.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Accessing the PRN Module -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">2</span>
+                            Accessing the BOC PRN Generation Console &amp; Cycle Selection
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">HR &amp; Payroll &#10148; BOC PRN Generation</span> or select <span class="sop-flow">Banking &amp; Transfers &#10148; BOC PRN File Export</span>.</p>
+                            <p>In the PRN Generator control panel:</p>
+                            <ol>
+                                <li><strong>Select Payroll Cycle <code>*</code>:</strong> Choose the target settlement month (e.g., <em>September 2026</em>) from the dropdown.</li>
+                                <li><strong>Select Company Disbursing Account <code>*</code>:</strong> Choose Cinaway Logistics&apos; corporate BOC current account from which the bulk debit will be drawn (pre-configured with corporate CID number).</li>
+                                <li><strong>Payment Value Date <code>*</code>:</strong> Specify the effective calendar transfer execution date on which the bank must execute the credit transfers.</li>
+                                <li>Click <span class="sop-btn-indicator">&#128269; Load Payroll Batch</span>. The system retrieves all approved net salary pay-outs and aggregates the transfer registers.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Previewing Draft Payment Register & Excel Validation Sheet -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">3</span>
+                            Previewing Draft Payment Register &amp; Excel Verification Sheet
+                        </h3>
+                        <div class="step-content">
+                            <p>The console populates an interactive pre-disbursement payment register for accounting review:</p>
+                            <ul>
+                                <li><strong>Aggregate KPI Summary:</strong> Live cards display <em>Total Transfer Value (LKR)</em>, <em>Total Beneficiary Count</em>, <em>BOC Direct Account Transfers</em> (real-time internal settlement), and <em>Other Bank (CEFT/SLIPS) Transfers</em>.</li>
+                                <li><strong>Line-by-Line Verification Table:</strong> Inspect staff line items displaying Employee Code, Full Legal Name (as registered with the bank), Bank Name, Branch Code, Account Number, and Net Payable Salary.</li>
+                                <li><strong>Download Audit Spreadsheet:</strong> Click <span class="sop-btn-indicator">&#128196; Download Excel Preview Sheet</span> to export a formatted verification spreadsheet (<code>.xlsx</code>). This sheet must be reviewed, printed, and signed off by the Financial Controller / Managing Director prior to generating the native bank text file.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Native PRN Text File Generation -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">4</span>
+                            Generating &amp; Exporting the Native Bank PRN Text File
+                        </h3>
+                        <div class="step-content">
+                            <p>Once management has signed off on the draft spreadsheet, proceed with native file generation:</p>
+                            <ol>
+                                <li>Click the <span class="sop-btn-indicator">&#9881; Generate BOC PRN File</span> action button.</li>
+                                <li>The backend parsing engine constructs the standardized fixed-width ASCII PRN payload:
+                                    <ul>
+                                        <li><strong>Header Record (Row 1):</strong> Encodes the Corporate Customer Identification (CID), Disbursing Account Number, Value Date, Batch Sequence Number, and Grand Total Payment Sum.</li>
+                                        <li><strong>Transaction Detail Records:</strong> Generates fixed-width records for each employee containing Beneficiary Account, Full Legal Name, Net Amount (zero-padded), Bank Code, Branch Code, and Narration (e.g., <code>SALARY SEP 2026</code>).</li>
+                                        <li><strong>Trailer Control Record (Final Row):</strong> Injects the total transaction record count and cryptographic hash checksums for bank gateway transmission verification.</li>
+                                    </ul>
+                                </li>
+                                <li>Click <span class="sop-btn-indicator">&#11015; Download PRN Text File</span>. The system downloads the encrypted file (e.g., <code>BOC_PRN_SEP2026_B01.txt</code> or <code>.prn</code>) to your secure authorized workstation. Do <strong>not</strong> open, format, or resave this file in rich text editors, as doing so will corrupt fixed-width column alignments.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: BOC Corporate Internet Banking Upload -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">5</span>
+                            Uploading &amp; Authorizing in BOC Corporate Internet Banking (PayMaster)
+                        </h3>
+                        <div class="step-content">
+                            <p>To execute the actual electronic salary disbursement with Bank of Ceylon:</p>
+                            <ol>
+                                <li>Log in to the official <a href="https://corporate.boc.lk" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 600;">BOC Corporate Internet Banking Portal</a> using dual-factor authentication hardware tokens.</li>
+                                <li>Navigate to <span class="sop-flow">Bulk Payment Services &#10148; File Upload &#10148; PRN File Processing</span>.</li>
+                                <li>Click <span class="sop-btn-indicator">Browse</span> and upload the downloaded <code>.prn</code> text file.</li>
+                                <li>The BOC portal parser verifies the file structure, confirms account existence, checks checksum hashes, and generates a pre-execution confirmation screen.</li>
+                                <li><strong>Dual Authorization Protocol:</strong> The initiating Finance Officer submits the batch. The secondary authorized signatory (Managing Director or Executive Director) logs into the BOC portal and enters their cryptographic token OTP to execute the fund transfer.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Atomic Duplicate Protection & Disbursement Locking -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">6</span>
+                            Atomic Duplicate Protection &amp; Batch Disbursement Locking
+                        </h3>
+                        <div class="step-content">
+                            <p>To guarantee that no employee is ever paid twice for the same monthly cycle, Cinaway ERP implements an immutable disbursement locking mechanism:</p>
+                            <ul>
+                                <li><strong>Mark Batch as Disbursed:</strong> Return to the ERP PRN console and click <span class="sop-btn-indicator">&#128274; Mark Batch as Disbursed &amp; Lock</span>.</li>
+                                <li><strong>Cryptographic Batch ID Binding:</strong> The system assigns an immutable <code>PRN_BATCH_ID</code> (e.g., <code>PRN-2026-09-001</code>) to every included employee payroll record and flips the status to <code>Disbursed</code>.</li>
+                                <li><strong>Accidental Re-Run Prevention:</strong> If any operator attempts to re-generate PRN files or alter salary line items for locked staff members, the engine rejects the operation with a <em>"Batch Already Disbursed and Locked"</em> security exception.</li>
+                                <li><strong>Unlock Authority Protocol:</strong> In the rare event that the bank returns the file due to an institutional holiday or external network issue, only a Super Administrator can unlock the batch, requiring mandatory audit remarks and directorate approval.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Scribe Interactive Walkthrough Embed -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">7</span>
+                            Interactive Step-by-Step Guide (Scribe Walkthrough)
+                        </h3>
+                        <div class="step-content">
+                            <p>Follow the interactive visual guide below for the complete BOC Bulk PRN Generation workflow &mdash; covering payroll batch loading, Excel verification sheet inspection, native fixed-width PRN file generation, and disbursement locking &mdash; with live screen captures and click annotations.</p>
+
+                            <!-- Scribe Responsive Embed -->
+                            <div class="scribe-container my-6 w-full overflow-hidden rounded-xl border border-border shadow-sm"
+                                style="margin-top: 16px; margin-bottom: 8px; width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <iframe
+                                    src="https://scribehow.com/embed/Bank_of_Ceylon_BOC_Bulk_PRN_File_Generation_and_Electronic_Salary_Transfer_in_Cinaway_ERP__DtpDRA8iQ5iauZaVwViaaw?as=scrollable"
+                                    width="100%"
+                                    height="800"
+                                    allow="fullscreen"
+                                    style="border: 0; min-height: 640px; display: block;"
+                                    title="BOC PRN Generation &amp; Electronic Salary Transfer in Cinaway ERP">
+                                </iframe>
+                                <div class="print-url-fallback">
+                                    <span class="fallback-icon">&#127760;</span>
+                                    <span class="fallback-text">View Live Interactive Walkthrough:</span>
+                                    <a href="https://scribehow.com/shared/Bank_of_Ceylon_BOC_Bulk_PRN_File_Generation_and_Electronic_Salary_Transfer_in_Cinaway_ERP__DtpDRA8iQ5iauZaVwViaaw" class="fallback-url" target="_blank" rel="noopener">Open Scribe Guide &rarr;</a>
+                                </div>
+                            </div>
+                            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+                                &#128161; <em>Scroll through the interactive steps inside the frame above to view exact screen actions, input highlights, and click annotations. Use fullscreen mode for the best experience.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Banking & Electronic Transfer Troubleshooting Matrix -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">8</span>
+                            Banking &amp; Electronic Transfer Troubleshooting Matrix
+                        </h3>
+                        <div class="step-content">
+                            <div class="sop-table-container" style="overflow-x: auto; margin-top: 10px;">
+                                <table class="sop-table" style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+                                    <thead>
+                                        <tr style="background-color: var(--bg-card); border-bottom: 2px solid var(--border-color); text-align: left;">
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Issue / Scenario</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Root Cause</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Corrective Resolution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">BOC Portal rejects file with "Invalid Hash / Checksum Error"</td>
+                                            <td style="padding: 10px 14px;">The <code>.prn</code> text file was opened and saved in MS Word, TextEdit, or Notepad, altering carriage returns or fixed-width spacing.</td>
+                                            <td style="padding: 10px 14px;">Do not open or edit the generated file. Re-generate and download a pristine copy directly from Cinaway ERP, and upload directly to the BOC portal.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Specific employees missing from the generated PRN batch</td>
+                                            <td style="padding: 10px 14px;">Employee bank details (Bank Code, Branch Code, or Account Number) are empty or flagged as invalid in Employee Profiles.</td>
+                                            <td style="padding: 10px 14px;">Navigate to <strong>Employee Directory (Module 04)</strong>, complete the missing banking information, and re-load the batch before downloading the PRN file.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">"Batch Already Disbursed and Locked" warning in ERP</td>
+                                            <td style="padding: 10px 14px;">The selected month&apos;s payroll has already been locked under an existing <code>PRN_BATCH_ID</code> to prevent double payments.</td>
+                                            <td style="padding: 10px 14px;">Check the <strong>Disbursement History</strong> tab. If an adjustment is necessary due to an institutional bank rejection, request Super Administrator authorization to perform an audited unlock.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">BOC Portal returns "Invalid Branch Code" for specific employee</td>
+                                            <td style="padding: 10px 14px;">The employee&apos;s 3-digit branch code is outdated due to recent bank branch amalgamations or typos during onboarding.</td>
+                                            <td style="padding: 10px 14px;">Cross-reference the branch code against the official Central Bank of Sri Lanka Financial Institution directory. Update the employee record and re-generate.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px 14px; font-weight: 600;">Employee changed bank account after PRN file was generated</td>
+                                            <td style="padding: 10px 14px;">Salary was already routed to the old account number during the monthly batch generation window.</td>
+                                            <td style="padding: 10px 14px;">If the file has not yet been authorized on the BOC portal, delete the upload, unlock the ERP batch, update the employee profile, and generate an updated PRN file.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+     MODULE 11 / CHAPTER 11: PRODUCTS MASTER, STOCK ADJUSTMENTS & BULK INGESTION
+     ========================================================================== -->
+            <section class="sop-module" id="products-master-stock-adjustments"
+                data-title="Products &amp; Stock Management"
+                data-responsible="Warehouse Manager / Inventory Controller / Logistics Operations / System Administrator">
+                <div class="module-header">
+                    <span class="module-badge">Module 11 &middot; Chapter 11 &mdash; Inventory &amp; Supply Chain Operations</span>
+                    <h2 class="module-title">Products Master, Stock Adjustments &amp; Bulk Ingestion in Cinaway ERP</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Target Audience</span>
+                            <span class="meta-value">Warehouse Managers, Inventory Controllers, Procurement &amp; Inward Logistics Officers, System Administrators</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Responsible Person</span>
+                            <span class="meta-value" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="role-badge role-logistics" onclick="filterByRole('Logistics Operations')">Logistics Operations</span>
+                                <span class="role-badge role-finance" onclick="filterByRole('Accounts &amp; Finance')">Accounts &amp; Finance</span>
+                                <span class="role-badge role-admin" onclick="filterByRole('System Administrator')">System Administrator</span>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Objective</span>
+                            <span class="meta-value">Administrative procedures for registering product masters, executing bulk Excel ingestion, viewing current physical stock, managing manual quantity adjustments, and tracking audit logs.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-body">
+
+                    <!-- Inventory Valuation & Balance Sheet Notice Banner -->
+                    <div class="sop-alert info" style="margin-bottom: 24px;">
+                        <div class="alert-icon">&#128230;</div>
+                        <div class="alert-content">
+                            <strong>Perpetual Inventory Valuation &amp; Warehouse Stock Reconciliation Protocol:</strong>
+                            <p>Under Cinaway ERP&apos;s integrated supply chain architecture, all registered inventory SKUs are mapped directly to <strong>Account 1300 (Merchandise Inventory Asset)</strong>. Inward supplier deliveries (Purchase Orders / GRNs) automatically increment physical on-hand quantities, while Lorry Loading Dispatches and Sales Rep Invoicing deduct inventory in real time. Manual stock adjustments, damage write-offs, or physical cycle-count reconciliations trigger automated general ledger journal adjustments with immutable user audit trails.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Navigating the Products Directory -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">1</span>
+                            Navigating the Products Directory &amp; Inventory Overview
+                        </h3>
+                        <div class="step-content">
+                            <p>To access the centralized merchandise catalog, navigate to <span class="sop-flow">Inventory &amp; Logistics &#10148; Products Master</span> or select <span class="sop-flow">Stock Management &#10148; Products</span> from the main sidebar navigation.</p>
+                            <p>The Products Master dashboard provides high-level catalog intelligence and warehouse stock summaries:</p>
+                            <ul>
+                                <li><strong>Key Performance Metrics:</strong> Dynamic KPI counters displaying <em>Total Registered SKUs</em>, <em>Active Products in Catalog</em>, <em>Low-Stock Warnings (&lt; Reorder Level)</em>, and <em>Zero-Stock / Out-of-Stock SKUs</em>.</li>
+                                <li><strong>Multi-Criteria Search &amp; Filtering:</strong> Filter items dynamically by <strong>Product Category</strong> (e.g., <em>Unilever Personal Care</em>, <em>Home Care</em>, <em>Foods &amp; Refreshments</em>), <strong>Brand Hierarchy</strong>, or search instantly by Product Code, Trade Name, or EAN Barcode.</li>
+                                <li><strong>Catalog Action Controls:</strong> Quick launch buttons for <span class="sop-btn-indicator">+ Add Product</span> (individual manual registration), <span class="sop-btn-indicator">&#128229; Bulk Ingest</span> (mass Excel catalog upload), and <span class="sop-btn-indicator">&#128202; Stock Ledger Report</span>.</li>
+                                <li><strong>Interactive Table View:</strong> Lists Product Code, Name, Category, Unit of Measure (UOM), Landed Cost Price (LKR), Wholesale / Retail Selling Price (LKR), Current Physical Stock On Hand, and direct row action buttons (<span class="sop-btn-indicator">View Details</span>, <span class="sop-btn-indicator">Edit</span>, <span class="sop-btn-indicator">Adjust Stock</span>).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Individual Product Registration -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">2</span>
+                            Individual Product Master Registration &amp; SKU Profiling
+                        </h3>
+                        <div class="step-content">
+                            <p>When onboarding a new merchandise item, click the <span class="sop-btn-indicator">+ Add Product</span> button in the top-right header and complete the profile fields:</p>
+                            <ul>
+                                <li><strong>Product Code / SKU <code>*</code>:</strong> Enter the unique alphanumeric item identifier (e.g., <code>PRD-0102</code> or internal Unilever SKU code). This code binds to all dispatch slips and invoice printouts.</li>
+                                <li><strong>Product Name <code>*</code>:</strong> Input the official trade name and pack packaging description (e.g., <em>Sunlight Soap 100g 4-Pack</em>, <em>Lifebuoy Total Bar 110g</em>, <em>Astra Margarine 250g Tub</em>).</li>
+                                <li><strong>Category &amp; Brand <code>*</code>:</strong> Select the merchandise department from the pre-configured Category Master.</li>
+                                <li><strong>Unit of Measure (UOM) <code>*</code>:</strong> Select the stocking unit (e.g., <em>Piece</em>, <em>Case / Carton</em>, <em>Bundle</em>, <em>Tub</em>).</li>
+                                <li><strong>Cost Price (LKR) <code>*</code>:</strong> Enter the standard landed supplier cost per unit. This figure governs perpetual inventory asset valuations under Account 1300.</li>
+                                <li><strong>Wholesale &amp; Retail Selling Price (LKR) <code>*</code>:</strong> Define the authorized selling price populated on sales rep mobile terminals and invoice printouts.</li>
+                                <li><strong>Reorder Level / Minimum Buffer <code>*</code>:</strong> Set the minimum inventory quantity threshold. When physical stock drops below this number, the dashboard triggers automated reorder alerts.</li>
+                            </ul>
+                            <p>Click <span class="sop-btn-indicator">Save Product</span> to register the SKU into the active sales catalog.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Bulk Excel Ingestion -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">3</span>
+                            Bulk Excel Ingestion &amp; Mass SKU Catalog Onboarding Pipeline
+                        </h3>
+                        <div class="step-content">
+                            <p>When onboarding extensive product catalogs during distributor brand transitions or agency acquisitions, utilize the bulk Excel ingestion engine:</p>
+                            <ol>
+                                <li>Click the <span class="sop-btn-indicator">&#128229; Import Products</span> button at the top of the Products page.</li>
+                                <li>Click <span class="sop-btn-indicator">Download Sample Template</span>. Always use this official template to guarantee column alignment with the backend parser.</li>
+                                <li><strong>Populate Spreadsheet Data:</strong> Ensure mandatory columns are filled (<code>product_code</code>, <code>name</code>, <code>category</code>, <code>uom</code>, <code>cost_price</code>, <code>selling_price</code>, <code>reorder_level</code>, <code>initial_stock</code>). Do not rename headers or alter column order.</li>
+                                <li><strong>File Upload &amp; Validation:</strong> Click <span class="sop-btn-indicator">&#11014; Browse Files</span> and select the completed <code>.xlsx</code> or <code>.csv</code> file. Click <span class="sop-btn-indicator">Upload &amp; Process</span>.</li>
+                                <li><strong>Duplicate Suppression &amp; Atomic Commit:</strong> The pipeline checks SKU codes against existing database records. Duplicates are flagged in the import audit summary while valid items are committed in a single atomic transaction.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Real-Time Stock View & Warehouse Ledger -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">4</span>
+                            Real-Time Stock Monitoring &amp; Physical vs. Allocated Inventory Ledger
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Stock Management &#10148; Current Stock Ledger</span> to inspect live warehouse balances:</p>
+                            <ul>
+                                <li><strong>Physical On-Hand Quantity:</strong> The total physical inventory residing within the central warehouse racks and storage bays.</li>
+                                <li><strong>Allocated / Reserved Quantity:</strong> Stock that has been reserved on approved Lorry Loading Manifests for today&apos;s field delivery routes, but has not yet exited the warehouse gates.</li>
+                                <li><strong>Available / Sellable Stock:</strong> The net uncommitted balance calculated as <code>Physical On-Hand &minus; Allocated Stock</code>. This is the exact quantity available for new sales rep booking orders.</li>
+                                <li><strong>Low-Stock Indicator Badges:</strong> Visual badges (<span class="sop-btn-indicator" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">Critical &lt; Reorder Level</span> or <span class="sop-btn-indicator" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border-color: rgba(16, 185, 129, 0.3);">Adequate</span>) provide instant visual alerts for procurement planning.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Manual Stock Adjustments -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">5</span>
+                            Executing Manual Stock Adjustments &amp; Cycle Count Reconciliations
+                        </h3>
+                        <div class="step-content">
+                            <p>When physical periodic cycle counts reveal variances, or when warehouse damage, shrinkage, or supplier returns occur, execute an audited stock adjustment:</p>
+                            <ol>
+                                <li>Locate the product in the table and click <span class="sop-btn-indicator">Adjust Stock</span> on that row, or click <span class="sop-btn-indicator">+ New Stock Adjustment</span> from the top action bar.</li>
+                                <li><strong>Adjustment Type <code>*</code>:</strong> Select either:
+                                    <ul>
+                                        <li><strong>Add (+ Stock In):</strong> For physical inventory audit surpluses, found inventory, or unrecorded manufacturer bonus stock.</li>
+                                        <li><strong>Deduct (- Stock Out):</strong> For warehouse breakages, flood/water damage, expiry write-offs, or physical audit shortages.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Adjustment Quantity <code>*</code>:</strong> Enter the numeric count of units to add or deduct.</li>
+                                <li><strong>Reason Code <code>*</code>:</strong> Select a standardized audit code: <em>Physical Cycle Count Discrepancy</em>, <em>Damaged in Warehouse</em>, <em>Expired Stock Write-Off</em>, <em>Supplier Warranty Return</em>, or <em>Audit Adjustment</em>.</li>
+                                <li><strong>Detailed Remarks <code>*</code>:</strong> Input detailed warehouse bay reference, supervisor verification note, or disposal ticket number for corporate audit inspection.</li>
+                                <li>Click <span class="sop-btn-indicator">Confirm &amp; Apply Adjustment</span>. The system immediately updates the on-hand quantity and posts balancing entries to the inventory adjustments general ledger.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Granular Stock Audit History -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">6</span>
+                            Granular Stock Audit History &amp; Movement Traceability
+                        </h3>
+                        <div class="step-content">
+                            <p>Every single transaction affecting product inventory is recorded in an immutable ledger trail:</p>
+                            <ul>
+                                <li><strong>View Movement Ledger:</strong> Click <span class="sop-btn-indicator">&#128737; Audit History</span> on any product profile to open its complete timeline.</li>
+                                <li><strong>Comprehensive Transaction Tracking:</strong> The log tracks:
+                                    <ul>
+                                        <li><strong>Purchase Orders / GRNs:</strong> Inward supplier stock receipts with PO numbers and landed costs.</li>
+                                        <li><strong>Lorry Dispatches &amp; Invoices:</strong> Outward deductions for delivery routes with dispatch manifest codes.</li>
+                                        <li><strong>Sales Returns &amp; Credit Notes:</strong> Inward restocking of unopened return goods with customer invoice references.</li>
+                                        <li><strong>Manual Stock Adjustments:</strong> Supervisor additions and write-offs with reason codes and operator IDs.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Running Balance Verification:</strong> Each row records the exact pre-transaction quantity, delta change, and post-transaction running balance to ensure zero discrepancies.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Scribe Interactive Walkthrough Embed -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">7</span>
+                            Interactive Step-by-Step Guide (Scribe Walkthrough)
+                        </h3>
+                        <div class="step-content">
+                            <p>Follow the interactive visual guide below for the complete Products &amp; Stock Management workflow &mdash; covering product registration, bulk spreadsheet ingestion, real-time stock monitoring, manual quantity adjustments, and audit trail inspection &mdash; with live screen captures and click annotations.</p>
+
+                            <!-- Scribe Responsive Embed -->
+                            <div class="scribe-container my-6 w-full overflow-hidden rounded-xl border border-border shadow-sm"
+                                style="margin-top: 16px; margin-bottom: 8px; width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <iframe
+                                    src="https://scribehow.com/embed/Products_Master_Stock_Adjustments_and_Bulk_Ingestion_in_Cinaway_ERP__0YoVRzp3RmmNYhcU5ud-1g?as=scrollable"
+                                    width="100%"
+                                    height="800"
+                                    allow="fullscreen"
+                                    style="border: 0; min-height: 640px; display: block;"
+                                    title="Products Master, Stock Adjustments &amp; Bulk Ingestion in Cinaway ERP">
+                                </iframe>
+                                <div class="print-url-fallback">
+                                    <span class="fallback-icon">&#127760;</span>
+                                    <span class="fallback-text">View Live Interactive Walkthrough:</span>
+                                    <a href="https://scribehow.com/shared/Products_Master_Stock_Adjustments_and_Bulk_Ingestion_in_Cinaway_ERP__0YoVRzp3RmmNYhcU5ud-1g" class="fallback-url" target="_blank" rel="noopener">Open Scribe Guide &rarr;</a>
+                                </div>
+                            </div>
+                            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+                                &#128161; <em>Scroll through the interactive steps inside the frame above to view exact screen actions, input highlights, and click annotations. Use fullscreen mode for the best experience.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Inventory & Stock Management Troubleshooting Matrix -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">8</span>
+                            Inventory &amp; Stock Management Troubleshooting Matrix
+                        </h3>
+                        <div class="step-content">
+                            <div class="sop-table-container" style="overflow-x: auto; margin-top: 10px;">
+                                <table class="sop-table" style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+                                    <thead>
+                                        <tr style="background-color: var(--bg-card); border-bottom: 2px solid var(--border-color); text-align: left;">
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Issue / Scenario</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Root Cause</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Corrective Resolution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Bulk Ingestion skips rows with "Duplicate SKU Code"</td>
+                                            <td style="padding: 10px 14px;">The <code>product_code</code> in the uploaded spreadsheet matches an existing SKU already registered in the database.</td>
+                                            <td style="padding: 10px 14px;">Review the import log. If updating existing prices or stock, use the <em>Batch Update</em> tool. If registering a new pack size, assign a distinct, unique product code.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Physical warehouse count is lower than ERP on-hand balance</td>
+                                            <td style="padding: 10px 14px;">Unrecorded warehouse transit damage, unlogged sample distributions, or delayed goods return processing from field reps.</td>
+                                            <td style="padding: 10px 14px;">Perform a physical cycle count. Click <strong>Adjust Stock</strong>, select <strong>Deduct (- Stock Out)</strong>, pick reason <em>Physical Cycle Count Discrepancy</em>, and record supervisor approval notes.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Cannot save Stock Adjustment without mandatory Reason Code</td>
+                                            <td style="padding: 10px 14px;">Cinaway ERP financial governance requires strict categorization of all non-sales inventory movements for general ledger auditing.</td>
+                                            <td style="padding: 10px 14px;">Select an appropriate standardized code from the <em>Reason Code</em> dropdown and enter descriptive remarks before confirming the adjustment.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Updated selling price not reflecting on Sales Rep mobile devices</td>
+                                            <td style="padding: 10px 14px;">Sales Rep collector app has not performed its daily master data synchronization.</td>
+                                            <td style="padding: 10px 14px;">Instruct sales representatives to trigger <strong>Sync Master Data</strong> on their mobile collector application before departing on their daily route.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px 14px; font-weight: 600;">Attempting to delete a product with existing transaction history</td>
+                                            <td style="padding: 10px 14px;">Hard database deletion is strictly blocked to protect financial ledger audit compliance and invoice history integrity.</td>
+                                            <td style="padding: 10px 14px;">Do not attempt deletion. Change the product status to <span class="sop-btn-indicator">Inactive</span>. The item will be hidden from new orders while preserving all historical sales records.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+     MODULE 12 / CHAPTER 12: SALES SUMMARY INGESTION, ITEM-WISE BILLING & INVENTORY RECONCILIATIONS
+     ========================================================================== -->
+            <section class="sop-module" id="sales-summary-invoicing-inventory"
+                data-title="Sales, Invoicing &amp; Inventory Depletion"
+                data-responsible="Sales Operations / Accounts &amp; Finance / Logistics &amp; Warehouse / System Administrator">
+                <div class="module-header">
+                    <span class="module-badge">Module 12 &middot; Chapter 12 &mdash; Sales &amp; Distribution Operations</span>
+                    <h2 class="module-title">Sales Summary Ingestion, Item-Wise Billing &amp; Inventory Reconciliations in Cinaway ERP</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Target Audience</span>
+                            <span class="meta-value">Sales Operations Officers, Accounts Receivable Accountants, Warehouse &amp; Inventory Dispatchers, System Administrators</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Responsible Person</span>
+                            <span class="meta-value" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="role-badge role-logistics" onclick="filterByRole('Sales Operations')">Sales Operations</span>
+                                <span class="role-badge role-finance" onclick="filterByRole('Accounts &amp; Finance')">Accounts &amp; Finance</span>
+                                <span class="role-badge role-admin" onclick="filterByRole('System Administrator')">System Administrator</span>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Objective</span>
+                            <span class="meta-value">Administrative procedures for importing Unilever sales summaries, posting Trade Debtors (1200) and Revenue (4001), item-wise sales ingestion, automated stock depletion, and free issue accounting valuations.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-body">
+
+                    <!-- Automated Ledger Integration & COGS Banner -->
+                    <div class="sop-alert info" style="margin-bottom: 24px;">
+                        <div class="alert-icon">&#128181;</div>
+                        <div class="alert-content">
+                            <strong>Automated Financial Postings &amp; Dual-Impact Inventory Depletion:</strong>
+                            <p>Importing sales transactions into Cinaway ERP executes an atomic multi-ledger transaction: (1) Debits <strong>Account 1200 (Accounts Receivable / Trade Debtors)</strong> mapped 1:1 to the outlet debtor sub-ledger, (2) Credits <strong>Account 4001 (Sales Revenue &mdash; Primary FMCG Distribution)</strong>, (3) Automatically depletes physical inventory from <strong>Account 1300 (Merchandise Inventory Asset)</strong> and debits <strong>Account 5001 (Cost of Goods Sold &mdash; COGS)</strong>, and (4) Formulates promotional <strong>Free Issue</strong> items under designated promotional expense accounts without distorting trade debtor balances.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Navigating the Sales Console -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">1</span>
+                            Navigating the Centralized Sales &amp; Invoicing Operations Hub
+                        </h3>
+                        <div class="step-content">
+                            <p>To access the distribution sales console, navigate to <span class="sop-flow">Sales &amp; Distribution &#10148; Sales Summaries</span> or select <span class="sop-flow">Invoicing &#10148; Sales Orders</span> from the main ERP navigation bar.</p>
+                            <p>The Sales Operations dashboard serves as the central command post for daily delivery route billings:</p>
+                            <ul>
+                                <li><strong>Daily Sales Telemetry:</strong> Live KPI cards displaying <em>Total Daily Invoiced Gross</em>, <em>Total Net Revenue</em>, <em>Total Outlets Invoiced Today</em>, <em>Free Issue Goods Value</em>, and <em>New Trade Debtor Postings</em>.</li>
+                                <li><strong>Multi-Criteria Filtering:</strong> Filter past sales records by <strong>Delivery Route</strong> (e.g., Colombo North, Kandy Central), <strong>Sales Representative</strong>, <strong>Invoice Date Range</strong>, or search dynamically by Customer Code or Invoice Number.</li>
+                                <li><strong>Ingestion Action Controls:</strong> Quick buttons for <span class="sop-btn-indicator">&#128229; Import Sales Summary</span>, <span class="sop-btn-indicator">&#128230; Item-Wise Sales Ingestion</span>, and <span class="sop-btn-indicator">&#128202; Daily Route Reconciliation Report</span>.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Unilever Sales Summary File Ingestion -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">2</span>
+                            Unilever Daily Sales Summary Ingestion &amp; Duplicate Protection
+                        </h3>
+                        <div class="step-content">
+                            <p>At the end of each field sales run, import the daily sales extract generated from the Unilever distributor management system (CDMS):</p>
+                            <ol>
+                                <li>Click the <span class="sop-btn-indicator">&#128229; Import Sales Summary</span> button at the top of the Sales dashboard.</li>
+                                <li><strong>Select Sales Date <code>*</code>:</strong> Choose the calendar dispatch date corresponding to the delivery route run.</li>
+                                <li><strong>Select Route / Territory <code>*</code>:</strong> Choose the assigned delivery route from the Route Master dropdown.</li>
+                                <li><strong>File Upload:</strong> Click <span class="sop-btn-indicator">&#11014; Browse Files</span> and select the standardized Unilever daily sales spreadsheet (<code>.xlsx</code> or <code>.csv</code>).</li>
+                                <li><strong>Automated Integrity &amp; Duplicate Check:</strong> Click <span class="sop-btn-indicator">Validate &amp; Ingest</span>. The ingestion engine parses each invoice row:
+                                    <ul>
+                                        <li><strong>Outlet Code Binding:</strong> Verifies that every outlet code exists in the master Outlets Directory (Module 08).</li>
+                                        <li><strong>Duplicate Invoice Suppression:</strong> Rejects any invoice number that has already been ingested into the system to prevent double billing and duplicate accounts receivable accruals.</li>
+                                        <li><strong>Math &amp; Discount Verification:</strong> Confirms that <code>Gross Amount &minus; Line Discounts = Net Payable Amount</code>.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Item-Wise Sales Ingestion & Real-Time Stock Depletion -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">3</span>
+                            Item-Wise Sales Ingestion &amp; Automated Warehouse Stock Depletion
+                        </h3>
+                        <div class="step-content">
+                            <p>For granular SKU-level stock reconciliation and cost of goods sold (COGS) tracking, utilize the Item-Wise Ingestion mode:</p>
+                            <ul>
+                                <li><strong>Granular Line-Item Ingestion:</strong> Ingests the full product breakdown per invoice: Product Code, Commercial Pack Description, Billed Quantity, Free Issue Quantity, Unit Price, and Line Total.</li>
+                                <li><strong>Real-Time Physical Stock Depletion:</strong> For every confirmed item row, the inventory engine automatically reduces on-hand warehouse balances:
+                                    <div style="background-color: var(--bg-card); border-left: 4px solid var(--primary); padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-family: monospace; font-size: 13px;">
+                                        Physical Stock On Hand = Current Stock &minus; (Billed Quantity + Free Issue Quantity)
+                                    </div>
+                                </li>
+                                <li><strong>COGS Journal Posting:</strong> In accordance with perpetual inventory standards, the system calculates standard landed cost for all depleted units:
+                                    <ul>
+                                        <li><strong>Credit:</strong> Account 1300 (Merchandise Inventory Asset)</li>
+                                        <li><strong>Debit:</strong> Account 5001 (Cost of Goods Sold &mdash; Primary Distribution)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Negative Stock Safeguard:</strong> If an invoice calls for more stock than physically recorded in the central warehouse, the system flags a <em>"Stock Deficit Warning"</em> allowing inventory managers to verify unposted supplier GRNs before committing.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Automated Debtor Sub-Ledger Posting (Account 1200) -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">4</span>
+                            Automated Debtor Sub-Ledger Posting (Account 1200 Integration)
+                        </h3>
+                        <div class="step-content">
+                            <p>Cinaway ERP automates accounts receivable bookkeeping upon sales summary confirmation:</p>
+                            <ul>
+                                <li><strong>Sub-Ledger Account Debit:</strong> Each sales invoice instantly debits the specific customer debtor sub-account (e.g., <code>1200-OUT-0412</code>) under parent account <strong>1200 (Accounts Receivable / Trade Debtors)</strong>.</li>
+                                <li><strong>Revenue Account Credit:</strong> The net sales value credits <strong>Account 4001 (Sales Revenue &mdash; FMCG Distribution)</strong> in real time.</li>
+                                <li><strong>Credit Ceiling &amp; Aging Impact:</strong> The outlet&apos;s outstanding balance increments immediately. If the newly calculated balance breaches the authorized credit limit configured in Module 08, future loading manifests flag credit-hold warnings for that shop.</li>
+                                <li><strong>Cash vs. Credit Segregation:</strong> Cash-on-delivery (COD) invoices are flagged for same-day cashier collection settlement, while 14-day and 30-day credit accounts flow directly into aging buckets (Current, 1&ndash;30 Days, 31&ndash;60 Days).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Free Issue Accounting & Promotional Valuations -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">5</span>
+                            Free Issue Accounting &amp; Unilever Promotional Claim Valuations
+                        </h3>
+                        <div class="step-content">
+                            <p>Unilever distribution agreements regularly require the execution of promotional trade promotions (e.g., <em>Buy 10 Cases Get 1 Case Free</em>):</p>
+                            <ul>
+                                <li><strong>Zero Customer Receivable:</strong> Free issue items carry a selling price of LKR <code>0.00</code> on the customer invoice, ensuring retail trade debtor balances (Account 1200) remain strictly accurate and uninflated.</li>
+                                <li><strong>Inventory Asset Depletion:</strong> The physical free issue unit is deducted from <strong>Account 1300 (Merchandise Inventory Asset)</strong> at its standard landed cost price to maintain 100% physical inventory accuracy.</li>
+                                <li><strong>Promotional Expense Ledger:</strong> The landed cost of the free item debits <strong>Account 5120 (Trade Promotional Schemes &amp; Free Issue Expense)</strong>.</li>
+                                <li><strong>Unilever Principal Claim Reconciliation:</strong> The system compiles a dedicated <strong>Free Issue Claims Register</strong> summarizing all promotional units distributed per route. This report is exported monthly and submitted to Unilever Sri Lanka for commercial credit reimbursement.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Sales Verification, Dispatch SMS & Audit Trails -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">6</span>
+                            Batch Verification, Automated Dispatch SMS &amp; Audit Trails
+                        </h3>
+                        <div class="step-content">
+                            <p>After reviewing the preliminary invoice table, finalize the sales batch:</p>
+                            <ol>
+                                <li>Review the aggregated batch totals: Total Invoices Count, Gross Sales (LKR), Discounts (LKR), Net Invoiced Revenue (LKR), and Total Debtor Ledger Debit.</li>
+                                <li>Click <span class="sop-btn-indicator">&#9989; Verify &amp; Post Sales Batch</span>. The system commits the transaction atomically and assigns a unique immutable <code>SALES_BATCH_ID</code>.</li>
+                                <li><strong>Automated Customer Transactional SMS:</strong> If the customer has SMS notifications active (Module 08), the Notification Center (Module 09) dispatches an automated SMS alert to the store owner:
+                                    <div style="background-color: var(--bg-card); border: 1px dashed var(--border-color); padding: 10px 14px; margin: 8px 0; border-radius: 6px; font-size: 13px; color: var(--text-heading);">
+                                        <em>"Dear Customer, Cinaway Logistics Invoice #INV-10824 for LKR 48,250.00 has been dispatched on Route Colombo North. Thank you for your business."</em>
+                                    </div>
+                                </li>
+                                <li>Click <span class="sop-btn-indicator">&#128737; Audit History</span> on the batch to review creator user IDs, exact submission timestamps, and general ledger journal voucher numbers.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Scribe Interactive Walkthrough Embed -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">7</span>
+                            Interactive Step-by-Step Guide (Scribe Walkthrough)
+                        </h3>
+                        <div class="step-content">
+                            <p>Follow the interactive visual guide below for the complete Sales Summary Ingestion and Item-Wise Billing workflow &mdash; covering daily sales file uploading, item-wise inventory depletion, customer debtor ledger postings, free issue valuations, and audit verification &mdash; with live screen captures and click annotations.</p>
+
+                            <!-- Scribe Responsive Embed -->
+                            <div class="scribe-container my-6 w-full overflow-hidden rounded-xl border border-border shadow-sm"
+                                style="margin-top: 16px; margin-bottom: 8px; width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <iframe
+                                    src="https://scribehow.com/embed/Sales_Summary_Ingestion_Item-Wise_Billing_and_Inventory_Reconciliations_in_Cinaway_ERP__xwF2uC5mQrWGVJewWD2soQ?as=scrollable"
+                                    width="100%"
+                                    height="800"
+                                    allow="fullscreen"
+                                    style="border: 0; min-height: 640px; display: block;"
+                                    title="Sales Summary Ingestion, Item-Wise Billing &amp; Inventory Reconciliations in Cinaway ERP">
+                                </iframe>
+                                <div class="print-url-fallback">
+                                    <span class="fallback-icon">&#127760;</span>
+                                    <span class="fallback-text">View Live Interactive Walkthrough:</span>
+                                    <a href="https://scribehow.com/shared/Sales_Summary_Ingestion_Item-Wise_Billing_and_Inventory_Reconciliations_in_Cinaway_ERP__xwF2uC5mQrWGVJewWD2soQ" class="fallback-url" target="_blank" rel="noopener">Open Scribe Guide &rarr;</a>
+                                </div>
+                            </div>
+                            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+                                &#128161; <em>Scroll through the interactive steps inside the frame above to view exact screen actions, input highlights, and click annotations. Use fullscreen mode for the best experience.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Sales & Invoicing Troubleshooting Matrix -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">8</span>
+                            Sales &amp; Invoicing Operations Troubleshooting Matrix
+                        </h3>
+                        <div class="step-content">
+                            <div class="sop-table-container" style="overflow-x: auto; margin-top: 10px;">
+                                <table class="sop-table" style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+                                    <thead>
+                                        <tr style="background-color: var(--bg-card); border-bottom: 2px solid var(--border-color); text-align: left;">
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Issue / Scenario</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Root Cause</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Corrective Resolution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Ingestion fails with "Unrecognized Outlet Code"</td>
+                                            <td style="padding: 10px 14px;">The customer code in the sales summary has not been registered in the master Outlets Directory.</td>
+                                            <td style="padding: 10px 14px;">Register the new retail shop in <strong>Outlets Directory (Module 08)</strong> first. Ensure the unique customer code matches the Unilever DMS code exactly before re-importing.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Stock Depletion flags "Insufficient Stock On Hand"</td>
+                                            <td style="padding: 10px 14px;">Inward supplier GRN (Purchase Order) for the shipment has not yet been posted in the inventory module.</td>
+                                            <td style="padding: 10px 14px;">Verify supplier delivery notes. Post the inward Purchase Order receipt to increment physical stock, then proceed with the item-wise sales commit.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Debtor sub-ledger balance differs from sales invoice total</td>
+                                            <td style="padding: 10px 14px;">Line-item discounts or special promotional trade rebates were recorded in DMS but not mapped to discount accounts in ERP.</td>
+                                            <td style="padding: 10px 14px;">Inspect the invoice discount breakdown. Ensure discount columns map to <strong>Account 4100 (Sales Discounts &amp; Allowances)</strong> rather than reducing net receivable totals.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Free Issue units missing from monthly principal claims report</td>
+                                            <td style="padding: 10px 14px;">Promotional items were entered as zero-price billed goods rather than flagged in the <code>free_issue_qty</code> column.</td>
+                                            <td style="padding: 10px 14px;">Ensure the Unilever import extract maintains the dedicated free issue column so the engine tags units under Account 5120 for monthly supplier claims.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px 14px; font-weight: 600;">Attempting to modify an already posted and locked sales batch</td>
+                                            <td style="padding: 10px 14px;">Posted batches are permanently locked to preserve general ledger audit compliance and historical inventory integrity.</td>
+                                            <td style="padding: 10px 14px;">Do not alter historical batches. For customer returns or billing corrections, issue a formal <strong>Sales Return / Credit Note</strong> to adjust the debtor ledger cleanly.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+     MODULE 13 / CHAPTER 13: RECEIVABLE COLLECTIONS, PAYMENT KNOCK-OFF, DISCOUNTS & ADVANCE SETTLEMENTS
+     ========================================================================== -->
+            <section class="sop-module" id="receivable-collections-settlements"
+                data-title="Receivable Collections &amp; Settlements"
+                data-responsible="Trade Debtors Accountant / Cashier / Sales Operations / System Administrator">
+                <div class="module-header">
+                    <span class="module-badge">Module 13 &middot; Chapter 13 &mdash; Sales &amp; Distribution Operations</span>
+                    <h2 class="module-title">Receivable Collections, Payment Knock-Off, Discounts &amp; Advance Settlements in Cinaway ERP</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Target Audience</span>
+                            <span class="meta-value">Trade Debtors Accountants, Finance Managers, Cashiers, Field Sales Representatives, System Administrators</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Responsible Person</span>
+                            <span class="meta-value" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="role-badge role-finance" onclick="filterByRole('Accounts &amp; Finance')">Accounts &amp; Finance</span>
+                                <span class="role-badge role-logistics" onclick="filterByRole('Sales Operations')">Sales &amp; Field Collections</span>
+                                <span class="role-badge role-admin" onclick="filterByRole('System Administrator')">System Administrator</span>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Objective</span>
+                            <span class="meta-value">Complete operational workflow for importing secondary sales invoices, processing Cash/Cheque/Bank payments, applying sales discounts (5100), allocating overpayments to customer advances (2106), and tracking cheque clearing/return cycles.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-body">
+
+                    <!-- Chart of Accounts Integration Banner -->
+                    <div class="sop-alert info" style="margin-bottom: 24px;">
+                        <div class="alert-icon">&#128179;</div>
+                        <div class="alert-content">
+                            <strong>Canonical Accounting Architecture &amp; Automated Settlement Postings:</strong>
+                            <p>Under Cinaway ERP&apos;s 59-account general ledger architecture, collection settlements execute atomic multi-ledger entries: (1) Credits <strong>Account 1200 (Accounts Receivable / Trade Debtors)</strong> mapped 1:1 to the outlet sub-ledger, (2) Debits the selected liquid cash or bank asset account: <strong>Account 1101 (Main Cash)</strong>, <strong>Account 1110 (Cheques in Hand / Clearing)</strong>, or <strong>Account 1120 (BOC Operating Account)</strong>, (3) Debits <strong>Account 5100 (Sales Discounts &amp; Rebates)</strong> for authorized prompt-settlement deductions, and (4) Credits <strong>Account 2106 (Customer Advance Payments)</strong> for any surplus amounts exceeding invoice totals for automated FIFO future knock-offs.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Ingesting Secondary Sales Invoices -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">1</span>
+                            Ingesting Secondary Sales Invoices &amp; Pre-Collection Verification
+                        </h3>
+                        <div class="step-content">
+                            <p>Before recording payments, ensure all secondary distribution invoices dispatched on field delivery routes are ingested and posted to customer ledgers:</p>
+                            <ul>
+                                <li><strong>Verify Invoice Readiness:</strong> Confirm that the daily sales summary (Module 12) has been posted. Each invoice line item will have debited Account 1200 under the outlet&apos;s unique sub-ledger (e.g., <code>1200-OUT-0412</code>).</li>
+                                <li><strong>Pre-Collection Debtor Aging Audit:</strong> Review the customer&apos;s outstanding profile. The system segments balances into chronological aging buckets: <em>Current (0&ndash;14 Days)</em>, <em>15&ndash;30 Days</em>, <em>31&ndash;60 Days</em>, and <em>60+ Days Overdue</em>.</li>
+                                <li><strong>Route Collection List Generation:</strong> Field sales representatives and lorry drivers receive the prioritized route collection register before departing on their daily runs.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Navigating the Collections Hub -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">2</span>
+                            Accessing the Collections Hub &amp; Receipt Initialization
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Sales &amp; Distribution &#10148; Collections &amp; Receipts</span> or select <span class="sop-flow">Accounts Receivable &#10148; Customer Payments</span>.</p>
+                            <p>The centralized Collections dashboard provides real-time cash flow and settlement metrics:</p>
+                            <ul>
+                                <li><strong>Real-Time Collection Telemetry:</strong> Live KPI cards displaying <em>Total Collections Today (LKR)</em>, <em>Cash In Hand</em>, <em>Cheques In-Transit / Clearing</em>, <em>Prompt Payment Discounts Granted</em>, and <em>Customer Advance Balances Held (Account 2106)</em>.</li>
+                                <li><strong>Multi-Criteria Search:</strong> Look up transactions by Receipt Number, Outlet Name, Customer Code, Delivery Route, or Date Range.</li>
+                                <li><strong>Receipt Action Controls:</strong> Click <span class="sop-btn-indicator">+ Record Collection Receipt</span> to open the payment settlement modal.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Multi-Mode Payment Recording -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">3</span>
+                            Multi-Mode Payment Recording (Cash, Cheque &amp; Direct Bank Transfer)
+                        </h3>
+                        <div class="step-content">
+                            <p>In the New Collection Receipt modal, select the target customer and payment instrument:</p>
+                            <ol>
+                                <li><strong>Select Customer / Outlet <code>*</code>:</strong> Search by shop name or outlet code. The system dynamically loads the customer&apos;s total outstanding balance and list of unpaid invoices.</li>
+                                <li><strong>Collection Date <code>*</code>:</strong> Enter the actual physical collection date.</li>
+                                <li><strong>Payment Instrument / Mode <code>*</code>:</strong> Select the payment method:
+                                    <ul>
+                                        <li><strong>Cash:</strong> Immediately debits <strong>Account 1101 (Main Cash in Hand)</strong>. Prepares the cashier handover receipt for lorry driver or sales rep daily physical cash reconciliations.</li>
+                                        <li><strong>Cheque:</strong> Prompts for mandatory Cheque Number, Bank Name, Branch Code, Cheque Date, and Drawer Account Name. Debits <strong>Account 1110 (Cheques in Hand / Clearing)</strong> and routes the item into the Cheque Management clearing pipeline.</li>
+                                        <li><strong>Bank Transfer / CEFT:</strong> Prompts for Bank Deposit Slip Reference or Electronic Fund Transfer (CEFT) transaction reference. Debits <strong>Account 1120 (BOC Operating Current Account)</strong> upon cashier statement verification.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Total Received Amount (LKR) <code>*</code>:</strong> Input the gross collected figure.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Invoice Knock-Off & Sales Discounts -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">4</span>
+                            Automated FIFO Knock-Off &amp; Prompt-Payment Discounts (Account 5100)
+                        </h3>
+                        <div class="step-content">
+                            <p>Once the payment amount is entered, allocate the funds across open customer invoices:</p>
+                            <ul>
+                                <li><strong>Automated FIFO Allocation:</strong> Click <span class="sop-btn-indicator">Auto-Allocate (FIFO)</span>. The engine automatically applies the funds to the oldest outstanding invoices first, minimizing overdue aging exposure.</li>
+                                <li><strong>Manual Specific Knock-Off:</strong> Operators can alternatively select specific invoice checkboxes or manually edit the knock-off amount per row to match the customer&apos;s remittance advice slip.</li>
+                                <li><strong>Partial Invoice Settlements:</strong> If the payment is less than the invoice total, the invoice status updates to <code>Partially Paid</code>, displaying the settled sum and remaining balance.</li>
+                                <li><strong>Prompt-Payment Sales Discounts (Account 5100):</strong> When an outlet qualifies for an authorized prompt-payment cash discount (e.g., 2% for payment within 7 days):
+                                    <div style="background-color: var(--bg-card); border-left: 4px solid var(--primary); padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-family: monospace; font-size: 13px;">
+                                        Debit: Account 5100 (Sales Discounts &amp; Rebates) &mdash; LKR Discount<br>
+                                        Debit: Account 1101/1110 (Cash/Cheque Asset) &mdash; LKR Net Payment<br>
+                                        Credit: Account 1200 (Trade Debtors Sub-Ledger) &mdash; LKR Gross Invoice Total
+                                    </div>
+                                    The invoice is cleared 100% without leaving artificial residual balances.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Overpayment & Customer Advance Allocation -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">5</span>
+                            Overpayment Handling &amp; Customer Advance Account Allocation (Account 2106)
+                        </h3>
+                        <div class="step-content">
+                            <p>When a retailer makes an unallocated payment or pays a rounded sum exceeding their outstanding invoice totals (e.g., paying LKR 50,000 cash against an outstanding invoice of LKR 47,850):</p>
+                            <ul>
+                                <li><strong>Automated Advance Separation:</strong> The system settles the invoice in full (LKR 47,850) and automatically books the surplus LKR 2,150.00 into <strong>Account 2106 (Customer Advance Payments &amp; Unallocated Credits)</strong>.</li>
+                                <li><strong>Customer Statement Impact:</strong> The outlet profile displays an active credit advance balance. The customer debtor ledger (Account 1200) remains perfectly balanced with zero negative distortion.</li>
+                                <li><strong>Automated Future Knock-Off:</strong> When the next delivery invoice is generated for that outlet in Module 12, the invoicing engine flags: <em>"Customer has LKR 2,150.00 in unallocated advances (Account 2106). Apply to this invoice?"</em> Clicking <span class="sop-btn-indicator">Apply Advance</span> knocks off the new invoice instantly with zero manual journal entries.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Cheque Clearing & Dishonored Cheque Lifecycle -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">6</span>
+                            Cheque Clearing, Realization &amp; Dishonored / Return Lifecycle
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Accounts Receivable &#10148; Cheque Management</span> to monitor physical cheque realization:</p>
+                            <ol>
+                                <li><strong>In-Hand / Safe Custody:</strong> Cheques received from field reps are tracked in <code>In-Hand</code> status under Account 1110.</li>
+                                <li><strong>Banking &amp; Deposit Slip Generation:</strong> Click <span class="sop-btn-indicator">Create Bank Deposit Slip</span> to group cheques into a physical bank deposit batch. The status transitions to <code>Deposited</code>.</li>
+                                <li><strong>Realization / Clearance Confirmation:</strong> Upon reviewing the BOC bank statement:
+                                    <ul>
+                                        <li>Locate the cleared cheque and click <span class="sop-btn-indicator">&#9989; Mark Realized</span>.</li>
+                                        <li>System executes journal: <strong>Credit Account 1110</strong> (Cheques in Hand) and <strong>Debit Account 1120</strong> (Bank of Ceylon Operating Account). The transaction lifecycle is fully completed.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Dishonored / Bounced Cheque Handling:</strong> If a cheque is returned unpaid by the clearing house (e.g., <em>Insufficient Funds</em>, <em>Payment Stopped</em>, <em>Signature Incompatible</em>):
+                                    <ul>
+                                        <li>Click <span class="sop-btn-indicator">&#10060; Mark Dishonored / Returned</span>.</li>
+                                        <li><strong>Automated Ledger Reversal:</strong> The system automatically credits Account 1110 and re-debits the outlet&apos;s Account 1200 sub-ledger, restoring the unpaid debt immediately.</li>
+                                        <li><strong>Bank Charges &amp; Credit Freeze:</strong> Bounced bank charges debit Account 1200 as recoverable fees, and the outlet profile is automatically flagged with a <em>"Cheque Restricted &mdash; Cash Only"</em> alert.</li>
+                                        <li><strong>Instant SMS Notification:</strong> Module 09 dispatches an urgent SMS alert notifying the store owner of the dishonored cheque and requesting immediate cash settlement.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Scribe Interactive Walkthrough Embed -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">7</span>
+                            Interactive Step-by-Step Guide (Scribe Walkthrough)
+                        </h3>
+                        <div class="step-content">
+                            <p>Follow the interactive visual guide below for the complete Receivable Collections workflow &mdash; covering invoice loading, cash/cheque receipt recording, prompt-payment discount deductions, overpayment advance handling, and cheque clearing/dishonor management &mdash; with live screen captures and click annotations.</p>
+
+                            <!-- Scribe Responsive Embed -->
+                            <div class="scribe-container my-6 w-full overflow-hidden rounded-xl border border-border shadow-sm"
+                                style="margin-top: 16px; margin-bottom: 8px; width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <iframe
+                                    src="https://scribehow.com/embed/Receivable_Collections_Payment_Knock-Off_Discounts_and_Advance_Settlements_in_Cinaway_ERP__U4W7Mi5kQ_ausM8EiQRT5Q?as=scrollable"
+                                    width="100%"
+                                    height="800"
+                                    allow="fullscreen"
+                                    style="border: 0; min-height: 640px; display: block;"
+                                    title="Receivable Collections, Payment Knock-Off, Discounts &amp; Advance Settlements in Cinaway ERP">
+                                </iframe>
+                                <div class="print-url-fallback">
+                                    <span class="fallback-icon">&#127760;</span>
+                                    <span class="fallback-text">View Live Interactive Walkthrough:</span>
+                                    <a href="https://scribehow.com/shared/Receivable_Collections_Payment_Knock-Off_Discounts_and_Advance_Settlements_in_Cinaway_ERP__U4W7Mi5kQ_ausM8EiQRT5Q" class="fallback-url" target="_blank" rel="noopener">Open Scribe Guide &rarr;</a>
+                                </div>
+                            </div>
+                            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+                                &#128161; <em>Scroll through the interactive steps inside the frame above to view exact screen actions, input highlights, and click annotations. Use fullscreen mode for the best experience.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Collections Troubleshooting Matrix -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">8</span>
+                            Receivable Collections &amp; Settlements Troubleshooting Matrix
+                        </h3>
+                        <div class="step-content">
+                            <div class="sop-table-container" style="overflow-x: auto; margin-top: 10px;">
+                                <table class="sop-table" style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+                                    <thead>
+                                        <tr style="background-color: var(--bg-card); border-bottom: 2px solid var(--border-color); text-align: left;">
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Issue / Scenario</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Root Cause</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Corrective Resolution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Payment recorded against incorrect customer outlet</td>
+                                            <td style="padding: 10px 14px;">Operator selected wrong shop with similar trading name during manual receipt creation.</td>
+                                            <td style="padding: 10px 14px;">Open <strong>Collection Receipts</strong>, locate receipt voucher, and click <span class="sop-btn-indicator">Reverse Receipt</span>. Enter audited cancellation note and re-issue payment against the correct outlet code.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Customer Cheque returned unpaid by bank</td>
+                                            <td style="padding: 10px 14px;">Retailer had insufficient funds or post-dated cheque was deposited prematurely.</td>
+                                            <td style="padding: 10px 14px;">Navigate to <strong>Cheque Management</strong> and click <span class="sop-btn-indicator">Mark Dishonored</span>. The system restores the customer&apos;s debt balance, debits return bank charges, and alerts the sales rep.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Advance payment in Account 2106 not applying to new invoice</td>
+                                            <td style="padding: 10px 14px;">The new sales invoice was generated under a different sister outlet code belonging to the same owner.</td>
+                                            <td style="padding: 10px 14px;">Perform an authorized inter-branch credit transfer journal in General Ledger or apply the credit manually in the invoice settlement window.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Prompt-Payment discount exceeds authorized policy</td>
+                                            <td style="padding: 10px 14px;">Operator attempted to input discount greater than authorized threshold (e.g., &gt; 3.0%).</td>
+                                            <td style="padding: 10px 14px;">Discounts exceeding standard policy require Financial Controller secondary PIN authorization before the receipt can be posted to Account 5100.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px 14px; font-weight: 600;">Field rep cash collection differs from physical cash handed to cashier</td>
+                                            <td style="padding: 10px 14px;">Lorry driver or rep collected cash on route but cash was misplaced or short-handed.</td>
+                                            <td style="padding: 10px 14px;">Print the <strong>Daily Route Collection Handover Sheet</strong>. Cashier signs for exact physical cash received, and any cash shortage is booked against the field rep&apos;s staff recovery account.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==========================================================================
+     MODULE 14 / CHAPTER 14: PROCUREMENT LIFECYCLE, BULK PURCHASE INGESTION & RETURN RECONCILIATIONS
+     ========================================================================== -->
+            <section class="sop-module" id="procurement-purchases-returns"
+                data-title="Purchases &amp; Purchase Returns"
+                data-responsible="Procurement Manager / Inventory Controller / Accounts Payable / Warehouse Manager / System Administrator">
+                <div class="module-header">
+                    <span class="module-badge">Module 14 &middot; Chapter 14 &mdash; Procurement &amp; Supply Chain Operations</span>
+                    <h2 class="module-title">Procurement Lifecycle, Bulk Purchase Ingestion &amp; Return Reconciliations in Cinaway ERP</h2>
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Target Audience</span>
+                            <span class="meta-value">Procurement Officers, Inventory Controllers, Accounts Payable Accountants, Warehouse Receiving Supervisors, System Administrators</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Responsible Person</span>
+                            <span class="meta-value" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="role-badge role-logistics" onclick="filterByRole('Logistics Operations')">Procurement &amp; Supply Chain</span>
+                                <span class="role-badge role-finance" onclick="filterByRole('Accounts &amp; Finance')">Accounts Payable &amp; Finance</span>
+                                <span class="role-badge role-admin" onclick="filterByRole('System Administrator')">System Administrator</span>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Objective</span>
+                            <span class="meta-value">Administrative procedures for bulk purchase Excel imports, receiving goods into warehouse stock, posting trade creditor payables (2001), validating purchase returns against original bills, and updating supplier balances upon approval.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-body">
+
+                    <!-- Chart of Accounts Integration Banner -->
+                    <div class="sop-alert info" style="margin-bottom: 24px;">
+                        <div class="alert-icon">&#128230;</div>
+                        <div class="alert-content">
+                            <strong>Canonical Accounting Architecture &amp; Perpetual Inventory Postings:</strong>
+                            <p>Under Cinaway ERP&apos;s chart of accounts architecture, procurement and return operations execute atomic general ledger transactions: (1) Inward purchase deliveries debit <strong>Account 1300 (Merchandise Inventory Asset)</strong> at landed cost and credit <strong>Account 2001 (Trade Creditors / Accounts Payable)</strong> mapped 1:1 to the supplier sub-ledger. (2) Purchase return reconciliations validate against the original bill reference, debit <strong>Account 2001 (Trade Creditors)</strong> via an automated Debit Note to reduce supplier liability, and credit <strong>Account 1300 (Merchandise Inventory Asset)</strong> to decrement physical warehouse stock with full audit tracking.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Navigating the Procurement Hub -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">1</span>
+                            Navigating the Procurement Hub &amp; Inward Shipment Verification
+                        </h3>
+                        <div class="step-content">
+                            <p>Navigate to <span class="sop-flow">Procurement &amp; Supply Chain &#10148; Purchases &amp; Inward Bills</span> or select <span class="sop-flow">Accounts Payable &#10148; Supplier Purchases</span>.</p>
+                            <p>The centralized Purchases dashboard provides real-time visibility over all inbound stock shipments, supplier invoice postings, and payment settlement schedules:</p>
+                            <ul>
+                                <li><strong>Inward Shipment Telemetry:</strong> Live metrics showing <em>Total Purchases MTD (LKR)</em>, <em>Pending Inward Shipments</em>, <em>Open Supplier Payables (Account 2001)</em>, and <em>Active Purchase Return Requests</em>.</li>
+                                <li><strong>Pre-Ingestion Verification:</strong> Verify that the supplier is registered in the Supplier Directory and that all arriving SKUs exist in the Products Master (Module 11) with configured standard landed cost prices.</li>
+                                <li><strong>Action Options:</strong> Choose between <span class="sop-btn-indicator">&#128229; Import Bulk Purchases (Excel)</span> for large shipment batches or <span class="sop-btn-indicator">+ New Purchase Bill</span> for direct single-vendor invoice entry.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Bulk Purchase Ingestion via Excel -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">2</span>
+                            Bulk Purchase Ingestion via Standardized Excel Template
+                        </h3>
+                        <div class="step-content">
+                            <p>For high-volume FMCG deliveries (e.g., Unilever consolidated warehouse deliveries), use the bulk Excel ingestion workflow to post inward stock and creditor liabilities in one batch:</p>
+                            <ol>
+                                <li><strong>Download Ingestion Template:</strong> Click <span class="sop-btn-indicator">Download Purchase Template (.xlsx)</span>. The template enforces strict column headers:
+                                    <ul>
+                                        <li><code>Supplier_Code</code>: Unique supplier identifier registered in Cinaway ERP.</li>
+                                        <li><code>Invoice_Bill_No</code>: Supplier&apos;s physical delivery invoice/bill reference number.</li>
+                                        <li><code>Bill_Date</code>: Invoice date (<code>YYYY-MM-DD</code>).</li>
+                                        <li><code>SKU_Code</code>: Registered product code matching ERP product master.</li>
+                                        <li><code>Quantity_Received</code>: Integer quantity of units accepted into warehouse.</li>
+                                        <li><code>Unit_Cost_Price</code>: Landed cost price per unit in LKR.</li>
+                                        <li><code>Batch_Number</code> &amp; <code>Expiry_Date</code>: Optional traceability attributes for perishable FMCG lots.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Upload Ingestion File:</strong> Drag and drop the populated Excel workbook into the bulk purchase import dropzone.</li>
+                                <li><strong>Pre-Flight Ingestion Validation:</strong> The ingestion engine checks every row for:
+                                    <ul>
+                                        <li>Duplicate Bill Numbers already posted in Account 2001.</li>
+                                        <li>Unrecognized SKU codes or inactive items.</li>
+                                        <li>Non-positive or zero quantities and cost figures.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Execute Batch Ingestion:</strong> Click <span class="sop-btn-indicator">&#9881; Process Purchase Ingestion</span>. The system increments physical on-hand inventory under <strong>Account 1300</strong> and books the total liability under <strong>Account 2001</strong>.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Direct Manual Purchase Bill Entry -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">3</span>
+                            Direct Purchase Bill Entry &amp; Warehouse Receiving
+                        </h3>
+                        <div class="step-content">
+                            <p>For direct local purchases, emergency replenishment, or single-vendor consignments, enter bills manually through the Purchase Bill creator:</p>
+                            <ul>
+                                <li><strong>Supplier Selection:</strong> Search and select the verified supplier (e.g., <em>Unilever Sri Lanka Ltd</em>). The system auto-populates default credit terms and payment due cycles.</li>
+                                <li><strong>Bill Reference &amp; Dates:</strong> Input the official Supplier Bill Number, Bill Date, and Goods Received Date.</li>
+                                <li><strong>Itemized Line Entries:</strong>
+                                    <ul>
+                                        <li>Type SKU Code or Product Name in the item lookup autocomplete.</li>
+                                        <li>System pre-fills default Landed Cost Price (LKR) with override capability for authorized price changes.</li>
+                                        <li>Enter verified received quantity. The row automatically computes Gross Line Total, Trade Discounts, and Net Value.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Warehouse Destination:</strong> Confirm destination warehouse bin or zone (e.g., <em>Central Distribution Warehouse &mdash; Zone A</em>).</li>
+                                <li><strong>Save &amp; Finalize:</strong> Click <span class="sop-btn-indicator">Post Purchase Bill</span>. The system generates an internal Goods Received Note (GRN) and locks the bill against unauthorized changes.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Accounts Payable (2001) Integration & Supplier Aging -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">4</span>
+                            Accounts Payable (2001) Integration &amp; Supplier Aging Reconciliations
+                        </h3>
+                        <div class="step-content">
+                            <p>Every finalized purchase bill establishes an audited payable balance in the General Ledger:</p>
+                            <ul>
+                                <li><strong>Supplier Sub-Ledger Posting:</strong> The transaction credits <strong>Account 2001 (Trade Creditors / Accounts Payable)</strong> tagged with the supplier&apos;s unique ledger code (e.g., <code>2001-SUP-0012</code>).</li>
+                                <li><strong>Aging Schedule Analysis:</strong> Payables are classified into chronological aging buckets: <em>Current (0&ndash;30 Days)</em>, <em>31&ndash;60 Days</em>, <em>61&ndash;90 Days</em>, and <em>90+ Days Overdue</em> based on agreed credit terms.</li>
+                                <li><strong>Statement Reconciliation:</strong> Monthly supplier statement balances can be matched against the ERP sub-ledger to verify pending payments, settled cheques, and approved debit notes before authorizing bulk electronic funds transfers (BOC PRN / CEFT).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Purchase Return Initiation & Bill Validation -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">5</span>
+                            Purchase Return Initiation &amp; Original Bill Validation
+                        </h3>
+                        <div class="step-content">
+                            <p>When stock must be returned to the manufacturer or supplier due to damages, defects, or expiry, initiate a Purchase Return with strict validation:</p>
+                            <ol>
+                                <li><strong>Access Return Module:</strong> Go to <span class="sop-flow">Procurement &#10148; Purchase Returns</span> and click <span class="sop-btn-indicator">+ Initiate Purchase Return</span>.</li>
+                                <li><strong>Link Original Purchase Bill Reference <code>*</code>:</strong> Enter the original Purchase Bill Number. The system immediately retrieves the exact items, quantities, and cost prices invoiced on that bill.</li>
+                                <li><strong>Strict Quantity Validation Protocol:</strong>
+                                    <div class="sop-alert warning" style="margin: 12px 0;">
+                                        <div class="alert-icon">&#9888;</div>
+                                        <div class="alert-content">
+                                            <strong>Enforced Bill Cross-Validation:</strong> Cinaway ERP strictly enforces that return quantities cannot exceed the original purchased quantity on the selected bill minus any prior returns. Attempting to return unregistered items or excessive units is automatically rejected by the validation engine.
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><strong>Return Classification:</strong> Select the return reason: <em>Damaged in Transit</em>, <em>Near-Expiry / Expired Stock</em>, <em>Manufacturing Defect</em>, or <em>Delivery Surplus / Billing Error</em>.</li>
+                                <li><strong>Submit for Approval:</strong> Click <span class="sop-btn-indicator">Submit Return for Authorization</span>. The return request enters <code>Pending Approval</code> status.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Approval Workflow & Balance Knock-Off -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">6</span>
+                            Multi-Level Approval Workflow &amp; Automated Balance Knock-Off
+                        </h3>
+                        <div class="step-content">
+                            <p>To preserve financial integrity, purchase returns require multi-tier operational and accounting authorization:</p>
+                            <ul>
+                                <li><strong>Verification &amp; Physical Inspection:</strong> The Warehouse Manager inspects the quarantined return stock and verifies quantities against the return request.</li>
+                                <li><strong>Financial Authorization:</strong> The Accounts Payable Lead reviews the return valuation and clicks <span class="sop-btn-indicator">&#9989; Approve Purchase Return</span>.</li>
+                                <li><strong>Automated Ledger Reconciliations on Approval:</strong>
+                                    <div style="background-color: var(--bg-card); border-left: 4px solid var(--primary); padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-family: monospace; font-size: 13px;">
+                                        Debit: Account 2001 (Trade Creditors / Accounts Payable) &mdash; LKR Return Value<br>
+                                        Credit: Account 1300 (Merchandise Inventory Asset) &mdash; LKR Return Landed Cost
+                                    </div>
+                                    The supplier&apos;s payable balance is reduced immediately, and physical inventory is depleted from warehouse stock.
+                                </li>
+                                <li><strong>Debit Note &amp; Return Gate Pass:</strong> The system automatically issues an audited <strong>Supplier Debit Note</strong> and prints a <strong>Goods Return Gate Pass</strong> authorizing physical stock removal during supplier collection.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Scribe Interactive Walkthrough Embed -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">7</span>
+                            Interactive Step-by-Step Guide (Scribe Walkthrough)
+                        </h3>
+                        <div class="step-content">
+                            <p>Follow the interactive visual guide below for the complete Procurement &amp; Purchase Return workflow &mdash; covering bulk Excel ingestion, receiving goods into warehouse inventory, posting trade creditor payables (2001), validating returns against original bills, and approving supplier balance knock-offs &mdash; with live screen captures and click annotations.</p>
+
+                            <!-- Scribe Responsive Embed -->
+                            <div class="scribe-container my-6 w-full overflow-hidden rounded-xl border border-border shadow-sm"
+                                style="margin-top: 16px; margin-bottom: 8px; width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <iframe
+                                    src="https://scribehow.com/embed/Procurement_Lifecycle_Bulk_Purchase_Ingestion_and_Return_Reconciliations_in_Cinaway_ERP__lt2KdThGR4W0yRN4gvKqDA?as=scrollable"
+                                    width="100%"
+                                    height="800"
+                                    allow="fullscreen"
+                                    style="border: 0; min-height: 640px; display: block;"
+                                    title="Procurement Lifecycle, Bulk Purchase Ingestion &amp; Return Reconciliations in Cinaway ERP">
+                                </iframe>
+                                <div class="print-url-fallback">
+                                    <span class="fallback-icon">&#127760;</span>
+                                    <span class="fallback-text">View Live Interactive Walkthrough:</span>
+                                    <a href="https://scribehow.com/shared/Procurement_Lifecycle_Bulk_Purchase_Ingestion_and_Return_Reconciliations_in_Cinaway_ERP__lt2KdThGR4W0yRN4gvKqDA" class="fallback-url" target="_blank" rel="noopener">Open Scribe Guide &rarr;</a>
+                                </div>
+                            </div>
+                            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+                                &#128161; <em>Scroll through the interactive steps inside the frame above to view exact screen actions, input highlights, and click annotations. Use fullscreen mode for the best experience.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Procurement Troubleshooting Matrix -->
+                    <div class="procedure-step">
+                        <h3 class="step-title">
+                            <span class="step-num">8</span>
+                            Procurement &amp; Purchase Returns Troubleshooting Matrix
+                        </h3>
+                        <div class="step-content">
+                            <div class="sop-table-container" style="overflow-x: auto; margin-top: 10px;">
+                                <table class="sop-table" style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+                                    <thead>
+                                        <tr style="background-color: var(--bg-card); border-bottom: 2px solid var(--border-color); text-align: left;">
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Issue / Scenario</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Root Cause</th>
+                                            <th style="padding: 10px 14px; color: var(--text-heading);">Corrective Resolution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Duplicate Purchase Bill Number error during Excel import</td>
+                                            <td style="padding: 10px 14px;">The supplier bill number was previously imported or posted in Account 2001.</td>
+                                            <td style="padding: 10px 14px;">Verify the bill number in <strong>Purchases List</strong>. If this is a revised or supplemental delivery, append an audited suffix (e.g., <code>-REV1</code>) after confirming with the supplier.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Return quantity rejected by validation engine</td>
+                                            <td style="padding: 10px 14px;">Entered return quantity exceeds the original purchased quantity or previous partial returns consumed the balance.</td>
+                                            <td style="padding: 10px 14px;">Inspect the original bill audit trail. System displays remaining returnable quantity; adjust return unit count to match available eligible quantity.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Imported SKU code not found in system</td>
+                                            <td style="padding: 10px 14px;">Supplier delivered a new product line not yet registered in the Products Master (Module 11).</td>
+                                            <td style="padding: 10px 14px;">Register the new SKU code and unit cost price in <strong>Products Master</strong> first, then re-upload the purchase Excel file.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 10px 14px; font-weight: 600;">Landed cost price variance on physical invoice</td>
+                                            <td style="padding: 10px 14px;">Supplier modified price without prior notice or applied extra freight/handling surcharges.</td>
+                                            <td style="padding: 10px 14px;">Update the landed unit price during bill entry with Procurement Manager authorization. System re-evaluates weighted average inventory cost under Account 1300.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px 14px; font-weight: 600;">Approved return stock still visible in active warehouse bin</td>
+                                            <td style="padding: 10px 14px;">Return was authorized in ERP but physical stock was not moved to the quarantine dispatch zone.</td>
+                                            <td style="padding: 10px 14px;">Print the <strong>Goods Return Gate Pass</strong>, transfer physical goods to the Supplier Return Quarantine Bay, and obtain the supplier lorry driver&apos;s physical sign-off upon collection.</td>
                                         </tr>
                                     </tbody>
                                 </table>
