@@ -85,6 +85,15 @@ export const App: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
+  // Reset print all mode after print dialog finishes
+  useEffect(() => {
+    const handleAfterPrint = () => {
+      setPrintAllMode(false);
+    };
+    window.addEventListener('afterprint', handleAfterPrint);
+    return () => window.removeEventListener('afterprint', handleAfterPrint);
+  }, []);
+
   const handlePrintCurrent = () => {
     setPrintAllMode(false);
     setTimeout(() => window.print(), 100);
@@ -125,8 +134,8 @@ export const App: React.FC = () => {
           onCloseMobile={() => setMobileMenuOpen(false)}
         />
 
-        {/* Main Content Area (Margin Left on desktop for fixed sidebar) */}
-        <main className="flex-1 lg:pl-80 p-4 sm:p-6 lg:p-8 min-w-0">
+        {/* Main Content Area (Margin Left on desktop for fixed sidebar; hidden during Print All) */}
+        <main className={`flex-1 lg:pl-80 p-4 sm:p-6 lg:p-8 min-w-0 ${printAllMode ? 'print:hidden' : ''}`}>
           <div className="max-w-5xl mx-auto">
             {isDashboard ? (
               <DashboardView 
@@ -138,6 +147,7 @@ export const App: React.FC = () => {
                 module={currentModule}
                 onNavigate={navigateTo}
                 onPrintCurrent={handlePrintCurrent}
+                onPrintAll={handlePrintAll}
               />
             ) : (
               <div className="p-12 text-center bg-white dark:bg-[#0f172a] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">

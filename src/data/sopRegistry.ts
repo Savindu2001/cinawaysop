@@ -3,6 +3,12 @@ export interface SopRole {
   badgeClass: string;
 }
 
+export interface TroubleshootingItem {
+  mistake: string;
+  cause: string;
+  quickFix: string;
+}
+
 export interface SopModule {
   id: string;
   slug: string;
@@ -10,19 +16,20 @@ export interface SopModule {
   title: string;
   category: string;
   sectionGroupId: string;
-  simpleSummary: string;
-  detailedGuide: string[];
-  actionChecklist: string[];
+  whatIsThisFor: string; // 2 simple sentences
+  beforeYouStart: string[]; // checklist of prerequisites
+  stepByStepInstructions: string[]; // numbered simple steps
+  commonMistakes: TroubleshootingItem[]; // troubleshooting table (min 2 items)
   embedUrl: string;
+  viewerUrl: string;
   status: 'live' | 'upcoming';
   roles: SopRole[];
   estimatedMinutes: number;
   lastAudited: string;
-  prerequisites?: string[];
-  keyTips?: string[];
 }
 
 export const SOP_REGISTRY: SopModule[] = [
+  // 1. Route Operations & Sales Collections
   {
     id: "route-operations",
     slug: "/day-to-day-routes",
@@ -30,33 +37,45 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Daily Route Sales, Collections & Cashier Settlement",
     category: "Core Logistics & Sales",
     sectionGroupId: "logistics-sales",
-    simpleSummary: "Learn how to record daily shop deliveries, collect cash or cheques from customers, and hand over the money to the cashier at the end of the day.",
-    detailedGuide: [
-      "Select your assigned delivery route and sales vehicle in the system before leaving the warehouse.",
-      "Record shop arrivals, customer invoice handovers, and return item counts in real time.",
-      "Collect cash, crossed cheques, or bank transfer slips for each bill delivered.",
-      "At day end, return to the main cashier desk and complete the daily physical cash handover settlement.",
-      "Confirm that system balances match physical cash, cheques, and returned inventory."
+    whatIsThisFor: "This module helps delivery teams record daily shop deliveries, collect customer cash or cheques, and settle money with the head cashier at the end of the day. It makes sure every bottle, pack, and rupee matches physical stock before leaving the office.",
+    beforeYouStart: [
+      "Assigned delivery route and vehicle number for the day",
+      "Login credentials and active PIN for the mobile/tablet app",
+      "Loaded vehicle physical inventory count signed by storekeeper",
+      "Official receipt booklet and crossed stamp for cheque acceptance"
     ],
-    actionChecklist: [
-      "Confirm vehicle loading checklist and route manifest before morning dispatch",
-      "Record delivery status for each outlet stop (Delivered / Partial / Rescheduled)",
-      "Collect payment receipt reference numbers and enter cheque leaf details",
-      "Hand over physical cash envelopes and cheques to the head cashier",
-      "Receive printed Cashier Settlement Confirmation slip before clocking out"
+    stepByStepInstructions: [
+      "Log into Cinaway ERP on your mobile phone or depot tablet at the start of your shift.",
+      "Select your assigned route for today and confirm your vehicle loading manifest against physical cartons.",
+      "At each retail outlet, mark products delivered, record any damaged return items, and issue the print invoice.",
+      "Collect payment from the shopkeeper in cash, bank transfer slip, or crossed cheque, and enter the exact leaf number.",
+      "At the end of your route, return to the main cashier desk, hand over all physical cash envelopes and cheques, and collect your signed End-of-Day Settlement slip."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Cashier reports cash shortage during evening handover",
+        cause: "Mixing personal cash with shop collections or forgetting to record cash discounts given to shopkeeper.",
+        quickFix: "Check the 'Unsettled Bills' tab in your app to recount outlet payments before signing the physical handover sheet."
+      },
+      {
+        mistake: "Cheque rejected due to incorrect payee name",
+        cause: "Customer wrote their own business name or made a spelling mistake on the payee line.",
+        quickFix: "Always ensure cheques are stamped 'Account Payee Only' and written payable strictly to 'Cinaway Logistics (Pvt) Ltd'."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/End-to-End_Route_Operations_Daily_Sales_Collection_and_Cashier_Settlement__gf9AmhD2Rsqwhg6rAvssJw?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/End-to-End_Route_Operations_Daily_Sales_Collection_and_Cashier_Settlement__gf9AmhD2Rsqwhg6rAvssJw",
     status: "live",
     roles: [
-      { name: "Field Sales Rep", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300" },
-      { name: "Cashier", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300" },
-      { name: "Logistics Supervisor", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300" }
+      { name: "Field Sales Rep", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300" },
+      { name: "Cashier", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300" },
+      { name: "Driver / Lorry Helper", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300" }
     ],
     estimatedMinutes: 6,
-    lastAudited: "September 2026",
-    prerequisites: ["Assigned route in ERP", "Active login PIN", "Loaded delivery manifest"],
-    keyTips: ["Never accept post-dated cheques without written credit approval from the Financial Controller."]
+    lastAudited: "September 2026"
   },
+
+  // 2. Expense Management
   {
     id: "expense-management",
     slug: "/expenses",
@@ -64,33 +83,45 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Daily Expense Records & Bill Vouchers",
     category: "Finance & Accounting",
     sectionGroupId: "finance-accounting",
-    simpleSummary: "Learn how to enter daily spending like fuel, vehicle repairs, and small office bills, attach photos of receipts, and send them for manager approval.",
-    detailedGuide: [
-      "Open the Expense Management module and select 'Create Expense Voucher'.",
-      "Choose the appropriate spending category (Fuel, Vehicle Maintenance, Office Supplies, Travel, or Meals).",
-      "Enter the exact amount paid, currency, payment method (Petty Cash, Cheque, or Bank Transfer), and tax details.",
-      "Upload high-resolution camera photos or scans of the original physical receipt or invoice.",
-      "Submit the voucher into the multi-tier approval workflow for department manager sign-off."
+    whatIsThisFor: "This module allows employees to record daily operational expenses such as lorry fuel, puncture repairs, meals, and office supplies. It lets managers review bills and approve repayments quickly without lost paper slips.",
+    beforeYouStart: [
+      "Original clear paper receipt or tax invoice from the vendor",
+      "Vehicle registration number (if claiming vehicle fuel or repair)",
+      "Assigned department cost center code",
+      "Mobile camera or document scanner to upload receipt photos"
     ],
-    actionChecklist: [
-      "Verify that the physical paper receipt contains vendor name, date, and tax TIN",
-      "Select the right vehicle registration number if recording fuel or maintenance",
-      "Attach clear JPG/PNG/PDF receipt scan showing the full receipt edges",
-      "Confirm ledger cost center allocation before final submission",
-      "Track voucher approval status in the 'My Pending Approvals' dashboard"
+    stepByStepInstructions: [
+      "Click on 'Expenses' in the sidebar and choose 'Create Expense Voucher'.",
+      "Choose the correct category from the dropdown (Fuel, Vehicle Maintenance, Office Supplies, Meals, or Travel).",
+      "Type in the exact bill amount, date of purchase, and select payment method (Petty Cash, Cheque, or Company Card).",
+      "Upload a clear photo or PDF scan of the merchant receipt showing the vendor name, date, and items.",
+      "Click 'Submit for Approval' to send the voucher to your department manager."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Expense voucher rejected by accounts officer",
+        cause: "Blurry receipt photo uploaded or receipt is missing vendor date and cash paid stamp.",
+        quickFix: "Re-take the photo in bright light on a dark flat surface ensuring all four corners and the date are clearly visible."
+      },
+      {
+        mistake: "Wrong vehicle charged for fuel expense",
+        cause: "Selected the wrong vehicle number from the dropdown list during high-volume data entry.",
+        quickFix: "Open the voucher draft, select the correct license plate number from the fleet list, and cross-check the odometer reading."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Expense_Management__myFjp8TeTkm56wp9c9Djpw?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Expense_Management__myFjp8TeTkm56wp9c9Djpw",
     status: "live",
     roles: [
-      { name: "Accountant", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-300" },
-      { name: "Finance Manager", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-300" },
-      { name: "All Staff", badgeClass: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300" }
+      { name: "All Staff Members", badgeClass: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300" },
+      { name: "Accountant", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" },
+      { name: "Finance Manager", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300" }
     ],
     estimatedMinutes: 5,
-    lastAudited: "September 2026",
-    prerequisites: ["Original physical vendor receipt", "Assigned department cost center"],
-    keyTips: ["Expenses over Rs. 10,000 require pre-authorization from the Managing Director."]
+    lastAudited: "September 2026"
   },
+
+  // 3. Fixed Assets
   {
     id: "fixed-assets",
     slug: "/fixed-assets",
@@ -98,32 +129,44 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Registering Office Assets & Monthly Value Drop (Depreciation)",
     category: "Finance & Accounting",
     sectionGroupId: "finance-accounting",
-    simpleSummary: "Guide to adding company vehicles, laptops, and machines into the system, assigning them to staff, and calculating monthly value loss.",
-    detailedGuide: [
-      "Access the Fixed Assets module and click 'Register Asset'.",
-      "Input asset category (Motor Vehicles, IT Equipment, Office Furniture, Plant & Machinery).",
-      "Tag serial numbers, chassis numbers, purchase date, cost value, and physical location.",
-      "Assign the custodian employee responsible for the asset's security and maintenance.",
-      "Run the monthly automated straight-line or diminishing depreciation calculation batch."
+    whatIsThisFor: "This module helps track company equipment like delivery lorries, computers, printers, and warehouse pallet lifters. It keeps record of who is responsible for each item and calculates monthly value drop automatically.",
+    beforeYouStart: [
+      "Purchase bill and warranty card for the equipment",
+      "Equipment serial number or vehicle chassis number",
+      "Official printed Cinaway barcode sticker",
+      "Name of employee or branch custodian responsible for the item"
     ],
-    actionChecklist: [
-      "Print and affix the official Cinaway barcoded asset sticker to the physical item",
-      "Record vendor invoice reference and warranty expiration period",
-      "Assign the custodian staff member and obtain digital sign-off handover",
-      "Run end-of-month depreciation batch job before finalizing balance sheet",
-      "Perform quarterly physical asset verification against the registry ledger"
+    stepByStepInstructions: [
+      "Go to 'Fixed Assets' and click 'Register Asset'.",
+      "Select asset class (Motor Vehicles, IT Hardware, Office Furniture, or Warehouse Machinery).",
+      "Enter item details: brand, model, purchase price, purchase date, and manufacturer serial number.",
+      "Assign the custodian employee and stick the physical barcode sticker onto the device.",
+      "At month-end, click 'Run Depreciation' to automatically calculate this month's equipment value drop."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Low-value consumable items entered as fixed assets",
+        cause: "Registering minor stationery or hand tools valued below Rs. 15,000 as capital assets.",
+        quickFix: "Items under Rs. 15,000 must be entered through 'Expense Management' as general supplies, not in Fixed Assets."
+      },
+      {
+        mistake: "Monthly depreciation run fails with error",
+        cause: "Depreciation method or useful life years left blank during initial item registration.",
+        quickFix: "Edit the asset card, select 'Straight Line Method', set useful life (e.g., 4 years for laptops), and re-run."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Fixed_Asset_Registration_Depreciation_and_Disposal__Vgoiko0-TCyVOBgRe0eadQ?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Fixed_Asset_Registration_Depreciation_and_Disposal__Vgoiko0-TCyVOBgRe0eadQ",
     status: "live",
     roles: [
-      { name: "Senior Accountant", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-300" },
-      { name: "Admin Officer", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300" }
+      { name: "Senior Accountant", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" },
+      { name: "Administration Lead", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300" }
     ],
     estimatedMinutes: 7,
-    lastAudited: "September 2026",
-    prerequisites: ["Purchase invoice", "Equipment serial number", "Barcode sticker"],
-    keyTips: ["Assets valued under Rs. 15,000 are expensed immediately as consumable tools."]
+    lastAudited: "September 2026"
   },
+
+  // 4. All Reports Hub
   {
     id: "all-reports",
     slug: "/reports",
@@ -131,33 +174,44 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Viewing & Exporting Business Reports",
     category: "Finance & Accounting",
     sectionGroupId: "finance-accounting",
-    simpleSummary: "How to open company reports for sales, staff, and money, choose which columns you want to see, and download files as PDF or Excel.",
-    detailedGuide: [
-      "Navigate to the centralized All Reports Hub from the sidebar.",
-      "Select your required report domain (Sales Performance, Inventory Movement, Debtor Aging, or HR Payroll).",
-      "Filter data by date ranges, specific sales reps, branch warehouses, or vehicle routes.",
-      "Customize table visibility by toggling display columns on or off.",
-      "Export reports directly to formatted PDF or raw Excel (.xlsx) files for executive presentation."
+    whatIsThisFor: "This module gives managers and accountants instant access to business numbers including daily sales totals, unpaid shop bills, and warehouse stock levels. You can filter data by date and download clean files as PDF or Excel spreadsheets.",
+    beforeYouStart: [
+      "User role permissions to view sensitive financial/sales data",
+      "Specific date range you want to analyze (e.g., this month or last quarter)",
+      "Depot branch name or sales route number you are checking"
     ],
-    actionChecklist: [
-      "Set beginning and ending fiscal dates accurately",
-      "Verify filter criteria (e.g. including/excluding canceled transactions)",
-      "Select appropriate currency conversion if viewing international vendor reports",
-      "Preview data on screen before executing export download",
-      "Save exported files using standardized company naming conventions"
+    stepByStepInstructions: [
+      "Click 'Reports' in the sidebar to open the central reports dashboard.",
+      "Pick the category you need: Sales Summary, Outstanding Debtors, Stock Movement, or HR Attendance.",
+      "Use the date filter to choose the start and end dates for your report.",
+      "Check or uncheck column boxes to show only the information you want on your screen.",
+      "Click 'Export as Excel' for spreadsheets or 'Export as PDF' to generate a printable management document."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Report numbers do not match physical cashier handover sheet",
+        cause: "Date filter set to 'Created Date' instead of 'Settlement Date' or cancelled bills included.",
+        quickFix: "Change filter criteria to 'Completed Transactions Only' and ensure date range matches the banking cut-off time."
+      },
+      {
+        mistake: "Excel export shows blank rows or missing currency formatting",
+        cause: "Very large report query timed out while downloading over slow mobile connection.",
+        quickFix: "Narrow down your filter to a single branch or single week before clicking 'Export to Excel'."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Accessing_Reports_in_Cinaway_ERP___uhnrreLTcCUYZKNw799eg?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Accessing_Reports_in_Cinaway_ERP___uhnrreLTcCUYZKNw799eg",
     status: "live",
     roles: [
-      { name: "Management", badgeClass: "bg-sky-100 text-sky-800 dark:bg-sky-950/40 dark:text-sky-300" },
-      { name: "Financial Controller", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-300" },
-      { name: "Auditors", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-300" }
+      { name: "Management", badgeClass: "bg-sky-100 text-sky-800 dark:bg-sky-950/60 dark:text-sky-300" },
+      { name: "Financial Controller", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" },
+      { name: "Auditors", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300" }
     ],
     estimatedMinutes: 4,
-    lastAudited: "September 2026",
-    prerequisites: ["Report viewer permissions assigned in user role"],
-    keyTips: ["Use Excel export for pivoting data; use PDF export when sharing with bank managers or auditors."]
+    lastAudited: "September 2026"
   },
+
+  // 5. Customer Collections & Advances
   {
     id: "customer-collections",
     slug: "/collections",
@@ -165,33 +219,44 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Receiving Customer Payments & Settling Bills",
     category: "Core Logistics & Sales",
     sectionGroupId: "logistics-sales",
-    simpleSummary: "How to enter money received from shops, match payments with open bills, handle discounts, and record advance payments.",
-    detailedGuide: [
-      "Open the Collections & Receivables interface and look up the customer shop.",
-      "Review the customer's outstanding invoices and aged debt balance.",
-      "Allocate the incoming payment against specific invoice line items (knock-off allocation).",
-      "Apply pre-approved early settlement prompt payment discounts if applicable.",
-      "Record any unallocated balance as a Customer Advance against future orders."
+    whatIsThisFor: "This module helps accounts staff match incoming customer money with open sales invoices. It handles invoice knock-offs, approved discount deductions, and holds leftover money as customer advances for future orders.",
+    beforeYouStart: [
+      "Bank deposit slip or customer cheque leaf number",
+      "Unique outlet shop code or registered telephone number",
+      "Pre-approved prompt payment discount percentage agreement (if applicable)"
     ],
-    actionChecklist: [
-      "Search outlet name or unique outlet code to verify customer ledger",
-      "Compare payment bank slip or cheque leaf image against physical bank alert",
-      "Apply payment knock-off strictly from oldest invoice to newest (FIFO basis)",
-      "Verify discount percentage conforms to client credit agreement policy",
-      "Issue automated SMS receipt notification to shop owner upon completion"
+    stepByStepInstructions: [
+      "Open 'Collections' and type the shop name or code in the search bar.",
+      "Review the list of unpaid bills owed by this customer.",
+      "Enter the payment amount and select which specific open bills this money pays off (oldest invoices first).",
+      "If the customer qualifies for an early-settlement discount, enter the approved discount percentage.",
+      "Click 'Confirm Payment Knock-Off' to update the customer ledger and automatically send a payment SMS receipt."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Payment applied to the wrong customer outlet",
+        cause: "Selecting a customer with a similar business name from the search dropdown.",
+        quickFix: "Always verify the outlet's unique 5-digit code and shop owner mobile number before posting payment."
+      },
+      {
+        mistake: "Unallocated payment left hanging in suspense",
+        cause: "Customer paid a lump sum that does not match any single bill.",
+        quickFix: "Knock off the oldest invoices completely and leave the remaining balance marked as 'Customer Advance Credit'."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Receivable_Collections_Payment_Knock-Off_Discounts_and_Advance_Settlements_in_Cinaway_ERP__U4W7Mi5kQ_ausM8EiQRT5Q?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Receivable_Collections_Payment_Knock-Off_Discounts_and_Advance_Settlements_in_Cinaway_ERP__U4W7Mi5kQ_ausM8EiQRT5Q",
     status: "live",
     roles: [
-      { name: "Credit Controller", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300" },
-      { name: "Accounts Receivable", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-300" },
-      { name: "Sales Rep", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300" }
+      { name: "Credit Controller", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300" },
+      { name: "Accounts Receivable", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" },
+      { name: "Sales Rep", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300" }
     ],
     estimatedMinutes: 8,
-    lastAudited: "September 2026",
-    prerequisites: ["Bank credit confirmation or physically validated cheque leaf"],
-    keyTips: ["Always double-check cheque clearance dates before releasing credit hold on high-value accounts."]
+    lastAudited: "September 2026"
   },
+
+  // 6. Staff Payroll & Loan Processing
   {
     id: "staff-payroll",
     slug: "/payroll",
@@ -199,33 +264,44 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Monthly Staff Salaries, Loans & Government Funds",
     category: "Human Resources",
     sectionGroupId: "human-resources",
-    simpleSummary: "How to calculate monthly employee pay, deduct salary loans and advances, and process EPF and ETF contributions.",
-    detailedGuide: [
-      "Access HR Management and open the Monthly Payroll run for the current pay period.",
-      "Import verified biometric attendance logs to compute working days, overtime, and unpaid leaves.",
-      "Check automatic deductions: staff loan installments, mid-month salary advances, and canteen expenses.",
-      "Verify statutory calculations: Employee EPF (8%), Employer EPF (12%), and Employer ETF (3%).",
-      "Finalize pay slips and submit batch for managing director authorization."
+    whatIsThisFor: "This module calculates monthly employee pay, deducts staff loans and salary advances, and calculates EPF and ETF contributions. It ensures every staff member is paid accurately into their bank account on salary day.",
+    beforeYouStart: [
+      "Completed and verified attendance records from fingerprint machine",
+      "Approved staff salary advance and loan deduction schedule",
+      "National identity card (NIC) and Bank of Ceylon account numbers for all staff"
     ],
-    actionChecklist: [
-      "Lock attendance data on the 25th of the calendar month",
-      "Review employee advance ledger and deduct recurring loan installments",
-      "Verify tax withholding (APIT) thresholds against national inland revenue guidelines",
-      "Generate draft payroll summary and reconcile variance against previous month",
-      "Publish employee digital pay slips to email or employee portal"
+    stepByStepInstructions: [
+      "Go to 'Human Resources' and open 'Monthly Payroll'.",
+      "Choose the current pay month and click 'Calculate Salaries from Attendance'.",
+      "Check individual deduction lines for salary advances, company loan payments, and unpaid leave days.",
+      "Verify statutory deductions: Employee EPF (8%), Company EPF (12%), and Company ETF (3%).",
+      "Click 'Approve Payroll Batch' to generate official digital pay slips for all employees."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Employee salary shows zero overtime pay",
+        cause: "Biometric attendance records were not approved by warehouse manager before calculating payroll.",
+        quickFix: "Open Attendance module, approve pending overtime hours, and click 'Recalculate Salary' on the employee pay card."
+      },
+      {
+        mistake: "Duplicate loan installment deducted in same month",
+        cause: "Manual loan deduction entered twice by both HR officer and payroll clerk.",
+        quickFix: "Open the employee's deductions ledger, delete the duplicate entry, and verify the remaining balance."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/End-to-End_Payroll_Lifecycle_Staff_Advances_Loans_and_Statutory_Processing_in_Cinaway_ERP__0Kd6niXQSXWj2m9lDBWJgA?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/End-to-End_Payroll_Lifecycle_Staff_Advances_Loans_and_Statutory_Processing_in_Cinaway_ERP__0Kd6niXQSXWj2m9lDBWJgA",
     status: "live",
     roles: [
-      { name: "HR Manager", badgeClass: "bg-teal-100 text-teal-800 dark:bg-teal-950/40 dark:text-teal-300" },
-      { name: "Payroll Executive", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-300" },
-      { name: "Finance Director", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-300" }
+      { name: "HR Manager", badgeClass: "bg-teal-100 text-teal-800 dark:bg-teal-950/60 dark:text-teal-300" },
+      { name: "Payroll Executive", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300" },
+      { name: "Managing Director", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" }
     ],
     estimatedMinutes: 9,
-    lastAudited: "September 2026",
-    prerequisites: ["Approved biometric attendance", "Loan ledger reconciliation"],
-    keyTips: ["Run payroll test simulation 3 days prior to salary release to catch missing tax numbers."]
+    lastAudited: "September 2026"
   },
+
+  // 7. Leave Applications & Approvals
   {
     id: "leave-applications",
     slug: "/leaves",
@@ -233,33 +309,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Staff Leave Requests & Manager Approval",
     category: "Human Resources",
     sectionGroupId: "human-resources",
-    simpleSummary: "How staff can request leave days, how managers check leave balances, and how to approve or reject requests.",
-    detailedGuide: [
-      "Employees log in to their profile and click 'Apply for Leave'.",
-      "Select leave classification (Annual Leave, Casual Leave, Medical Leave, or Duty Leave).",
-      "Pick start/end dates, specify half-day or full-day, and provide operational reasoning or medical certificates.",
-      "The designated department head receives an instant system notification and email alert.",
-      "Manager reviews department shift coverage and approves or declines with written remarks."
+    whatIsThisFor: "This module allows employees to submit leave requests online and enables department managers to review and approve them. It automatically keeps track of how many vacation and sick days each worker has left.",
+    beforeYouStart: [
+      "Active ERP login username and password",
+      "Available leave balance in your annual quota",
+      "Doctor medical certificate photo (if taking medical leave longer than 2 days)"
     ],
-    actionChecklist: [
-      "Check that employee has remaining accrued days in their annual quota",
-      "Attach doctor's medical certificate for sick leaves exceeding 2 continuous days",
-      "Ensure minimum warehouse/fleet operational crew coverage before granting leave",
-      "Notify acting cover person for operational responsibilities",
-      "Verify leave status reflects in the monthly payroll attendance calculation"
+    stepByStepInstructions: [
+      "Click 'HR Management' and choose 'Leave Requests'.",
+      "Click 'New Leave Request' and select the type of leave (Annual, Casual, Medical, or Duty Leave).",
+      "Pick your start date and end date, choose half-day or full-day, and write a short reason.",
+      "Attach a photo of your medical certificate if you were on sick leave.",
+      "Click 'Submit'; your supervisor will receive an instant alert to approve or decline your request."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Leave request blocked by system with 'Quota Exceeded' alert",
+        cause: "Employee has used all allocated casual or annual days for the calendar year.",
+        quickFix: "Select 'No Pay Leave' with managerial consent or check with HR for compensatory off adjustments."
+      },
+      {
+        mistake: "Department manager cannot find pending leave request",
+        cause: "Employee saved request as a draft instead of clicking the final 'Submit' button.",
+        quickFix: "Open 'My Requests' tab, open the draft entry, and click 'Submit for Manager Approval'."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Leave_Configuration_Staff_Applications_and_Approval_Workflows_in_Cinaway_ERP___X32c-tPQoC8BuQ2DnQjTw?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Leave_Configuration_Staff_Applications_and_Approval_Workflows_in_Cinaway_ERP___X32c-tPQoC8BuQ2DnQjTw",
     status: "live",
     roles: [
       { name: "All Employees", badgeClass: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300" },
-      { name: "Department Heads", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300" },
-      { name: "HR Officer", badgeClass: "bg-teal-100 text-teal-800 dark:bg-teal-950/40 dark:text-teal-300" }
+      { name: "Department Heads", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300" }
     ],
     estimatedMinutes: 4,
-    lastAudited: "September 2026",
-    prerequisites: ["Configured annual leave entitlement balance"],
-    keyTips: ["Urgent casual leaves must be submitted within 24 hours of returning to duty."]
+    lastAudited: "September 2026"
   },
+
+  // 8. Employee Onboarding & Profiles
   {
     id: "employee-onboarding",
     slug: "/add-employee",
@@ -267,32 +353,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Adding New Employees & Setting Up Profiles",
     category: "Human Resources",
     sectionGroupId: "human-resources",
-    simpleSummary: "How to register a new hire, fill in identity and bank account numbers, upload job documents, and create system login details.",
-    detailedGuide: [
-      "From Human Resources, click 'Add Employee' to initiate the master registration wizard.",
-      "Fill in personal data: full name, National Identity Card (NIC) number, contact numbers, and residential address.",
-      "Enter statutory bank account details for salary wire transfer and assign an EPF registration number.",
-      "Upload digital attachments: NIC copy, birth certificate, driving license (for drivers), and signed appointment letter.",
-      "Assign job title, department, reporting supervisor, and generate ERP login credentials."
+    whatIsThisFor: "This module helps HR register newly hired workers, record their national identity and bank details, and upload their signed contract papers. It creates their official employee profile and gives them their initial login.",
+    beforeYouStart: [
+      "Physical copy of employee National Identity Card (NIC)",
+      "Bank passbook copy showing Bank of Ceylon account number and branch code",
+      "Signed appointment letter and driving license copy (for vehicle drivers)"
     ],
-    actionChecklist: [
-      "Verify NIC number against original physical government identity card",
-      "Confirm employee bank account number, bank code, and branch code accurately",
-      "Set correct employment type (Permanent / Probation / Contract / Intern)",
-      "Enroll employee biometric ID code into fingerprint scanner device",
-      "Assign security role permissions corresponding to their job description"
+    stepByStepInstructions: [
+      "Open 'Human Resources' and click 'Add Employee'.",
+      "Fill in the employee's full legal name, date of birth, home address, and mobile phone number.",
+      "Enter statutory identification numbers: NIC number and EPF registration number.",
+      "Input Bank of Ceylon branch code and account number for salary deposits.",
+      "Upload scans of the appointment letter and NIC, then click 'Save Employee Profile'."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Bank salary transfer rejects employee during monthly PRN run",
+        cause: "Typo in the 10-to-12 digit bank account number or wrong 3-digit branch code entered.",
+        quickFix: "Cross-check the account number against the scanned passbook copy and update the profile before generating payroll."
+      },
+      {
+        mistake: "Duplicate employee record created in system",
+        cause: "Re-entering a returning employee who previously worked at the company instead of reactivating them.",
+        quickFix: "Search archived records by NIC number and click 'Reactivate Employee' instead of creating a new profile."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Employee_Onboarding_Profile_Configuration_and_Access_Delegation_in_Cinaway_ERP__LyjgT4r_RF2xJtod0DWjGA?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Employee_Onboarding_Profile_Configuration_and_Access_Delegation_in_Cinaway_ERP__LyjgT4r_RF2xJtod0DWjGA",
     status: "live",
     roles: [
-      { name: "HR Executive", badgeClass: "bg-teal-100 text-teal-800 dark:bg-teal-950/40 dark:text-teal-300" },
-      { name: "IT Administrator", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-300" }
+      { name: "HR Executive", badgeClass: "bg-teal-100 text-teal-800 dark:bg-teal-950/60 dark:text-teal-300" },
+      { name: "System Administrator", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300" }
     ],
     estimatedMinutes: 6,
-    lastAudited: "September 2026",
-    prerequisites: ["Signed employment contract", "Verified bank passbook copy", "Valid NIC scan"],
-    keyTips: ["Drivers must have heavy vehicle commercial licenses checked on government portal."]
+    lastAudited: "September 2026"
   },
+
+  // 9. User Roles & System Permissions
   {
     id: "user-roles",
     slug: "/user-roles",
@@ -300,32 +397,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "User Permissions & Staff Access Rights",
     category: "Settings & Administration",
     sectionGroupId: "settings-admin",
-    simpleSummary: "How to give staff correct screen access (such as Salesperson, Cashier, or Admin) so they only see the pages they need.",
-    detailedGuide: [
-      "Open Settings & Administration > User Roles & Access Control.",
-      "Create or edit a predefined role (e.g. Sales Representative, Warehouse Staff, Cashier, Auditor, Admin).",
-      "Configure module permission flags: Read, Create, Edit, Delete, Export, or Approve.",
-      "Restrict sensitive financial tabs (Profit margins, Payroll data, Statutory reports) from general staff.",
-      "Assign the role to specific user profiles and enforce 2-Factor Authentication where appropriate."
+    whatIsThisFor: "This module controls which screens and buttons each employee can see in the ERP system. It makes sure sales reps only see their routes, storekeepers only see stock, and only managers see profit and salary numbers.",
+    beforeYouStart: [
+      "Master Administrator login credentials",
+      "Approved user permission request form signed by department head",
+      "Employee job title and official company email address"
     ],
-    actionChecklist: [
-      "Apply Principle of Least Privilege: only grant access essential for daily duty",
-      "Disable 'Delete' permissions on completed invoices and ledger vouchers for non-admin staff",
-      "Require supervisor override for manual price discounts and credit limit extensions",
-      "Audit quarterly user permissions log for terminated or transferred staff",
-      "Deactivate inactive accounts after 30 days of inactivity"
+    stepByStepInstructions: [
+      "Navigate to 'Settings & Administration' and select 'User Roles & Access Control'.",
+      "Choose to edit an existing role (e.g. Sales Rep, Cashier, Storekeeper) or create a new custom role.",
+      "Check or uncheck permissions: View, Create, Edit, Delete, and Export for each individual module.",
+      "Ensure sensitive checkboxes (like 'Delete Invoices' and 'View Profit Margins') remain unchecked for standard staff.",
+      "Click 'Save Role' and assign the role to the employee profile."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Field sales rep can see company payroll or profit figures",
+        cause: "Assigned employee to 'Admin' or 'Finance Manager' group by accident.",
+        quickFix: "Edit user profile immediately, switch role back to 'Field Sales Representative', and force sign-out."
+      },
+      {
+        mistake: "Cashier blocked from printing day-end settlement slip",
+        cause: "'Print Reports' permission was turned off during role permission cleanup.",
+        quickFix: "Open Cashier role settings, check the box for 'Print Daily Cashier Summary', and click save."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/User_Roles_and_Permission_Matrix_Configuration_in_Cinaway_ERP__lcadT9SqQa2bCVSpYyYtNA?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/User_Roles_and_Permission_Matrix_Configuration_in_Cinaway_ERP__lcadT9SqQa2bCVSpYyYtNA",
     status: "live",
     roles: [
-      { name: "System Administrator", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-300" },
-      { name: "Chief Technology Officer", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-300" }
+      { name: "System Administrator", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300" },
+      { name: "IT Lead", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300" }
     ],
     estimatedMinutes: 7,
-    lastAudited: "September 2026",
-    prerequisites: ["Super Admin clearance credentials"],
-    keyTips: ["Never share admin credentials; create separate named admin accounts for each system manager."]
+    lastAudited: "September 2026"
   },
+
+  // 10. Login, Password Reset & Security
   {
     id: "signin-guide",
     slug: "/signin-guide",
@@ -333,31 +441,42 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "System Login, Password Reset & Safe Logout",
     category: "Settings & Administration",
     sectionGroupId: "settings-admin",
-    simpleSummary: "Basic guide on how to log in safely, recover a lost password using email verification, and keep the user account secure.",
-    detailedGuide: [
-      "Open your web browser and go to the official portal at https://cinawaylogistics.com/signin.",
-      "Enter your registered company email address and strong alphanumeric password.",
-      "If you forget your password, click 'Forgot Password?' and check your corporate inbox for a one-time reset token.",
-      "Always click 'Sign Out' when walking away from your workstation to protect company data.",
-      "Change your password every 90 days to maintain maximum enterprise system security."
+    whatIsThisFor: "This module explains how to log into the Cinaway ERP system safely, recover your password if you forget it, and log out properly. It ensures company data stays protected when computers are shared across shifts.",
+    beforeYouStart: [
+      "Registered company email address activated by IT",
+      "Web browser (Google Chrome, Firefox, or Safari on desktop or tablet)",
+      "Secure internet connection"
     ],
-    actionChecklist: [
-      "Confirm secure HTTPS padlock appears in your browser address bar",
-      "Ensure passwords are at least 8 characters long with uppercase, numbers, and symbols",
-      "Never save passwords on shared warehouse kiosk computers",
-      "Check spam folder if password reset email does not arrive within 2 minutes",
-      "Notify IT helpdesk immediately if you detect unauthorized login alerts"
+    stepByStepInstructions: [
+      "Open your web browser and go to: https://cinawaylogistics.com/signin.",
+      "Type in your registered company email address and your password.",
+      "If you forget your password, click 'Forgot Password?' and check your email inbox for a password reset link.",
+      "Never share your password with anyone or write it on sticky notes on warehouse computers.",
+      "Always click your profile picture and select 'Sign Out' whenever stepping away from a shared workstation."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Account locked after multiple incorrect password attempts",
+        cause: "Entering wrong password 5 times in a row triggers automatic security protection.",
+        quickFix: "Wait 15 minutes for the automated timer to reset, or contact the IT Helpdesk to unlock your account."
+      },
+      {
+        mistake: "Password reset email does not arrive in inbox",
+        cause: "Email went to Spam/Junk folder or typo was made in the email address.",
+        quickFix: "Check your email spam folder for 'Cinaway Security' and confirm your exact email spelling with HR."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/User_Authentication_Session_Control_and_Password_Recovery_in_Cinaway_ERP__Ebt2yrKzSqGrttPTuPgZDA?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/User_Authentication_Session_Control_and_Password_Recovery_in_Cinaway_ERP__Ebt2yrKzSqGrttPTuPgZDA",
     status: "live",
     roles: [
       { name: "All ERP Users", badgeClass: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300" }
     ],
     estimatedMinutes: 3,
-    lastAudited: "September 2026",
-    prerequisites: ["Registered email address activated by Admin"],
-    keyTips: ["Cinaway IT will never ask for your password via phone or WhatsApp message."]
+    lastAudited: "September 2026"
   },
+
+  // 11. Fleet & Vehicle Operations
   {
     id: "fleet-vehicles",
     slug: "/vehicles",
@@ -365,33 +484,44 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Company Vehicle Maintenance & Fleet Pay",
     category: "Fleet Operations",
     sectionGroupId: "fleet-operations",
-    simpleSummary: "How to log company lorries and vans, track fuel bills, record workshop repairs, and process driver pay.",
-    detailedGuide: [
-      "Navigate to Fleet Operations > Vehicles & Fleet to view company transport assets.",
-      "Register new lorries, vans, and three-wheelers with engine number, license class, and revenue license expiry.",
-      "Enter daily fuel receipts with odometer readings to monitor fuel efficiency (km/liter).",
-      "Schedule preventive maintenance servicing (oil change, tyre replacement, brake shoe renewal).",
-      "Process driver route allowances and trip incentive payments based on verified delivery performance."
+    whatIsThisFor: "This module manages all company delivery lorries, vans, and bikes. It tracks diesel fuel spending, schedules garage oil changes and tyre repairs, and calculates driver trip delivery pay.",
+    beforeYouStart: [
+      "Vehicle registration license plate number",
+      "Current odometer kilometer reading from the lorry dashboard",
+      "Physical garage repair estimate or fuel pump receipt"
     ],
-    actionChecklist: [
-      "Verify vehicle odometer reading on fuel pump receipts before logging fuel entry",
-      "Set alert threshold 14 days before vehicle revenue license and insurance expiration",
-      "Attach garage repair quote and obtain Fleet Manager signature prior to major overhauls",
-      "Perform weekly safety tire pressure and fluid level inspections",
-      "Calculate driver monthly delivery commissions based on successfully delivered cartons"
+    stepByStepInstructions: [
+      "Go to 'Fleet Operations' and click on 'Vehicles & Fleet'.",
+      "Select the lorry or van by entering its license plate number.",
+      "Record daily fuel receipts with liters filled and odometer reading to track fuel efficiency (km per liter).",
+      "To schedule a repair, click 'Create Maintenance Job' and enter garage name and repair description.",
+      "At month end, click 'Calculate Driver Trip Pay' to generate delivery allowances based on completed routes."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Vehicle fuel economy shows impossible reading (e.g. 0.5 km/L)",
+        cause: "Wrong odometer kilometers entered (e.g. missing a zero or typing trip meter instead of total odometer).",
+        quickFix: "Check the physical odometer on the vehicle and edit the fuel voucher with the correct total reading."
+      },
+      {
+        mistake: "Lorry blocked from route dispatch in morning",
+        cause: "System safety rule triggered because vehicle revenue license or insurance is expired.",
+        quickFix: "Upload the renewed insurance certificate in the vehicle profile to unblock dispatch immediately."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Managing_Vehicle_Operations_And_Payroll_In_Fleet_Management_System_Copy__nCG15VbyTdCcH5gZQAl7Sg?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Managing_Vehicle_Operations_And_Payroll_In_Fleet_Management_System_Copy__nCG15VbyTdCcH5gZQAl7Sg",
     status: "live",
     roles: [
-      { name: "Fleet Manager", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300" },
-      { name: "Transport Officer", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300" },
-      { name: "Driver", badgeClass: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300" }
+      { name: "Fleet Manager", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300" },
+      { name: "Transport Officer", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300" },
+      { name: "Delivery Driver", badgeClass: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300" }
     ],
     estimatedMinutes: 7,
-    lastAudited: "September 2026",
-    prerequisites: ["Vehicle registration documents", "Service history book"],
-    keyTips: ["Vehicles overdue for mechanical servicing are automatically blocked from route assignment."]
+    lastAudited: "September 2026"
   },
+
+  // 12. SMS & Email Notifications
   {
     id: "notifications",
     slug: "/notifications",
@@ -399,33 +529,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Sending SMS & Email Alerts to Customers and Staff",
     category: "Settings & Administration",
     sectionGroupId: "settings-admin",
-    simpleSummary: "How to send delivery alerts and payment reminders to shop owners via SMS, and email notices to internal teams.",
-    detailedGuide: [
-      "Open Settings & Administration > Notifications (SMS & Email dispatch).",
-      "Select message channel: Bulk SMS Gateway or Corporate SMTP Email server.",
-      "Choose target recipient group (All Outlets in Route 04, Overdue Debtors, Warehouse Staff, or All Employees).",
-      "Use dynamic merge tags like {{shop_name}}, {{amount_due}}, {{delivery_date}}, and {{invoice_id}}.",
-      "Review campaign cost credits and dispatch messages with automated delivery receipt tracking."
+    whatIsThisFor: "This module allows the company to send automated SMS notifications to shopkeepers about delivery deliveries and payment receipts. It also sends email announcements to internal staff members.",
+    beforeYouStart: [
+      "Active SMS gateway credit balance",
+      "Recipient phone number list in standard format (e.g., 07XXXXXXXX)",
+      "Approved notification message template text"
     ],
-    actionChecklist: [
-      "Check remaining SMS gateway credits before launching large bulk customer broadcasts",
-      "Test merge tags with a single sample phone number before sending full broadcast",
-      "Ensure outbound marketing messages comply with national customer communication time windows (8 AM - 8 PM)",
-      "Include opt-out or helpline contact number on all customer billing reminders",
-      "Review delivery logs to identify bounced numbers or failed transmissions"
+    stepByStepInstructions: [
+      "Click 'Notifications' under Settings & Administration.",
+      "Choose 'Send SMS' for text messages or 'Send Email' for internal memos.",
+      "Select your audience: All Retail Outlets in Route 04, Customers with Overdue Bills, or All Warehouse Staff.",
+      "Use merge tags like {{shop_name}} and {{amount_due}} to personalize each message automatically.",
+      "Click 'Send Broadcast' and review delivery confirmation logs to verify messages were delivered."
+    ],
+    commonMistakes: [
+      {
+        mistake: "SMS broadcast fails to send to shopkeepers",
+        cause: "SMS gateway account balance is depleted or telephone numbers missing leading zero.",
+        quickFix: "Top up SMS credits under gateway settings and format phone numbers as standard 10-digit mobile numbers."
+      },
+      {
+        mistake: "Customer complains of receiving late-night payment reminders",
+        cause: "Automated SMS job scheduled during off-hours.",
+        quickFix: "Configure the SMS dispatch window to strictly send between 8:30 AM and 6:00 PM on business days."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Multi-Channel_Notification_Center_Single_and_Bulk_SMSEmail_Dispatch_in_Cinaway_ERP_Copy__lDnJAm_XRamJVEVM1uGPSA?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Multi-Channel_Notification_Center_Single_and_Bulk_SMSEmail_Dispatch_in_Cinaway_ERP_Copy__lDnJAm_XRamJVEVM1uGPSA",
     status: "live",
     roles: [
-      { name: "Marketing Coordinator", badgeClass: "bg-pink-100 text-pink-800 dark:bg-pink-950/40 dark:text-pink-300" },
-      { name: "Operations Supervisor", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300" },
-      { name: "Credit Controller", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300" }
+      { name: "Marketing Coordinator", badgeClass: "bg-pink-100 text-pink-800 dark:bg-pink-950/60 dark:text-pink-300" },
+      { name: "Operations Supervisor", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300" }
     ],
     estimatedMinutes: 5,
-    lastAudited: "September 2026",
-    prerequisites: ["Configured SMS gateway API key", "Verified mobile numbers in outlet records"],
-    keyTips: ["Bulk payment reminders send between 9 AM and 11 AM yield highest recovery rates."]
+    lastAudited: "September 2026"
   },
+
+  // 13. Outlets Directory
   {
     id: "outlets-directory",
     slug: "/outlets",
@@ -433,32 +573,44 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Registering Shops (Outlets) & Managing Shop Balances",
     category: "Core Logistics & Sales",
     sectionGroupId: "logistics-sales",
-    simpleSummary: "How to add new shops, import bulk store lists from Excel, and check each shop's ledger balance.",
-    detailedGuide: [
-      "Navigate to Core Logistics & Sales > Outlets Directory.",
-      "Click 'Add Outlet' to register a single retailer with shop name, owner contact, GPS coordinates, and route assignment.",
-      "Or use 'Bulk Ingestion' to upload a standardized Excel spreadsheet of hundreds of retail outlets.",
-      "Configure credit terms: maximum credit limit (e.g. Rs. 150,000) and allowed credit days (e.g. 14 days or 21 days).",
-      "Inspect the live customer sub-ledger to see historical invoices, collected cheques, and return notes."
+    whatIsThisFor: "This module keeps an address book of all retail stores and groceries served by Cinaway. It records store location coordinates, assigned delivery routes, credit limits, and current ledger balances.",
+    beforeYouStart: [
+      "Physical retail store business name and owner full name",
+      "Owner active mobile telephone number for SMS billing alerts",
+      "Store GPS location or physical landmark address",
+      "Approved credit limit amount (e.g., Rs. 100,000) and credit days"
     ],
-    actionChecklist: [
-      "Capture exact retail shop name as indicated on business registration or sign board",
-      "Pinpoint location using mobile GPS or Google Maps pin to optimize driver route sequencing",
-      "Verify owner's active mobile number for automated delivery SMS notifications",
-      "Set conservative credit limit for first 3 months before reviewing repayment track record",
-      "Assign correct delivery territory and weekly visit day (e.g. Monday & Thursday)"
+    stepByStepInstructions: [
+      "Open 'Core Logistics & Sales' and click 'Outlets Directory'.",
+      "Click 'Add Outlet' for a single shop, or 'Bulk Import' to upload an Excel sheet of shops.",
+      "Enter the shop name, owner name, mobile number, and select the assigned sales route.",
+      "Set the maximum credit limit and allowed credit days (e.g. 14 or 21 days).",
+      "Click 'Save Outlet' to generate the unique 5-digit outlet code."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Driver cannot find newly added outlet on the route",
+        cause: "GPS pin placed incorrectly or assigned to wrong route day (e.g., Tuesday instead of Monday).",
+        quickFix: "Open the outlet card, verify the GPS pin on Google Maps, and re-assign the correct route schedule."
+      },
+      {
+        mistake: "Billing blocked with 'Credit Limit Exceeded' message",
+        cause: "Customer has unpaid invoices older than approved credit days.",
+        quickFix: "Collect pending overdue cheques from shopkeeper, or request written temporary credit limit approval."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Outlets_Directory_Bulk_Ingestion_and_Automated_Customer_Ledger_Management_in_Cinaway_ERP_Copy__dXjJ2FHyQeeW8bTpIunyew?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Outlets_Directory_Bulk_Ingestion_and_Automated_Customer_Ledger_Management_in_Cinaway_ERP_Copy__dXjJ2FHyQeeW8bTpIunyew",
     status: "live",
     roles: [
-      { name: "Territory Sales Executive", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300" },
-      { name: "Sales Operations Manager", badgeClass: "bg-sky-100 text-sky-800 dark:bg-sky-950/40 dark:text-sky-300" }
+      { name: "Territory Sales Rep", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300" },
+      { name: "Sales Manager", badgeClass: "bg-sky-100 text-sky-800 dark:bg-sky-950/60 dark:text-sky-300" }
     ],
     estimatedMinutes: 6,
-    lastAudited: "September 2026",
-    prerequisites: ["Shop visit form with GPS coordinates", "Owner NIC and telephone number"],
-    keyTips: ["Duplicate outlet phone numbers prevent automated SMS delivery—always check before creating."]
+    lastAudited: "September 2026"
   },
+
+  // 14. Products & Stock Adjustments
   {
     id: "products-inventory",
     slug: "/products",
@@ -466,32 +618,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Product Master List & Stock Updates",
     category: "Supply Chain",
     sectionGroupId: "supply-chain",
-    simpleSummary: "How to add new sale items, update warehouse stock quantities, and import item price lists.",
-    detailedGuide: [
-      "Go to Supply Chain > Inventory > Products Master List.",
-      "Register new stock keeping units (SKUs) with universal barcode, unit of measure (Cartons/Pieces), and brand hierarchy.",
-      "Set wholesale price, maximum retail price (MRP), and dealer discount tier matrices.",
-      "Perform physical inventory stock adjustments with documented adjustment reasons (Damage, Breakage, Expiry, or Found Stock).",
-      "Use barcode batch scanning to quickly audit physical stock counts against virtual system ledgers."
+    whatIsThisFor: "This module holds the master catalog of all saleable goods. It manages product barcodes, carton packaging quantities, wholesale and retail prices, and records physical warehouse stock count adjustments.",
+    beforeYouStart: [
+      "Official manufacturer product catalog and barcode number (EAN-13)",
+      "Approved wholesale and maximum retail price (MRP) list",
+      "Physical count verification sheet signed by warehouse supervisor"
     ],
-    actionChecklist: [
-      "Assign correct manufacturer product code and barcode (EAN-13)",
-      "Specify carton inner quantity packaging (e.g., 24 units per master case)",
-      "Set minimum reorder threshold level to trigger automated purchase replenishment alerts",
-      "Submit inventory adjustment vouchers for dual-approval before changing warehouse ledger totals",
-      "Run quarterly inventory reconciliation to ensure warehouse balance sheet alignment"
+    stepByStepInstructions: [
+      "Go to 'Supply Chain' > 'Inventory' > 'Products Master List'.",
+      "Click 'Add New Product' and enter the product name, brand, category, and barcode.",
+      "Specify units per carton (e.g., 24 pieces per case) and carton gross weight.",
+      "Enter wholesale price and maximum retail price.",
+      "To update stock counts after stocktaking, click 'Stock Adjustment', enter variance quantity and reason, and submit for supervisor approval."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Barcode scanner fails to recognize item at dispatch desk",
+        cause: "Barcode number typed with extra space or missing initial zero.",
+        quickFix: "Re-scan the physical product directly into the barcode field to ensure exact 13-digit sequence matches."
+      },
+      {
+        mistake: "Stock adjustment value doubles inventory unexpectedly",
+        cause: "Entered total physical count instead of the difference/variance quantity.",
+        quickFix: "Verify whether the adjustment screen asks for 'New Count' or 'Count Difference (+/-)' before saving."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Products_Master_Stock_Adjustments_and_Bulk_Ingestion_in_Cinaway_ERP_Copy__ol-6d6dSRVKpoO1PBE7NCg?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Products_Master_Stock_Adjustments_and_Bulk_Ingestion_in_Cinaway_ERP_Copy__ol-6d6dSRVKpoO1PBE7NCg",
     status: "live",
     roles: [
-      { name: "Warehouse Manager", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300" },
-      { name: "Inventory Controller", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-300" }
+      { name: "Warehouse Manager", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300" },
+      { name: "Inventory Clerk", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300" }
     ],
     estimatedMinutes: 8,
-    lastAudited: "September 2026",
-    prerequisites: ["Product catalog specification sheet", "Official distributor price list"],
-    keyTips: ["Always verify whether prices entered are inclusive or exclusive of Value Added Tax (VAT)."]
+    lastAudited: "September 2026"
   },
+
+  // 15. Sales Invoices & Inventory Reconcile
   {
     id: "sales-invoicing",
     slug: "/sales",
@@ -499,33 +662,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Creating Sales Invoices & Checking Warehouse Stock",
     category: "Core Logistics & Sales",
     sectionGroupId: "logistics-sales",
-    simpleSummary: "How to issue bills to customers, confirm products sold, and check that stock counts reduce properly.",
-    detailedGuide: [
-      "Open Core Logistics & Sales > Sales Invoices.",
-      "Select outlet shop name; system automatically pulls active credit terms and outstanding balance.",
-      "Add SKU line items, specify order quantities, and view real-time warehouse available-to-promise inventory.",
-      "Apply contractual trade promotions, free issue deals, and approved cash discount percentages.",
-      "Authorize invoice to auto-deduct warehouse stock inventory and generate legal printable 3-part delivery tax invoice."
+    whatIsThisFor: "This module is used to generate customer delivery bills and confirm products sold. When an invoice is approved, the system automatically deducts sold cartons from warehouse inventory in real time.",
+    beforeYouStart: [
+      "Customer outlet name or unique code",
+      "Customer purchase order or verbal delivery request",
+      "Available stock confirmed in warehouse depot"
     ],
-    actionChecklist: [
-      "Check outlet credit ceiling before completing invoice creation",
-      "Confirm stock lot batch expiry date is minimum 90 days out before dispatching food items",
-      "Apply applicable promo schemes (e.g. Buy 10 Cartons Get 1 Free)",
-      "Generate 3 physical printed invoice copies: Customer Copy, Accounts Copy, and Store Gatepass Copy",
-      "Confirm inventory ledger deducts quantity in real time upon invoice approval"
+    stepByStepInstructions: [
+      "Click 'Sales' > 'Invoices' > 'Create New Invoice'.",
+      "Select the customer outlet; check that the customer has sufficient credit balance.",
+      "Add product items and quantities; verify that warehouse has enough stock on hand.",
+      "Review automatic promotional deals (such as 'Buy 10 Get 1 Free') and discounts.",
+      "Click 'Issue Invoice'; print 3 copies (Customer Copy, Accounts Copy, and Store Gatepass Copy)."
+    ],
+    commonMistakes: [
+      {
+        mistake: "System prevents creating invoice with 'Insufficient Stock' warning",
+        cause: "Warehouse intake GRN was not entered for newly arrived stock shipment.",
+        quickFix: "Confirm storekeeper has accepted the delivery in Purchases module before creating customer invoices."
+      },
+      {
+        mistake: "Customer billed with incorrect price tier",
+        cause: "Special wholesale discount scheme was not selected on the invoice header.",
+        quickFix: "Void the draft bill, re-select the customer's contracted price group, and re-generate the invoice."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Sales_Summary_Ingestion_Item-Wise_Billing_and_Inventory_Reconciliations_in_Cinaway_ERP_Copy__GiS7YpXgTB2oTTbePd7yiw?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Sales_Summary_Ingestion_Item-Wise_Billing_and_Inventory_Reconciliations_in_Cinaway_ERP_Copy__GiS7YpXgTB2oTTbePd7yiw",
     status: "live",
     roles: [
-      { name: "Billing Clerk", badgeClass: "bg-sky-100 text-sky-800 dark:bg-sky-950/40 dark:text-sky-300" },
-      { name: "Sales Coordinator", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300" },
-      { name: "Storekeeper", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300" }
+      { name: "Billing Clerk", badgeClass: "bg-sky-100 text-sky-800 dark:bg-sky-950/60 dark:text-sky-300" },
+      { name: "Sales Coordinator", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300" }
     ],
     estimatedMinutes: 6,
-    lastAudited: "September 2026",
-    prerequisites: ["Active customer account", "Available inventory stock in warehouse location"],
-    keyTips: ["System will block billing if customer has overdue invoices older than 45 days."]
+    lastAudited: "September 2026"
   },
+
+  // 16. System Initial Setup
   {
     id: "initial-setup",
     slug: "/initial-setup",
@@ -533,32 +706,44 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "First-Time System Setup & Admin Profile",
     category: "Settings & Administration",
     sectionGroupId: "settings-admin",
-    simpleSummary: "First-day guide for company setup, adding company name, contact numbers, and creating the main admin account.",
-    detailedGuide: [
-      "Access the initial deployment configuration screen during initial ERP installation.",
-      "Enter legal enterprise profile: Cinaway Logistics legal entity name, corporate address, and VAT registration TIN.",
-      "Upload high-resolution vector corporate logos for automated invoice headers and dispatch notes.",
-      "Define operating currency (LKR / USD), fiscal calendar year start/end dates, and default tax rates.",
-      "Configure the root Master Administrator account with multi-factor authentication credentials."
+    whatIsThisFor: "This module is used when launching the ERP for the first time. It sets up company legal name, VAT tax registration number, logo graphics, fiscal calendar year, and the master administrator account.",
+    beforeYouStart: [
+      "Official certificate of business registration (PV number)",
+      "Inland Revenue Department VAT and TIN registration papers",
+      "High-resolution transparent PNG company logo",
+      "Company primary bank account details"
     ],
-    actionChecklist: [
-      "Verify company corporate registration number with Department of Registrar of Companies",
-      "Upload clean transparent PNG logo formatted at 400x120 pixels for high-DPI document printing",
-      "Set standard operating warehouse time zone (Asia/Colombo UTC+05:30)",
-      "Configure company bank accounts for receiving customer direct remittances",
-      "Store master super-admin recovery keyphrase in the corporate physical fireproof safe"
+    stepByStepInstructions: [
+      "Access the initial setup screen during software setup.",
+      "Enter company corporate details: legal name, registered office address, and contact numbers.",
+      "Enter official Tax Identification Number (TIN) and Value Added Tax (VAT) rate.",
+      "Upload company logo for invoice headers and dispatch documents.",
+      "Create the master system administrator username, strong password, and store recovery codes safely."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Company logo appears distorted or blurry on printed bills",
+        cause: "Uploaded low-resolution JPEG with dark background.",
+        quickFix: "Upload a clean transparent PNG image sized 400x120 pixels at 300 DPI."
+      },
+      {
+        mistake: "Fiscal year dates set incorrectly",
+        cause: "Selected standard calendar year instead of company April-March financial cycle.",
+        quickFix: "Correct the fiscal year start date in System Settings before finalizing any invoice or purchase entries."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Initial_System_Initialization_and_First_Administrator_Onboarding_in_Cinaway_ERP_Copy__T-kGxV7pREqdDKLU6nWSOA?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Initial_System_Initialization_and_First_Administrator_Onboarding_in_Cinaway_ERP_Copy__T-kGxV7pREqdDKLU6nWSOA",
     status: "live",
     roles: [
-      { name: "Managing Director", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-300" },
-      { name: "Implementation Consultant", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-300" }
+      { name: "Managing Director", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" },
+      { name: "IT Administrator", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300" }
     ],
     estimatedMinutes: 10,
-    lastAudited: "September 2026",
-    prerequisites: ["Corporate legal papers", "TIN certificate", "Bank mandate documentation"],
-    keyTips: ["Once company registration number is locked in, changes require written database audit request."]
+    lastAudited: "September 2026"
   },
+
+  // 17. Attendance & Biometric Fingerprint Import
   {
     id: "attendance-biometric",
     slug: "/attendance",
@@ -566,32 +751,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Daily Staff Attendance & Biometric Fingerprint Import",
     category: "Human Resources",
     sectionGroupId: "human-resources",
-    simpleSummary: "How to import attendance records from fingerprint machines, mark manual attendance, and view daily late arrivals.",
-    detailedGuide: [
-      "Open Human Resources > Attendance > Biometric Import module.",
-      "Connect to networked warehouse fingerprint and facial recognition scanners or upload device .dat/.csv files.",
-      "Execute automated time reconciliation to pair clock-in and clock-out timestamps for each employee.",
-      "Review exception alerts: late arrivals, half days, early departures, and missing punches.",
-      "Submit manual attendance correction vouchers with managerial approvals for off-site field sales reps."
+    whatIsThisFor: "This module imports employee clock-in and clock-out timestamps from warehouse fingerprint machines. It calculates working hours, flags late arrivals, and provides clean data for monthly salary calculations.",
+    beforeYouStart: [
+      "Connected fingerprint machine on local office network or USB data file",
+      "Master employee biometric ID assignment list",
+      "Morning shift cut-off time (8:30 AM standard)"
     ],
-    actionChecklist: [
-      "Perform daily biometric sync every morning by 10:00 AM",
-      "Flag and investigate employees with single in-punch or missing out-punch",
-      "Match field staff location check-ins against mobile sales GPS tracking logs",
-      "Apply official grace period rules (e.g. 15 minutes grace past official 8:30 AM shift start)",
-      "Approve overtime hours for warehouse night-loading crew prior to payroll calculation"
+    stepByStepInstructions: [
+      "Open 'Human Resources' and click 'Attendance' > 'Biometric Import'.",
+      "Click 'Download from Device' or upload the biometric attendance log file.",
+      "Run the automated pairing tool to match in-punches and out-punches for each employee.",
+      "Review the exceptions list for workers who forgot to punch out or arrived late.",
+      "Submit manual attendance adjustment notes with manager sign-off for off-site delivery drivers."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Employee marked absent despite working full day",
+        cause: "Employee punched fingerprint but machine displayed 'Try Again' error without user noticing.",
+        quickFix: "Submit a manual attendance adjustment voucher signed by warehouse supervisor to add the missing punch."
+      },
+      {
+        mistake: "Overtime hours calculating incorrectly",
+        cause: "Shift start and end times configured wrong in company shift master schedule.",
+        quickFix: "Verify the shift schedule under Attendance Settings ensuring shift ends at 5:00 PM before overtime starts."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Employee_Attendance_Tracking_and_Biometric_Import_Management_in_Cinaway_ERP_Copy__baxr3ccQTJSe-lZkFu3kMA?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Employee_Attendance_Tracking_and_Biometric_Import_Management_in_Cinaway_ERP_Copy__baxr3ccQTJSe-lZkFu3kMA",
     status: "live",
     roles: [
-      { name: "HR Executive", badgeClass: "bg-teal-100 text-teal-800 dark:bg-teal-950/40 dark:text-teal-300" },
-      { name: "Timekeeper", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300" }
+      { name: "HR Officer", badgeClass: "bg-teal-100 text-teal-800 dark:bg-teal-950/60 dark:text-teal-300" },
+      { name: "Timekeeper", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300" }
     ],
     estimatedMinutes: 5,
-    lastAudited: "September 2026",
-    prerequisites: ["Biometric device network connectivity", "Active employee fingerprint registration"],
-    keyTips: ["Fingerprint device time clocks must sync with the national NTP time server every 24 hours."]
+    lastAudited: "September 2026"
   },
+
+  // 18. Bank of Ceylon (BOC) Bulk PRN File
   {
     id: "boc-prn-file",
     slug: "/boc-prn-generation",
@@ -599,32 +795,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Creating Bank Salary Transfer (BOC PRN) Files",
     category: "Human Resources",
     sectionGroupId: "human-resources",
-    simpleSummary: "How to generate the official Bank of Ceylon PRN file from monthly payroll to pay staff salaries directly via online banking.",
-    detailedGuide: [
-      "After final payroll approval, navigate to HR Management > BOC PRN Generation.",
-      "Select approved payroll batch period and verify total bank disbursement sum against payroll summary.",
-      "System validates Bank of Ceylon account formatting (10 to 12 digits, valid branch codes).",
-      "Click 'Generate BOC PRN File' to download encrypted bank-compliant ASCII flat file.",
-      "Upload file into Bank of Ceylon Corporate Online Banking portal for multi-authorization release."
+    whatIsThisFor: "This module generates the official Bank of Ceylon PRN bank file from monthly payroll. Uploading this file to BOC Corporate Internet Banking pays all employee salaries directly into their bank accounts in one click.",
+    beforeYouStart: [
+      "Authorized and finalized monthly payroll batch",
+      "Verified BOC account numbers and branch codes for all employees",
+      "Corporate BOC Internet Banking security token"
     ],
-    actionChecklist: [
-      "Verify that all newly onboarded staff have verified BOC account and branch codes",
-      "Confirm net pay total matches certified payroll journal entry",
-      "Download generated .PRN / .TXT batch file directly into secure accounting directory",
-      "Log in to BOC Corporate Banking and upload file under 'Bulk File Upload - Payroll'",
-      "Notify authorized signatories (Managing Director & CFO) for token authentication"
+    stepByStepInstructions: [
+      "Go to 'HR Management' and click 'BOC PRN Generation'.",
+      "Select the authorized payroll period and confirm total payment matches approved payroll summary.",
+      "Click 'Validate Bank Records'; verify that no employee has a missing bank account.",
+      "Click 'Generate BOC PRN File' to download the bank file (.txt/.prn).",
+      "Log into BOC Corporate Banking, select 'Bulk File Upload - Payroll', upload the file, and authorize with token."
+    ],
+    commonMistakes: [
+      {
+        mistake: "BOC Corporate Banking rejects uploaded PRN file with format error",
+        cause: "File was opened and re-saved in Microsoft Excel or Notepad, corrupting strict bank spacing.",
+        quickFix: "Re-generate a fresh PRN file from Cinaway ERP and upload directly to bank without opening it in text editors."
+      },
+      {
+        mistake: "Salary payment delayed for one worker",
+        cause: "Employee bank account number was inactive, dormant, or closed at branch.",
+        quickFix: "Verify employee active account status with their branch and issue manual cheque if necessary."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Bank_of_Ceylon_BOC_Bulk_PRN_File_Generation_and_Electronic_Salary_Transfer_in_Cinaway_ERP_Copy__YzlhX_uNSOGHul1XLrifug?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Bank_of_Ceylon_BOC_Bulk_PRN_File_Generation_and_Electronic_Salary_Transfer_in_Cinaway_ERP_Copy__YzlhX_uNSOGHul1XLrifug",
     status: "live",
     roles: [
-      { name: "Payroll Accountant", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-300" },
-      { name: "Finance Director", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-300" }
+      { name: "Payroll Accountant", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300" },
+      { name: "Finance Director", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" }
     ],
     estimatedMinutes: 5,
-    lastAudited: "September 2026",
-    prerequisites: ["Authorized monthly payroll run", "Valid BOC Corporate Internet Banking account"],
-    keyTips: ["Never edit the PRN file in text editor after generation—it will break strict bank checksums!"]
+    lastAudited: "September 2026"
   },
+
+  // 19. Suppliers & Trade Creditors
   {
     id: "suppliers-creditors",
     slug: "/suppliers",
@@ -632,32 +839,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Supplier Directory & Payment Terms",
     category: "Supply Chain",
     sectionGroupId: "supply-chain",
-    simpleSummary: "How to register product vendors, view how much money is owed to each vendor, and review payment due dates.",
-    detailedGuide: [
-      "Navigate to Supply Chain > Suppliers Directory.",
-      "Create vendor records: company name, commercial registration number, business address, and contact executives.",
-      "Record vendor bank account details, accepted currencies, and agreed credit terms (e.g. Net 30, Net 60).",
-      "Inspect supplier trade creditor sub-ledgers to monitor outstanding invoices, debit notes, and payment history.",
-      "Generate Vendor Aged Payable reports to plan upcoming treasury cash flow requirements."
+    whatIsThisFor: "This module manages all vendor companies who sell products and services to Cinaway. It tracks supplier bank details, credit payment deadlines, and shows how much money is owed to each company.",
+    beforeYouStart: [
+      "Vendor commercial business registration and tax TIN certificate",
+      "Supplier bank account information and payment instructions",
+      "Agreed credit terms (e.g. Net 30 days or Net 60 days)"
     ],
-    actionChecklist: [
-      "Obtain certified vendor registration certificate and VAT registration confirmation",
-      "Record commercial sales representative contact details for emergency order follow-ups",
-      "Set payment reminder alerts 7 days prior to invoice maturity due dates",
-      "Reconcile monthly supplier statements against internal ERP accounts payable ledgers",
-      "Process vendor credit notes for returned damaged shipments promptly"
+    stepByStepInstructions: [
+      "Open 'Supply Chain' and select 'Suppliers Directory'.",
+      "Click 'Add Supplier' and enter company name, contact person, email, and phone numbers.",
+      "Input supplier bank details and currency (LKR or USD).",
+      "Set agreed credit period in days (e.g. 30 days).",
+      "Click 'Save Supplier Profile' to open their trade creditor sub-ledger."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Supplier ledger balance does not match vendor monthly statement",
+        cause: "Purchase return debit notes or damaged stock discounts were not recorded in ERP.",
+        quickFix: "Reconcile supplier statement against Good Received Notes (GRN) and post missing debit notes."
+      },
+      {
+        mistake: "Duplicate supplier record created",
+        cause: "Searching with abbreviation (e.g. 'Unilever' instead of 'Unilever Sri Lanka Ltd').",
+        quickFix: "Merge duplicate accounts under Master Settings to combine transaction history onto one vendor profile."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Suppliers_Master_Directory_Trade_Creditor_Sub-Ledgers_and_Payment_Terms_in_Cinaway_ERP_Copy__03qU9lffTgaKRaRxc0cQsQ?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Suppliers_Master_Directory_Trade_Creditor_Sub-Ledgers_and_Payment_Terms_in_Cinaway_ERP_Copy__03qU9lffTgaKRaRxc0cQsQ",
     status: "live",
     roles: [
-      { name: "Procurement Officer", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300" },
-      { name: "Accounts Payable", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-300" }
+      { name: "Procurement Officer", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300" },
+      { name: "Accounts Payable", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" }
     ],
     estimatedMinutes: 6,
-    lastAudited: "September 2026",
-    prerequisites: ["Supplier contract agreement", "Verified vendor bank details"],
-    keyTips: ["Always match supplier monthly statement with warehouse Good Received Notes (GRN) before paying."]
+    lastAudited: "September 2026"
   },
+
+  // 20. Purchases & Return Reconciliations
   {
     id: "purchases-returns",
     slug: "/purchases",
@@ -665,33 +883,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Purchase Bills & Damaged Stock Returns",
     category: "Supply Chain",
     sectionGroupId: "supply-chain",
-    simpleSummary: "How to enter supplier purchase invoices, receive items into warehouse stock, and return damaged goods.",
-    detailedGuide: [
-      "Open Supply Chain > Purchases & Returns module.",
-      "Create Purchase Order (PO) and dispatch to product vendor with agreed unit prices and delivery timelines.",
-      "Upon delivery truck arrival, receive goods against PO by generating a Good Received Note (GRN).",
-      "Inspect delivered stock for damaged cartons, seal tampering, or near-expiry batches.",
-      "Create Purchase Return Debit Notes for rejected goods to instantly credit supplier ledger balances."
+    whatIsThisFor: "This module handles incoming stock shipments from product manufacturers. It records warehouse Good Received Notes (GRN), updates stock quantities, and documents damaged items sent back to suppliers.",
+    beforeYouStart: [
+      "Supplier delivery dispatch note and commercial invoice",
+      "Approved company Purchase Order (PO) number",
+      "Physical count and quality inspection check by warehouse storekeeper"
     ],
-    actionChecklist: [
-      "Verify delivered cartons match vendor physical delivery order before driver departs",
-      "Log batch numbers and expiration dates during GRN goods intake",
-      "Quarantine broken, dented, or contaminated items in designated returns holding zone",
-      "Obtain delivery driver signature on rejected stock return note",
-      "Confirm stock increase in warehouse bins corresponds to exact accepted GRN quantity"
+    stepByStepInstructions: [
+      "Go to 'Supply Chain' > 'Purchases & Returns'.",
+      "Select 'Create Good Received Note (GRN)' and link to approved Purchase Order.",
+      "Count cartons offloaded from delivery lorry and inspect seals, batch codes, and expiration dates.",
+      "Accept good stock into warehouse inventory bins.",
+      "If any cartons are crushed or wet, record them on 'Purchase Return Debit Note' and obtain driver signature."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Stock counts in warehouse don't match ERP ledger",
+        cause: "Cartons accepted into warehouse without clicking 'Finalize GRN' in system.",
+        quickFix: "Open pending GRN list, confirm physical count, and click 'Finalize and Post to Stock'."
+      },
+      {
+        mistake: "Near-expiry goods accepted into main warehouse stock",
+        cause: "Storekeeper skipped checking expiration dates printed on carton packaging.",
+        quickFix: "Move stock to quarantine location and issue immediate supplier return debit note for exchange."
+      }
     ],
     embedUrl: "https://scribehow.com/embed/Procurement_Lifecycle_Bulk_Purchase_Ingestion_and_Return_Reconciliations_in_Cinaway_ERP_Copy__vascJ054SLmzANloNUagzQ?as=scrollable",
+    viewerUrl: "https://scribehow.com/shared/Procurement_Lifecycle_Bulk_Purchase_Ingestion_and_Return_Reconciliations_in_Cinaway_ERP_Copy__vascJ054SLmzANloNUagzQ",
     status: "live",
     roles: [
-      { name: "Storekeeper", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300" },
-      { name: "Warehouse Supervisor", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300" },
-      { name: "Purchasing Manager", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-300" }
+      { name: "Storekeeper", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300" },
+      { name: "Warehouse Supervisor", badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300" }
     ],
     estimatedMinutes: 8,
-    lastAudited: "September 2026",
-    prerequisites: ["Approved Purchase Order", "Vendor delivery challan and invoice"],
-    keyTips: ["Stock batches with under 6 months shelf life must not be accepted without written General Manager clearance."]
+    lastAudited: "September 2026"
   },
+
+  // 21. Chart of Accounts (Upcoming)
   {
     id: "chart-of-accounts",
     slug: "/chart-of-accounts",
@@ -699,32 +927,43 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "General Accounting & Chart of Accounts Setup",
     category: "Finance & Accounting",
     sectionGroupId: "finance-accounting",
-    simpleSummary: "Accounting structure guide for setting up ledger accounts, profit and loss, and balance sheets. [Scribe link updating soon]",
-    detailedGuide: [
-      "Access Finance & Accounting > Chart of Accounts.",
-      "Explore 5 root accounting classes: Assets (1000s), Liabilities (2000s), Equity (3000s), Revenue (4000s), and Expenses (5000s).",
-      "Create sub-ledger accounts for specific banks, regional petty cash funds, and departmental cost centers.",
-      "Configure tax liability accounts for Value Added Tax (VAT) and Social Security Contribution Levy (SSCL).",
-      "Review automated trial balance mapping to ensure balanced debit/credit posting for all automated journal entries."
+    whatIsThisFor: "This module organizes all financial ledger accounts into five standard categories: Assets, Liabilities, Equity, Income, and Expenses. It provides the foundation for balance sheets and profit & loss statements.",
+    beforeYouStart: [
+      "Chartered Accountant approval or Financial Controller credentials",
+      "Standard national chart of accounts numbering plan (1000 to 5000)",
+      "Opening balances signed off by external auditors"
     ],
-    actionChecklist: [
-      "Review account coding structure with Senior Chartered Accountant",
-      "Verify default accounts for Accounts Receivable, Accounts Payable, and Inventory Valuation",
-      "Lock parent summary accounts against direct manual journal entries",
-      "Confirm fiscal year rollover settings before closing fiscal year books",
-      "Audit Trial Balance report monthly to ensure Zero Out-of-Balance variance"
+    stepByStepInstructions: [
+      "Open 'Finance & Accounting' and select 'Chart of Accounts'.",
+      "View the five primary accounting classes: Assets, Liabilities, Equity, Revenue, and Expenses.",
+      "To add a new bank or cost center, click 'Add Sub-Account' under the appropriate parent header.",
+      "Assign a unique 4-digit code and select account currency.",
+      "Click 'Save Account' to enable journal posting to this ledger code."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Sub-account placed under wrong parent account",
+        cause: "Creating an expense account under Assets instead of Expenses (5000 series).",
+        quickFix: "Edit the account card, re-select the correct parent category from dropdown, and save."
+      },
+      {
+        mistake: "Trial balance fails to balance at month end",
+        cause: "Manual journal voucher entered with unequal debit and credit amounts.",
+        quickFix: "Check the 'Unbalanced Journals' alert tab and correct the offsetting entry to balance debits and credits."
+      }
     ],
     embedUrl: "",
+    viewerUrl: "https://sop.cinawaylogistics.com/#/chart-of-accounts",
     status: "upcoming",
     roles: [
-      { name: "Chief Financial Officer", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-300" },
-      { name: "Senior Accountant", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-300" }
+      { name: "Chief Financial Officer", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" },
+      { name: "Senior Accountant", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300" }
     ],
     estimatedMinutes: 10,
-    lastAudited: "Pending Publication",
-    prerequisites: ["Chartered Accounting qualification or CFO administrative delegation"],
-    keyTips: ["Interactive Scribe walkthrough is currently undergoing final audit review and will be linked shortly."]
+    lastAudited: "Pending Publication"
   },
+
+  // 22. System Backup & Recovery (Upcoming)
   {
     id: "system-backup",
     slug: "/backup",
@@ -732,31 +971,40 @@ export const SOP_REGISTRY: SopModule[] = [
     title: "Database Backup & Safety Archive",
     category: "Settings & Administration",
     sectionGroupId: "settings-admin",
-    simpleSummary: "How to download safety backups of system data and keep records safe. [Scribe link updating soon]",
-    detailedGuide: [
-      "Navigate to Settings & Administration > System Settings & Backup.",
-      "Configure daily automated hot database snapshots scheduled during low-traffic hours (2:00 AM daily).",
-      "Execute manual on-demand point-in-time database backup prior to major fiscal year closing or server upgrades.",
-      "Verify automated cloud synchronization to secondary geographically isolated offsite backup vaults.",
-      "Conduct quarterly disaster recovery restoration drill in the staging sandbox environment."
+    whatIsThisFor: "This module ensures that all company invoices, customer balances, and employee records are backed up safely every night. In case of server damage or computer breakdown, data can be restored completely within minutes.",
+    beforeYouStart: [
+      "Super Administrator server access credentials",
+      "Encrypted off-site cloud storage bucket configuration",
+      "Secondary offline storage drive connection"
     ],
-    actionChecklist: [
-      "Confirm active backup storage quota on primary cloud storage bucket",
-      "Verify encrypted AES-256 backup archives are generating without corruption",
-      "Test sandbox restoration drill every 90 days to guarantee Recovery Time Objective (RTO < 2 hrs)",
-      "Maintain offline cold storage copy on encrypted physical media for regulatory compliance",
-      "Inspect database error logs daily for replication warnings"
+    stepByStepInstructions: [
+      "Navigate to 'Settings & Administration' > 'System Settings & Backup'.",
+      "Verify that the automated daily backup schedule is set to run at 2:00 AM every night.",
+      "To take an immediate safety copy before year-end closing, click 'Create Manual Snapshot'.",
+      "Verify that the backup file size matches the database average and is marked 'Successful'.",
+      "Every three months, test restoration in the sandbox test server to guarantee data integrity."
+    ],
+    commonMistakes: [
+      {
+        mistake: "Automated nightly backup fails with 'Storage Quota' alert",
+        cause: "Cloud backup storage volume reached 100% capacity.",
+        quickFix: "Archive backups older than 180 days to cold storage or increase cloud storage allocation."
+      },
+      {
+        mistake: "Manual backup interrupted midway",
+        cause: "Triggered during peak daytime hours with high sales invoice volume.",
+        quickFix: "Run manual backup operations during low-traffic windows or lunch breaks."
+      }
     ],
     embedUrl: "",
+    viewerUrl: "https://sop.cinawaylogistics.com/#/backup",
     status: "upcoming",
     roles: [
-      { name: "DevOps Engineer", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-300" },
-      { name: "System Administrator", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-300" }
+      { name: "DevOps Engineer", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300" },
+      { name: "System Administrator", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300" }
     ],
     estimatedMinutes: 8,
-    lastAudited: "Pending Publication",
-    prerequisites: ["Root server infrastructure access permissions"],
-    keyTips: ["Interactive Scribe walkthrough is currently being recorded and will be linked soon."]
+    lastAudited: "Pending Publication"
   }
 ];
 

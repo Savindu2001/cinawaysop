@@ -29,7 +29,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     ? SOP_REGISTRY.slice(0, 6)
     : SOP_REGISTRY.filter(m => 
         m.title.toLowerCase().includes(query.toLowerCase()) ||
-        m.simpleSummary.toLowerCase().includes(query.toLowerCase()) ||
+        m.whatIsThisFor.toLowerCase().includes(query.toLowerCase()) ||
         m.number.toLowerCase().includes(query.toLowerCase()) ||
         m.slug.toLowerCase().includes(query.toLowerCase()) ||
         m.roles.some(r => r.name.toLowerCase().includes(query.toLowerCase()))
@@ -134,7 +134,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                     </span>
                   </div>
                   <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">
-                    {item.simpleSummary}
+                    {item.whatIsThisFor}
                   </p>
                 </div>
 

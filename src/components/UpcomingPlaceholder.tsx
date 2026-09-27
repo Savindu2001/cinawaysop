@@ -57,7 +57,7 @@ export const UpcomingPlaceholder: React.FC<UpcomingPlaceholderProps> = ({ module
               Standard Procedures Covered in this Module:
             </h4>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs text-slate-700 dark:text-slate-300">
-              {module.actionChecklist.map((step, i) => (
+              {module.stepByStepInstructions.map((step, i) => (
                 <li key={i} className="flex items-start gap-2">
                   <span className="w-4 h-4 rounded-full bg-amber-200 dark:bg-amber-900/80 text-amber-800 dark:text-amber-300 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
                     {i + 1}

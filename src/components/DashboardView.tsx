@@ -40,7 +40,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate, onOpen
   const filteredModules = SOP_REGISTRY.filter(m => {
     const matchesSearch = localSearch.trim() === '' || 
       m.title.toLowerCase().includes(localSearch.toLowerCase()) || 
-      m.simpleSummary.toLowerCase().includes(localSearch.toLowerCase()) ||
+      m.whatIsThisFor.toLowerCase().includes(localSearch.toLowerCase()) ||
       m.number.toLowerCase().includes(localSearch.toLowerCase()) ||
       m.slug.toLowerCase().includes(localSearch.toLowerCase());
 
@@ -331,7 +331,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate, onOpen
 
                 {/* Plain English summary */}
                 <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
-                  {module.simpleSummary}
+                  {module.whatIsThisFor}
                 </p>
               </div>
 

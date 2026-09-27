@@ -44,36 +44,49 @@
   background: rgba(71, 85, 105, 0.9);
 }
 
+/* Screen visibility classes */
+.print-only {
+  display: none !important;
+}
+
 /* ==========================================================================
    PRINT STYLES & PDF EXPORT REQUIREMENTS
    ========================================================================== */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 14mm 12mm 14mm 12mm;
+    margin: 12mm 12mm 14mm 12mm;
   }
 
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    box-sizing: border-box;
   }
 
-  /* Hide interactive elements during print */
+  /* Hide interactive elements and navigation during print */
   .no-print,
   .view-button,
   header,
   aside,
   nav,
   button,
+  input,
+  .search-container,
   .print-hide {
     display: none !important;
+  }
+
+  /* Show clean printable fallback cards during print */
+  .print-only {
+    display: block !important;
   }
 
   body {
     background-color: #ffffff !important;
     color: #0f172a !important;
-    font-size: 11pt !important;
-    line-height: 1.5 !important;
+    font-size: 10.5pt !important;
+    line-height: 1.45 !important;
   }
 
   main {
@@ -83,30 +96,33 @@
     width: 100% !important;
   }
 
-  /* Each SOP section must have break-before: page and page-break-before: always */
-  .sop-section-page,
-  .sop-print-page {
+  /* Force page breaks on SOP module sections */
+  .sop-module-section {
     break-before: page !important;
     page-break-before: always !important;
-    page-break-inside: avoid !important;
+    page-break-inside: avoid;
+    padding-top: 15px !important;
+    padding-bottom: 25px !important;
+    margin-bottom: 20px !important;
   }
 
-  /* The first page doesn't need to break before */
-  .sop-section-page:first-of-type {
+  /* The first page or module doesn't break unnecessarily */
+  .sop-module-section:first-of-type {
     break-before: auto !important;
     page-break-before: auto !important;
   }
 
-  .print-border {
-    border: 1px solid #cbd5e1 !important;
+  table {
+    page-break-inside: avoid;
+    width: 100% !important;
   }
 
-  .print-bg-light {
-    background-color: #f8fafc !important;
+  tr {
+    page-break-inside: avoid;
   }
 
   a {
-    color: inherit !important;
-    text-decoration: none !important;
+    color: #0369a1 !important;
+    text-decoration: underline !important;
   }
 }
