@@ -21,8 +21,34 @@ export interface NavGroup {
 
 export const SIDEBAR_NAVIGATION: NavGroup[] = [
   {
+    id: "getting-started",
+    title: "Getting Started",
+    items: [
+      {
+        id: "nav-initial-setup",
+        title: "Initial System Setup",
+        slug: "/initial-setup",
+        iconName: "Sparkles",
+        subItems: [
+          { title: "Company Profile & VAT TIN", slug: "/initial-setup" },
+          { title: "First Administrator Account", slug: "/initial-setup" }
+        ]
+      },
+      {
+        id: "nav-auth-guide",
+        title: "Login & Security Guide",
+        slug: "/signin-guide",
+        iconName: "KeyRound",
+        subItems: [
+          { title: "Portal Sign In & MFA", slug: "/signin-guide" },
+          { title: "Password Recovery via Email", slug: "/signin-guide" }
+        ]
+      }
+    ]
+  },
+  {
     id: "overview",
-    title: "1. Overview",
+    title: "Overview",
     items: [
       {
         id: "nav-dashboard",
@@ -38,7 +64,7 @@ export const SIDEBAR_NAVIGATION: NavGroup[] = [
   },
   {
     id: "logistics-sales",
-    title: "2. Core Logistics & Sales",
+    title: "Core Logistics & Sales",
     items: [
       {
         id: "nav-field-routes",
@@ -88,7 +114,7 @@ export const SIDEBAR_NAVIGATION: NavGroup[] = [
   },
   {
     id: "supply-chain",
-    title: "3. Supply Chain",
+    title: "Supply Chain",
     items: [
       {
         id: "nav-inventory",
@@ -127,7 +153,7 @@ export const SIDEBAR_NAVIGATION: NavGroup[] = [
   },
   {
     id: "finance-accounting",
-    title: "4. Finance & Accounting",
+    title: "Finance & Accounting",
     items: [
       {
         id: "nav-chart-accounts",
@@ -178,7 +204,7 @@ export const SIDEBAR_NAVIGATION: NavGroup[] = [
   },
   {
     id: "human-resources",
-    title: "5. Human Resources",
+    title: "Human Resources",
     items: [
       {
         id: "nav-employees",
@@ -218,7 +244,7 @@ export const SIDEBAR_NAVIGATION: NavGroup[] = [
   },
   {
     id: "fleet-operations",
-    title: "6. Fleet Operations",
+    title: "Fleet Operations",
     items: [
       {
         id: "nav-vehicles",
@@ -236,7 +262,7 @@ export const SIDEBAR_NAVIGATION: NavGroup[] = [
   },
   {
     id: "settings-admin",
-    title: "7. Settings & Administration",
+    title: "Settings & Administration",
     items: [
       {
         id: "nav-user-roles",
@@ -257,26 +283,6 @@ export const SIDEBAR_NAVIGATION: NavGroup[] = [
           { title: "Notification Center", slug: "/notifications" },
           { title: "Bulk SMS Customer Broadcasts", slug: "/notifications" },
           { title: "Corporate Email Dispatch", slug: "/notifications" }
-        ]
-      },
-      {
-        id: "nav-auth-guide",
-        title: "Login & Security Guide",
-        slug: "/signin-guide",
-        iconName: "KeyRound",
-        subItems: [
-          { title: "Portal Sign In & MFA", slug: "/signin-guide" },
-          { title: "Password Recovery via Email", slug: "/signin-guide" }
-        ]
-      },
-      {
-        id: "nav-initial-setup",
-        title: "Initial System Setup",
-        slug: "/initial-setup",
-        iconName: "Sparkles",
-        subItems: [
-          { title: "Company Profile & VAT TIN", slug: "/initial-setup" },
-          { title: "First Administrator Account", slug: "/initial-setup" }
         ]
       },
       {

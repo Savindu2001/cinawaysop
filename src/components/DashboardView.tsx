@@ -139,8 +139,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate, onOpen
             <Layers className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-2xl font-extrabold text-slate-900 dark:text-white font-display">7</span>
-            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Core Modules</span>
+            <span className="text-2xl font-extrabold text-slate-900 dark:text-white font-display">8</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Core Sections</span>
           </div>
         </div>
 
