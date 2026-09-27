@@ -33,7 +33,8 @@ import {
   X,
   FileText,
   Clock,
-  Sparkle
+  Sparkle,
+  ExternalLink
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -126,11 +127,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Main Sidebar Aside */}
       <aside 
-        className={`fixed top-16 bottom-0 left-0 z-40 w-72 md:w-80 bg-white dark:bg-[#0c121e] border-r border-slate-200 dark:border-slate-800/80 flex flex-col transition-transform duration-200 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-14 sm:top-16 bottom-0 left-0 z-40 w-72 md:w-80 bg-white dark:bg-[#0c121e] border-r border-slate-200 dark:border-slate-800/80 flex flex-col transition-transform duration-200 ease-in-out lg:translate-x-0 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         
+        {/* Mobile-only Portal Login banner inside drawer */}
+        <div className="lg:hidden p-3 border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/50">
+          <a
+            href="https://cinawaylogistics.com/signin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full flex items-center justify-center gap-2 py-2 px-3 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition-colors"
+          >
+            <span>Sign in to Cinaway ERP</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
         {/* Search Bar inside Sidebar */}
         <div className="p-3.5 border-b border-slate-100 dark:border-slate-800/80">
           <div className="relative">
