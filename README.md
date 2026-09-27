@@ -48,8 +48,8 @@
 | 18 | `SOP-HR-05` | Creating Bank Salary Transfer (BOC PRN) Files | `/boc-prn-generation` | Live |
 | 19 | `SOP-SCM-02` | Supplier Directory & Payment Terms | `/suppliers` | Live |
 | 20 | `SOP-SCM-03` | Purchase Bills & Damaged Stock Returns | `/purchases` | Live |
-| 21 | `SOP-FIN-04` | General Accounting & Chart of Accounts Setup | `/chart-of-accounts` | Upcoming Link |
-| 22 | `SOP-ADM-05` | Database Backup & Safety Archive | `/backup` | Upcoming Link |
+| 21 | `SOP-FIN-01` | Managing Financial Accounts, Mappings & Bank Reconciliations | `/chart-of-accounts` | Live |
+| 22 | `SOP-ADM-03` | Managing, Creating, and Deleting Cloud Database Backups | `/backup` | Live |
 
 ---
 

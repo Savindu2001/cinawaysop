@@ -160,11 +160,10 @@ export const SIDEBAR_NAVIGATION: NavGroup[] = [
         title: "Chart of Accounts",
         slug: "/chart-of-accounts",
         iconName: "BookOpenCheck",
-        isUpcoming: true,
         subItems: [
-          { title: "Accounts Master List", slug: "/chart-of-accounts", isUpcoming: true },
-          { title: "Trial Balance", slug: "/chart-of-accounts", isUpcoming: true },
-          { title: "Balance Sheet & P&L", slug: "/chart-of-accounts", isUpcoming: true }
+          { title: "Accounts Master List", slug: "/chart-of-accounts" },
+          { title: "Trial Balance & Reconciliation", slug: "/chart-of-accounts" },
+          { title: "Balance Sheet & P&L", slug: "/chart-of-accounts" }
         ]
       },
       {
@@ -290,10 +289,9 @@ export const SIDEBAR_NAVIGATION: NavGroup[] = [
         title: "System Settings & Backup",
         slug: "/backup",
         iconName: "DatabaseBackup",
-        isUpcoming: true,
         subItems: [
-          { title: "Database Backup & Safety Archive", slug: "/backup", isUpcoming: true },
-          { title: "Disaster Recovery Sandbox", slug: "/backup", isUpcoming: true }
+          { title: "Database Backup & Safety Archive", slug: "/backup" },
+          { title: "Cloud Archive Management", slug: "/backup" }
         ]
       }
     ]

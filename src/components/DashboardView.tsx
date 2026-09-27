@@ -67,7 +67,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate, onOpen
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span>Cinaway Logistics ERP Documentation</span>
-            <span className="text-emerald-400 font-mono">v2.4</span>
+            <span className="text-emerald-400 font-mono">22 / 22 Modules Fully Documented (100% Completion)</span>
           </div>
 
           <div className="space-y-2">
@@ -116,11 +116,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate, onOpen
         
         <div className="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-            <FileText className="w-6 h-6" />
+            <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-2xl font-extrabold text-slate-900 dark:text-white font-display">22</span>
-            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">SOP Guides</span>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-extrabold text-slate-900 dark:text-white font-display">22 / 22</span>
+              <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">(100%)</span>
+            </div>
+            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Modules Fully Documented</span>
           </div>
         </div>
 
@@ -129,8 +132,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate, onOpen
             <Sparkles className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-2xl font-extrabold text-slate-900 dark:text-white font-display">20</span>
-            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Live Scribes</span>
+            <span className="text-2xl font-extrabold text-slate-900 dark:text-white font-display">22</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Live Interactive Scribes</span>
           </div>
         </div>
 
@@ -150,7 +153,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate, onOpen
           </div>
           <div>
             <span className="text-2xl font-extrabold text-slate-900 dark:text-white font-display">100%</span>
-            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Plain English</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Plain English SOPs</span>
           </div>
         </div>
 

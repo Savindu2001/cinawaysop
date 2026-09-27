@@ -430,43 +430,51 @@ export const SOP_REGISTRY: SopModule[] = [
     id: "chart-of-accounts",
     slug: "/chart-of-accounts",
     number: "SOP-FIN-01",
-    title: "General Accounting & Chart of Accounts Setup",
+    title: "Managing Financial Accounts, Mappings & Bank Reconciliations",
     category: "Finance & Accounting",
     sectionGroupId: "finance-accounting",
-    whatIsThisFor: "This module organizes all financial ledger accounts into five standard categories: Assets, Liabilities, Equity, Income, and Expenses. It provides the foundation for balance sheets and profit & loss statements.",
+    whatIsThisFor: "Complete walkthrough on creating new ledger accounts, configuring parent category mappings, transferring funds between accounts, managing account settings, and reconciling bank statements.",
     beforeYouStart: [
-      "Chartered Accountant approval or Financial Controller credentials",
-      "Standard national chart of accounts numbering plan (1000 to 5000)",
+      "Finance Officer or Admin credentials with general ledger access rights",
+      "Standard national chart of accounts numbering plan (1000 to 5000 series)",
+      "Official bank statement with closing balance for period reconciliation",
       "Opening balances signed off by external auditors"
     ],
     stepByStepInstructions: [
-      "Open 'Finance & Accounting' and select 'Chart of Accounts'.",
-      "View the five primary accounting classes: Assets, Liabilities, Equity, Revenue, and Expenses.",
-      "To add a new bank or cost center, click 'Add Sub-Account' under the appropriate parent header.",
-      "Assign a unique 4-digit code and select account currency.",
-      "Click 'Save Account' to enable journal posting to this ledger code."
+      "Accessing Accounts List: Open 'Finance & Accounting' from the left navigation and select 'Chart of Accounts' to view the master accounts register.",
+      "Adding New Accounts: Click 'Add New Account' at the top right to create a new ledger or subsidiary account.",
+      "Setting Account Types & Normal Balance: Define account name, unique numeric code, account currency, and specify Normal Balance (Debit or Credit).",
+      "Parent Hierarchy Mapping: Select the parent category head (Assets, Liabilities, Equity, Income, or Expenses) to configure parent category mappings.",
+      "Fund Transfers: Use the 'Transfer Funds' action to record ledger movements between verified company bank accounts or petty cash ledgers with reference notes.",
+      "Bank Statement Reconciliation: Access the 'Reconciliations' tab, match uncleared ledger items with your bank statement, and confirm zero difference."
     ],
     commonMistakes: [
       {
-        mistake: "Sub-account placed under wrong parent account",
-        cause: "Creating an expense account under Assets instead of Expenses (5000 series).",
-        quickFix: "Edit the account card, re-select the correct parent category from dropdown, and save."
+        mistake: "Debit and credit balances do not match on the trial balance or ledger closing",
+        cause: "A manual journal voucher or transfer was entered with unequal amounts, or an opening balance was keyed incorrectly.",
+        quickFix: "Open the 'Unbalanced Journals' alert tab, review transaction audit logs, and post an offsetting adjusting journal entry to balance debits and credits."
       },
       {
-        mistake: "Trial balance fails to balance at month end",
-        cause: "Manual journal voucher entered with unequal debit and credit amounts.",
-        quickFix: "Check the 'Unbalanced Journals' alert tab and correct the offsetting entry to balance debits and credits."
+        mistake: "Sub-account placed under wrong parent account head or financial report category",
+        cause: "Incorrect parent category selected during account setup (e.g. creating an expense account under Assets instead of Expenses).",
+        quickFix: "Verify mapped parent heads in the Chart of Accounts list, edit the account card, re-select the correct parent category from the dropdown, and save."
+      },
+      {
+        mistake: "Bank statement reconciliation difference does not reach zero",
+        cause: "Uncleared deposits, outstanding cheques, or bank transaction fees have not yet been recorded in the system.",
+        quickFix: "Review bank statement entries against posted transactions, book missing service fees or interest as a bank adjustment voucher, and re-run reconciliation."
       }
     ],
-    embedUrl: "",
-    viewerUrl: "https://sop.cinawaylogistics.com/#/chart-of-accounts",
-    status: "upcoming",
+    embedUrl: "https://scribehow.com/embed/Managing_Financial_Accounts_and_Reconciliations__TvK5YMroT6uUiuOoa58ZaA?as=scrollable",
+    viewerUrl: "https://scribehow.com/o/oV76nFXbSnaxI6SpLCe-Rg/viewer/Managing_Financial_Accounts_and_Reconciliations__TvK5YMroT6uUiuOoa58ZaA",
+    status: "live",
     roles: [
-      { name: "Chief Financial Officer", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" },
-      { name: "Senior Accountant", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300" }
+      { name: "Finance Officer", badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300" },
+      { name: "System Administrator", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300" },
+      { name: "Chief Financial Officer", badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300" }
     ],
-    estimatedMinutes: 10,
-    lastAudited: "Pending Publication"
+    estimatedMinutes: 8,
+    lastAudited: "September 2026"
   },
   {
     id: "expense-management",
@@ -952,43 +960,51 @@ export const SOP_REGISTRY: SopModule[] = [
     id: "system-backup",
     slug: "/backup",
     number: "SOP-ADM-03",
-    title: "Database Backup & Safety Archive",
+    title: "Managing, Creating, and Deleting Cloud Database Backups",
     category: "Settings & Administration",
     sectionGroupId: "settings-admin",
-    whatIsThisFor: "This module ensures that all company invoices, customer balances, and employee records are backed up safely every night. In case of server damage or computer breakdown, data can be restored completely within minutes.",
+    whatIsThisFor: "Step-by-step instructions on generating instant database backups, inspecting storage size, downloading local copies for disaster recovery, and safely purging obsolete cloud archives.",
     beforeYouStart: [
-      "Super Administrator server access credentials",
-      "Encrypted off-site cloud storage bucket configuration",
-      "Secondary offline storage drive connection"
+      "Super Administrator access rights with verified authentication",
+      "Configured cloud storage bucket (AWS S3 or Google Cloud Storage) with active API credentials",
+      "Adequate local storage space if downloading disaster recovery archive files",
+      "Active high-speed internet connection for large archive transfers"
     ],
     stepByStepInstructions: [
-      "Navigate to 'Settings & Administration' > 'System Settings & Backup'.",
-      "Verify that the automated daily backup schedule is set to run at 2:00 AM every night.",
-      "To take an immediate safety copy before year-end closing, click 'Create Manual Snapshot'.",
-      "Verify that the backup file size matches the database average and is marked 'Successful'.",
-      "Every three months, test restoration in the sandbox test server to guarantee data integrity."
+      "Navigating to Settings > Backup: In the main left menu, expand 'Settings & Administration' and select 'System Settings & Backup' (or /backup).",
+      "Creating a Manual Cloud Backup Snapshot: Click 'Create Cloud Backup' to initiate an immediate on-demand database snapshot and SQL dump.",
+      "Monitoring Progress: Watch the real-time backup indicator until status changes to 'Snapshot Completed Successfully' with timestamp.",
+      "Inspecting Archive Details: Review the backup ledger row showing archive filename, schema version, creation date, and total storage size.",
+      "Downloading SQL/Archive Dump: Click the 'Download' action icon next to the archive to save an encrypted local copy for off-site disaster recovery.",
+      "Safe Deletion Protocol for Old Backups: Identify obsolete archives past the 90-day retention window, click 'Delete Archive', and confirm the administrator security prompt to permanently free storage."
     ],
     commonMistakes: [
       {
-        mistake: "Automated nightly backup fails with 'Storage Quota' alert",
-        cause: "Cloud backup storage volume reached 100% capacity.",
-        quickFix: "Archive backups older than 180 days to cold storage or increase cloud storage allocation."
+        mistake: "Timeout error or interrupted download during large SQL backup retrieval",
+        cause: "Unstable network connection or browser HTTP session timeout while transferring multi-gigabyte database dumps.",
+        quickFix: "Switch to a stable wired internet connection, refresh your admin session, or use the direct signed storage link utility provided in the backup drawer."
       },
       {
-        mistake: "Manual backup interrupted midway",
-        cause: "Triggered during peak daytime hours with high sales invoice volume.",
-        quickFix: "Run manual backup operations during low-traffic windows or lunch breaks."
+        mistake: "Backup retention warning or storage quota threshold alert triggered",
+        cause: "Cloud storage container reached capacity limit due to unpurged legacy backups exceeding the retention policy.",
+        quickFix: "Review backup history, execute the safe deletion protocol on archives older than 90 days, or increase the cloud bucket storage allocation."
+      },
+      {
+        mistake: "Manual backup fails to start with 'Database Lock' warning",
+        cause: "Initiating a backup during an active high-volume batch process such as nightly payroll or massive stock sync.",
+        quickFix: "Wait 2 to 3 minutes for the active queue to clear, or run manual snapshots during scheduled low-traffic maintenance windows."
       }
     ],
-    embedUrl: "",
-    viewerUrl: "https://sop.cinawaylogistics.com/#/backup",
-    status: "upcoming",
+    embedUrl: "https://scribehow.com/embed/How_to_Manage_and_Delete_Cloud_Backups__hdea5GbSRwehsGnyJa0Wzg?as=scrollable",
+    viewerUrl: "https://scribehow.com/o/oV76nFXbSnaxI6SpLCe-Rg/viewer/How_to_Manage_and_Delete_Cloud_Backups__hdea5GbSRwehsGnyJa0Wzg",
+    status: "live",
     roles: [
-      { name: "DevOps Engineer", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300" },
+      { name: "Super Administrator", badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300" },
+      { name: "DevOps Engineer", badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300" },
       { name: "System Administrator", badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300" }
     ],
-    estimatedMinutes: 8,
-    lastAudited: "Pending Publication"
+    estimatedMinutes: 6,
+    lastAudited: "September 2026"
   }
 ];
 
