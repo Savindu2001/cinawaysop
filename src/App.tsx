@@ -31,22 +31,38 @@ export const App: React.FC = () => {
     }
   }, [darkMode]);
 
-  // Read URL hash on load and when hash changes
+  // Read URL hash or pathname on load and when route changes
   useEffect(() => {
-    const handleHashChange = () => {
-      let hash = window.location.hash.replace(/^#/, '');
-      if (!hash || hash === '' || hash === '/') {
-        hash = '/dashboard';
+    const resolveCurrentRoute = () => {
+      // 1. Check hash first (e.g. #/expenses)
+      let current = window.location.hash.replace(/^#/, '');
+
+      // 2. If no hash, check pathname (e.g. /expenses on Netlify direct URL)
+      if (!current || current === '' || current === '/') {
+        const path = window.location.pathname;
+        if (path && path !== '' && path !== '/' && path !== '/index.html') {
+          current = path;
+        }
       }
-      if (!hash.startsWith('/')) {
-        hash = `/${hash}`;
+
+      if (!current || current === '' || current === '/' || current === '/index.html') {
+        current = '/dashboard';
       }
-      setActiveSlug(hash);
+
+      if (!current.startsWith('/')) {
+        current = `/${current}`;
+      }
+
+      setActiveSlug(current);
     };
 
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    resolveCurrentRoute();
+    window.addEventListener('hashchange', resolveCurrentRoute);
+    window.addEventListener('popstate', resolveCurrentRoute);
+    return () => {
+      window.removeEventListener('hashchange', resolveCurrentRoute);
+      window.removeEventListener('popstate', resolveCurrentRoute);
+    };
   }, []);
 
   // Global keyboard shortcut for search (⌘K or Ctrl+K)
